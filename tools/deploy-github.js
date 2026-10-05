@@ -84,8 +84,9 @@ function say(s) { console.log(s); }
 
   /* ---------- 4. 推送（令牌仅在内存的 URL 中） ---------- */
   const authUrl = `https://x-access-token:${TOKEN}@github.com/${OWNER}/${REPO}.git`;
-  git(['remote', 'remove', 'origin'], { stdio: 'ignore' });
-  git(['remote', 'add', 'origin', `https://github.com/${OWNER}/${REPO}.git`]);
+  try { git(['remote', 'remove', 'origin'], { stdio: 'ignore' }); } catch (e) { /* 首次没有 origin */ }
+  try { git(['remote', 'add', 'origin', `https://github.com/${OWNER}/${REPO}.git`], { stdio: 'ignore' }); }
+  catch (e) { git(['remote', 'set-url', 'origin', `https://github.com/${OWNER}/${REPO}.git`], { stdio: 'ignore' }); }
   try {
     git(['push', '-u', authUrl, `${BRANCH}:${BRANCH}`, '--force'], { stdio: ['ignore', 'pipe', 'pipe'] });
     say('✓ 推送成功');
