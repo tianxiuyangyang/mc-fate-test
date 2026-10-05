@@ -1,0 +1,2298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#eef4f3">
+<meta name="description" content="你的本命 MC 角色测试 —— 3 个小游戏 + 5 道性格题，测出你的我的世界本命角色与专属称号。">
+<title>你的本命 MC 角色测试 · 潜意识的像素人格</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230d1520'/%3E%3Crect x='2' y='2' width='12' height='12' fill='%234ec9b0'/%3E%3Crect x='2' y='2' width='6' height='6' fill='%232f8f7c'/%3E%3C/svg%3E">
+<style>
+/* ============================================================
+   你的本命 MC 角色测试  —  像素风 · MC 蓝绿灰主题
+   ============================================================ */
+:root{
+  --bg:#eef4f3;
+  --bg2:#fafcfb;
+  --panel:#ffffff;
+  --panel2:#eef5f4;
+  --line:#b3c7c8;
+  --mint:#17766b;
+  --mint-d:#1d8a78;
+  --mint-l:#0f8a76;
+  --mint-soft:#e3f4f1;
+  --steel:#48606c;
+  --txt:#213033;
+  --dim:#516669;
+  --dim2:#4d6165;
+  --foot:#63767c;
+  --gold:#a9760c;
+  --danger:#c4443a;
+  --purple:#8b5bc0;
+  --grass:#3f8f2f;
+  --dirt:#8b5a3c;
+  --shadow:rgba(24,48,52,.18);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:
+    radial-gradient(1100px 700px at 50% -8%, #eaf2f1 0%, rgba(238,244,243,0) 60%),
+    repeating-linear-gradient(0deg, rgba(23,118,107,.05) 0 1px, rgba(0,0,0,0) 1px 16px),
+    repeating-linear-gradient(90deg, rgba(23,118,107,.05) 0 1px, rgba(0,0,0,0) 1px 16px),
+    linear-gradient(180deg,#eef4f3 0%, #e7efee 100%);
+  background-attachment:fixed;
+  color:var(--txt);
+  font-family:"Segoe UI","PingFang SC","Microsoft YaHei","Hiragino Sans GB","Noto Sans SC",system-ui,-apple-system,sans-serif;
+  line-height:1.7;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+canvas{display:block}
+[hidden]{display:none !important}
+
+/* ---------- 背景 ---------- */
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* ---------- 布局 ---------- */
+.wrap{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:22px 16px 60px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;font-size:13px;color:var(--dim)}
+.brand{display:flex;align-items:center;gap:8px;letter-spacing:1px}
+.brand i{width:12px;height:12px;background:var(--mint);display:inline-block;box-shadow:4px 0 0 var(--mint-d),0 4px 0 var(--mint-d),4px 4px 0 var(--grass)}
+.top-actions{display:flex;gap:8px;align-items:center}
+.tbtn{background:var(--panel);border:2px solid var(--line);color:var(--dim);font:inherit;font-size:12px;
+  padding:5px 10px;cursor:pointer;transition:.15s;white-space:nowrap}
+.tbtn:hover{border-color:var(--mint);color:var(--mint)}
+.tbtn[aria-pressed="true"]{color:var(--mint);border-color:var(--mint-d)}
+
+.card{
+  position:relative;
+  background:linear-gradient(180deg,#ffffff 0%, #ffffff 46%, #f8fbfa 100%);
+  border:3px solid var(--line);
+  padding:26px 22px 30px;
+  box-shadow:
+    inset 0 3px 0 #ffffff,
+    inset 0 -3px 0 rgba(31,58,60,.05),
+    0 6px 0 0 #a8bfc0,
+    0 0 0 3px #c9d8d8,
+    0 22px 44px rgba(24,48,52,.16);
+  animation:cardIn .5s cubic-bezier(.2,.9,.25,1) both;
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(18px) scale(.99)}to{opacity:1;transform:none}}
+.card::before,.card::after{content:"";position:absolute;width:8px;height:8px;background:var(--mint-d)}
+.card::before{top:-3px;left:-3px;box-shadow:0 0 0 3px #c9d8d8}
+.card::after{bottom:-3px;right:-3px;box-shadow:0 0 0 3px #c9d8d8}
+
+/* ---------- 视图切换 ---------- */
+.view{animation:viewIn .34s ease both}
+@keyframes viewIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ---------- 排版 ---------- */
+h1,h2,h3{margin:0 0 12px;line-height:1.35;letter-spacing:1px}
+.h1{font-size:clamp(24px,5.2vw,40px);color:#1b2a2e;text-shadow:3px 3px 0 #ffffff,4px 4px 0 rgba(29,138,120,.35)}
+.h2{font-size:clamp(19px,3.6vw,26px);color:var(--mint-l);text-shadow:2px 2px 0 rgba(255,255,255,.9)}
+.sub{color:var(--dim);font-size:14.5px;margin:0 0 8px}
+.tag{display:inline-block;background:#f9fbfb;border:2px solid var(--line);color:var(--mint);
+  font-size:12px;padding:3px 9px;margin:0 6px 6px 0;letter-spacing:.5px}
+.center{text-align:center}
+.small{font-size:12.5px;color:var(--dim)}
+.hint{font-size:13px;color:var(--gold);min-height:20px;margin:8px 0 0}
+.divider{height:3px;background:repeating-linear-gradient(90deg,var(--line) 0 10px,transparent 10px 16px);margin:18px 0}
+
+/* ---------- 启动动画 ---------- */
+.boot{padding:26px 10px;text-align:center}
+.boot-bar{width:min(420px,90%);height:20px;margin:14px auto 8px;background:#ffffff;border:2px solid var(--line);padding:3px}
+.boot-bar i{display:block;height:100%;width:0%;background:repeating-linear-gradient(90deg,var(--mint) 0 6px,var(--mint-d) 6px 12px);transition:width .25s}
+.boot-log{font-family:Consolas,"Courier New",monospace;font-size:12px;color:var(--mint-d);min-height:18px;letter-spacing:.5px}
+
+/* ---------- 按钮 ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font:inherit;font-weight:700;letter-spacing:1px;cursor:pointer;
+  background:linear-gradient(180deg,#1d8a78,#136d5e);
+  color:#ffffff;border:3px solid #ffffff;
+  padding:13px 26px;margin:6px 5px;
+  box-shadow:0 5px 0 #a8bfc0,0 0 0 2px #136d5e inset;
+  transition:transform .1s, filter .15s;
+  text-shadow:0 1px 1px rgba(0,0,0,.18);
+  -webkit-tap-highlight-color:transparent;
+}
+.btn:hover{filter:brightness(1.09)}
+.btn:active{transform:translateY(5px);box-shadow:0 0 0 #a8bfc0,0 0 0 2px #136d5e inset}
+.btn.big{font-size:19px;padding:16px 40px}
+.btn.ghost{background:linear-gradient(180deg,#ffffff,#eef4f3);color:var(--mint-l);box-shadow:0 5px 0 #a8bfc0,0 0 0 2px #cfe0e2 inset}
+.btn.gold{background:linear-gradient(180deg,#f6cd67,#d9a922);color:#4a3406;box-shadow:0 5px 0 #a8bfc0,0 0 0 2px #b9861c inset;text-shadow:0 1px 0 rgba(255,255,255,.4)}
+.btn.block{display:flex;width:100%;margin:6px 0}
+.btn[disabled]{opacity:.45;pointer-events:none;filter:grayscale(.5)}
+
+/* ---------- 进度 ---------- */
+.progress{margin:0 0 18px}
+.pbar{height:10px;background:#ffffff;border:2px solid var(--line);padding:1px}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--mint-d),var(--mint-l));transition:width .35s ease}
+.plabel{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);margin-top:6px;letter-spacing:.5px}
+.card.playing .plabel{visibility:hidden}
+
+/* ---------- 小游戏 ---------- */
+.game-hud{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:2px 0 12px;font-size:14px;flex-wrap:wrap}
+.chip{background:#f9fbfb;border:2px solid var(--line);padding:5px 11px;font-size:13px;letter-spacing:.5px}
+.chip b{color:var(--mint-l);font-size:16px}
+.chip.time b{color:var(--gold)}
+.stage{
+  position:relative;width:100%;max-width:560px;margin:0 auto;
+  border:3px solid var(--line);background:
+    radial-gradient(120% 90% at 50% 10%, #eaf6fb 0%, #f3faf9 62%, #f8fcfc 100%);
+  box-shadow:inset 0 0 0 3px #c9d8d8, 0 6px 0 #a8bfc0;
+  overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;
+  cursor:crosshair;
+}
+.stage.grab{cursor:grab}
+.stage .ground{position:absolute;left:0;right:0;bottom:0;height:46px;
+  background:
+    repeating-linear-gradient(90deg,#8fc45c 0 14px,#82b552 14px 28px),
+    #79a84a;
+  border-top:4px solid #a9d96e;
+  image-rendering:pixelated;
+}
+.stage .ground::after{content:"";position:absolute;inset:0;background:
+    repeating-linear-gradient(90deg,rgba(31,58,60,.10) 0 6px,transparent 6px 20px);
+  opacity:.4}
+.pc{position:absolute;width:34px;height:34px;image-rendering:pixelated;
+  left:0;top:0;will-change:transform;pointer-events:none;
+  filter:drop-shadow(0 3px 0 rgba(31,58,60,.14))}
+.pc.shovel{width:38px;height:38px}
+.pc.pop{animation:pcPop 1s ease forwards;z-index:6}
+@keyframes pcPop{
+  0%{transform:translate(var(--fx),var(--fy)) scale(1)}
+  35%{transform:translate(var(--fx),var(--fy)) scale(1.5)}
+  100%{transform:translate(calc(var(--fx) + var(--dx)),calc(var(--fy) - 46px)) scale(.7);opacity:0}
+}
+.boom{position:absolute;width:56px;height:56px;pointer-events:none;image-rendering:pixelated;
+  animation:boom .45s steps(6) forwards;z-index:7}
+@keyframes boom{0%{transform:scale(.4);opacity:1}100%{transform:scale(1.5);opacity:0}}
+.score-pop{position:absolute;font-size:14px;font-weight:700;color:#8a5f06;pointer-events:none;
+  text-shadow:1px 1px 0 #ffffff;animation:spop .8s ease forwards;z-index:8}
+@keyframes spop{0%{transform:translateY(0);opacity:1}100%{transform:translateY(-42px);opacity:0}}
+.stage-msg{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;background:rgba(250,253,252,.86);backdrop-filter:blur(2px);z-index:12;text-align:center;padding:16px}
+.stage-msg b{font-size:30px;color:var(--mint-l);text-shadow:3px 3px 0 #ffffff}
+.timerbar{position:absolute;top:0;left:0;height:6px;background:var(--mint);width:100%;z-index:10;transition:width .2s linear;box-shadow:0 0 10px rgba(23,118,107,.45)}
+.timerbar.warn{background:var(--danger);box-shadow:0 0 10px rgba(196,68,58,.5)}
+.gpad{display:flex;gap:12px;margin:14px auto 0;max-width:560px}
+.gpad .btn{flex:1;margin:0;padding:18px 0;font-size:20px}
+.grid-wrap{position:absolute;left:0;top:0;right:0;bottom:46px}
+
+/* ---------- 选择题 ---------- */
+.q-num{font-size:12px;color:var(--mint);letter-spacing:2px}
+.q-text{font-size:clamp(18px,3.4vw,24px);margin:6px 0 20px;color:#1b2a2e;text-shadow:2px 2px 0 #ffffff}
+.opts{display:grid;gap:10px}
+.opt{
+  display:flex;align-items:center;gap:14px;text-align:left;width:100%;
+  background:linear-gradient(180deg,#f6faf9,#eef4f3);
+  border:3px solid var(--line);color:var(--txt);font:inherit;font-size:16px;
+  padding:14px 16px;cursor:pointer;transition:.14s;
+  box-shadow:0 4px 0 #a8bfc0;position:relative;
+}
+.opt:hover{border-color:var(--mint);background:linear-gradient(180deg,#e8f2f0,#f2f7f6);transform:translateX(4px)}
+.opt:active{transform:translateY(4px);box-shadow:0 0 0 #a8bfc0}
+.opt .k{width:26px;height:26px;flex:none;display:grid;place-items:center;
+  background:var(--mint-d);color:#ffffff;font-weight:700;font-size:14px;text-shadow:none}
+.opt.me{border-color:var(--gold);background:linear-gradient(180deg,#fdf4dc,#fffaf0)}
+
+/* ---------- 结算提示 ---------- */
+.toast{
+  position:fixed;left:50%;bottom:34px;transform:translateX(-50%) translateY(20px);
+  background:#ffffff;border:3px solid var(--mint-d);color:#12695c;
+  padding:11px 20px;font-size:14px;z-index:50;opacity:0;transition:.28s;pointer-events:none;
+  box-shadow:0 6px 0 #a8bfc0;max-width:86vw;text-align:center;
+}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ---------- 结果页 ---------- */
+.result-head{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.hero-box{position:relative;display:grid;place-items:center;padding:10px 0 4px;width:100%;min-height:214px}
+.hero-box::before{content:"";position:absolute;width:190px;height:190px;
+  background:radial-gradient(circle,rgba(29,138,120,.20),rgba(29,138,120,0) 70%);animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(.9);opacity:.7}50%{transform:scale(1.1);opacity:1}}
+.hero{position:relative;image-rendering:pixelated;width:176px;height:176px;
+  filter:drop-shadow(0 10px 0 rgba(31,58,60,.13));
+  opacity:1;transform:translateY(0) scale(1);
+  transition:opacity .42s ease, transform .42s cubic-bezier(.2,.9,.25,1)}
+.hero.swap{opacity:0;transform:translateY(12px) scale(.9)}
+.hero.big{width:224px;height:224px;animation:heroFloat 2.6s ease-in-out infinite}
+@keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.rname{font-size:clamp(26px,6.4vw,46px);color:#1b2a2e;margin:2px 0 0;
+  text-shadow:3px 3px 0 #ffffff,6px 6px 0 rgba(29,138,120,.35)}
+.rtitle{font-size:clamp(15px,3.2vw,20px);color:var(--gold);letter-spacing:2px;
+  text-shadow:2px 2px 0 #ffffff}
+.rquote{color:var(--mint-l);font-size:14.5px;margin-top:8px;font-style:italic}
+.rdesc{color:var(--txt);font-size:15.5px;margin:6px 0 0;text-align:left}
+.rdesc p{margin:0 0 10px}
+.matchline{font-size:13px;color:var(--dim);margin-top:6px}
+
+.traits{display:grid;gap:9px;margin-top:6px}
+.trait{display:grid;grid-template-columns:76px 1fr 42px;align-items:center;gap:10px;font-size:13px}
+.trait .tname{color:var(--dim)}
+.tbar{height:14px;background:#ffffff;border:2px solid var(--line);padding:1px}
+.tbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--mint-d),var(--mint-l));transition:width .8s cubic-bezier(.2,.9,.25,1)}
+.trait .tval{text-align:right;color:var(--mint-l);font-weight:700}
+
+.danger{margin-top:6px}
+.danger .dnum{font-size:34px;font-weight:800;color:var(--danger);text-shadow:2px 2px 0 #ffffff;line-height:1.1}
+.dbar{height:16px;background:#ffffff;border:2px solid var(--line);padding:2px;margin:6px 0 8px}
+.dbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#3f8f2f,#a9760c 55%,#c4443a);transition:width .9s cubic-bezier(.2,.9,.25,1)}
+
+.partner{display:flex;align-items:center;gap:16px;background:#f2f9f8;border:3px solid var(--line);padding:14px;margin-top:8px}
+.partner img,.partner canvas{image-rendering:pixelated;flex:none;background:#ffffff;outline:2px solid rgba(29,138,120,.25)}
+.partner .pn{font-size:19px;color:var(--mint-l);font-weight:700}
+.partner .pd{font-size:13px;color:var(--dim)}
+
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:12px}
+.actions .btn{margin:0}
+
+.grid2{display:grid;gap:16px}
+@media(min-width:720px){ .grid2{grid-template-columns:1fr 1fr;gap:22px} }
+
+.reveal-veil{display:grid;place-items:center;min-height:320px;text-align:center;gap:12px}
+.scan{width:min(320px,80%);height:16px;background:#ffffff;border:2px solid var(--line);padding:2px;overflow:hidden}
+.scan i{display:block;height:100%;width:36%;background:linear-gradient(90deg,transparent,var(--mint),transparent);animation:scan 1.05s linear infinite}
+@keyframes scan{0%{transform:translateX(-110%)}100%{transform:translateX(340%)}}
+.rolltext{font-family:Consolas,"Courier New",monospace;font-size:20px;color:var(--mint-l);letter-spacing:3px;min-height:28px}
+
+.foot{margin-top:20px;text-align:center;font-size:12px;color:#63767c;line-height:1.9}
+.foot b{color:var(--mint-d)}
+
+@media (max-width:520px){
+  .wrap{padding:12px 10px 46px}
+  .card{padding:18px 13px 22px;border-width:2px}
+  .topbar{font-size:12px}
+  .btn{padding:12px 18px;font-size:15px}
+  .btn.big{font-size:17px;padding:14px 26px;width:100%;margin:6px 0}
+  .opt{font-size:15px;padding:12px 12px;gap:10px}
+  .trait{grid-template-columns:64px 1fr 36px;font-size:12px}
+  .partner{flex-direction:column;text-align:center;gap:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
+/* 截图/自动化专用：index.html#shot 关闭所有动画，保证截到稳定状态 */
+html.no-anim *,html.no-anim{animation:none !important;transition:none !important}
+html.no-anim .view,html.no-anim .card,html.no-anim .hero,html.no-anim .reveal-veil{opacity:1 !important;transform:none !important}
+html.no-anim .toast{opacity:0 !important}
+html.no-anim .toast.on{opacity:1 !important}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand"><i></i><span>MYCRAFT · 本命角色测试</span></div>
+    <div class="top-actions">
+      <button class="tbtn" id="bgmBtn" type="button" aria-pressed="true" title="背景音乐">♪ 音效 开</button>
+    </div>
+  </div>
+
+  <main class="card" id="card">
+    <!-- 启动动画 -->
+    <section class="view boot" id="view-boot">
+      <div class="h2">正在载入你的潜意识世界…</div>
+      <div class="boot-bar"><i id="bootFill"></i></div>
+      <div class="boot-log" id="bootLog">&gt; 初始化世界种子…</div>
+      <div class="divider"></div>
+      <div class="hint">提示：本测试含 3 个小游戏 + 5 道性格题，约 90 秒</div>
+    </section>
+
+    <!-- 开场页 -->
+    <section class="view" id="view-intro" hidden>
+      <div class="center">
+        <div class="hero-box"><img id="introSprite" class="hero" alt="MC 角色像素立绘" width="176" height="176" src="" hidden></div>
+        <div class="tag">像素人格测评 v1.0</div>
+        <h1 class="h1">你的本命 MC 角色测试</h1>
+        <p class="sub">潜入你的潜意识，匹配属于你的我的世界本命角色</p>
+        <p class="small" id="introLine">正在唤醒世界…</p>
+        <div class="divider"></div>
+        <button class="btn big" id="startBtn" type="button">▶ 开始测试</button>
+      </div>
+      <div class="grid2" style="margin-top:18px">
+        <div>
+          <h3 class="h2">玩法说明</h3>
+          <p class="small">🎮 <b>3 个小游戏</b>：挖方块 / 躲苦力怕 / 速度搭建 —— 测你的手速、反应与性格风格。</p>
+          <p class="small">📜 <b>5 道性格题</b>：白天黑夜、遇事态度、性格底色、朋友评价、想要的超能力。</p>
+          <p class="small">✨ <b>综合判定</b>：六维人格向量 + 小游戏行为数据，从 12 位高人气角色中锁定唯一本命。</p>
+        </div>
+        <div>
+          <h3 class="h2">你会得到</h3>
+          <p class="small">🖼️ 超大角色像素立绘 · 专属人物解读</p>
+          <p class="small">🏷️ 专属本命称号（如「深渊主宰・天际孤王」）</p>
+          <p class="small">☠️ MC 危险等级 · 🤝 本命 MCCP 搭档</p>
+          <p class="small">📤 一键复制 / 保存海报 / 分享好友</p>
+        </div>
+      </div>
+      <div class="foot">本页面为粉丝向娱乐测评，与 Mojang / Microsoft 无关联。<br>角色形象为原创像素风演绎。</div>
+    </section>
+
+    <!-- 测评页 -->
+    <section class="view" id="view-quiz" hidden>
+      <div class="progress">
+        <div class="pbar"><i id="pFill"></i></div>
+        <div class="plabel"><span id="pText">进度 0 / 9</span><span id="pStage">小游戏</span></div>
+      </div>
+      <div id="stage"></div>
+    </section>
+
+    <!-- 结果页 -->
+    <section class="view" id="view-result" hidden></section>
+  </main>
+
+  <div class="foot">用鼠标 / 手指都能玩 · 建议全屏体验<br><b>深呼吸，凭第一直觉选择。</b></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* 运行时错误探针：便于排查（同时把错误显示在页面标题上） */
+window.addEventListener('error',function(e){
+  var msg=(e.error&&e.error.stack)||e.message||'unknown';
+  window.__lastError=msg;
+  document.title='ERR: '+String(msg).split('\n')[0];
+});
+
+/* =========================================================================
+   0. 工具
+   ========================================================================= */
+var $=function(s,r){return (r||document).querySelector(s);};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+function el(tag,attrs,html){
+  var n=document.createElement(tag);
+  if(attrs){for(var k in attrs){
+    if(k==='class')n.className=attrs[k];
+    else if(k==='text')n.textContent=attrs[k];
+    else if(k==='html')n.innerHTML=attrs[k];
+    else if(k.slice(0,2)==='on')n.addEventListener(k.slice(2),attrs[k]);
+    else if(attrs[k]!==null&&attrs[k]!==undefined)n.setAttribute(k,attrs[k]);
+  }}
+  if(html!==undefined)n.innerHTML=html;
+  return n;
+}
+function hash(s){var h=2166136261,i;for(i=0;i<s.length;i++){h^=s.charCodeAt(i);h=(h*16777619)>>>0;}return h>>>0;}
+function makeRnd(s){var h=hash(s)||123456789;return function(){h=(h*1103515245+12345)>>>0;return h/4294967296;};}
+var clamp=function(v,a,b){return v<a?a:(v>b?b:v);};
+/* 统一时钟：只用 epoch 毫秒，避免 RAF 时间戳与 performance.now 不同源的问题 */
+var nowMs=(function(){
+  var perf=window.performance;
+  if(perf&&typeof perf.now==='function'){
+    var base=Date.now()-perf.now();
+    return function(){return base+perf.now();};
+  }
+  return function(){return Date.now();};
+})();
+var toastTimer=null;
+function toast(msg){
+  var t=$('#toast');t.textContent=msg;t.classList.add('on');
+  clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.classList.remove('on');},2100);
+}
+
+/* =========================================================================
+   1. 音效（WebAudio 程序化，无外部资源）
+   ========================================================================= */
+var Sfx=(function(){
+  var ctx=null,master=null,musicGain=null,timer=null,step=0,soundOn=true,started=false;
+  function ensure(){
+    if(ctx)return ctx;
+    var AC=window.AudioContext||window.webkitAudioContext;
+    if(!AC)return null;
+    ctx=new AC();
+    master=ctx.createGain();master.gain.value=.5;master.connect(ctx.destination);
+    musicGain=ctx.createGain();musicGain.gain.value=.13;musicGain.connect(master);
+    return ctx;
+  }
+  function tone(freq,dur,type,vol,dest,slideTo){
+    if(!ctx||!soundOn)return;
+    var t=ctx.currentTime;
+    var o=ctx.createOscillator(),g=ctx.createGain();
+    o.type=type||'square';o.frequency.setValueAtTime(freq,t);
+    if(slideTo)o.frequency.exponentialRampToValueAtTime(Math.max(40,slideTo),t+dur);
+    g.gain.setValueAtTime(0,t);
+    g.gain.linearRampToValueAtTime(vol||.18,t+0.008);
+    g.gain.exponentialRampToValueAtTime(.0008,t+dur);
+    o.connect(g);g.connect(dest||master);
+    o.start(t);o.stop(t+dur+.03);
+  }
+  function noise(dur,vol,filt){
+    if(!ctx||!soundOn)return;
+    var t=ctx.currentTime,len=Math.floor(ctx.sampleRate*dur);
+    var buf=ctx.createBuffer(1,len,ctx.sampleRate),d=buf.getChannelData(0),i;
+    for(i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2);
+    var src=ctx.createBufferSource();src.buffer=buf;
+    var bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=filt||900;bp.Q.value=.8;
+    var g=ctx.createGain();g.gain.value=vol||.2;
+    src.connect(bp);bp.connect(g);g.connect(master);src.start(t);
+  }
+  var SCALE=[220,261.63,293.66,329.63,392,440,523.25];
+  var PATTERN=[0,2,4,3,5,4,2,1];
+  function schedule(){
+    if(!ctx||!soundOn)return;
+    var f=SCALE[PATTERN[step%PATTERN.length]]*(step%16<8?1:1.5);
+    tone(f,.42,'triangle',.5,musicGain);
+    tone(f/2,.6,'sine',.42,musicGain);
+    if(step%4===0)noise(.05,.05,320);
+    step++;
+  }
+  return {
+    get on(){return soundOn;},
+    unlock:function(){
+      var c=ensure();if(!c)return;
+      if(c.state==='suspended')c.resume();
+      if(!started){started=true;schedule();timer=setInterval(schedule,340);}
+    },
+    toggle:function(){
+      soundOn=!soundOn;
+      if(master)master.gain.value=soundOn?.5:0;
+      return soundOn;
+    },
+    click:function(){tone(740,.06,'square',.16,0,520);},
+    hover:function(){tone(1180,.03,'square',.05);},
+    dig:function(){noise(.16,.22,760);tone(180,.12,'square',.10,0,120);},
+    ore:function(){noise(.12,.18,1500);tone(880,.08,'square',.14);setTimeout(function(){tone(1320,.12,'square',.12);},70);},
+    miss:function(){tone(120,.13,'sawtooth',.13,0,70);},
+    hurt:function(){tone(220,.22,'sawtooth',.2,0,70);noise(.2,.16,420);},
+    win:function(){
+      var f=[523.25,659.25,783.99,1046.5],i;
+      for(i=0;i<f.length;i++)(function(n){setTimeout(function(){tone(f[n],.24,'square',.13);},n*90);})(i);
+    },
+    tick:function(){tone(1500,.03,'square',.05);}
+  };
+})();
+
+/* =========================================================================
+   2. 像素素材：调色板 + 16×16 精灵数据
+   ========================================================================= */
+var PAL={
+  mc:{h:'#4a3524',s:'#b87a55',H:'#8b5a2b',e:'#3a589c',m:'#6f4030',c:'#3698b3',p:'#27447e',b:'#454b56'},
+  ax:{h:'#c0631d',s:'#f0d0ae',H:'#9a4d17',e:'#4a854d',K:'#2c6331',J:'#7f5830',l:'#543a1d'},
+  cr:{g:'#3a8f36',G:'#4fb243',d:'#215421',k:'#243d1e',l:'#74d257'},
+  em:{b:'#232336',p:'#a566ef',P:'#c9a3e8',c:'#3b2f5e'},
+  zb:{s:'#4a8742',d:'#316330',e:'#2a2d34',c:'#437ba8',C:'#274b73'},
+  sk:{b:'#cfd6c6',d:'#8d9489',e:'#282b31'},
+  wt:{b:'#4a5057',d:'#26292e',r:'#586065',e:'#b04527',g:'#7a2a18'},
+  ed:{b:'#2a1f42',d:'#241a33',w:'#8f79b8',p:'#c945ab',l:'#a97fd6'},
+  vg:{r:'#6f5138',s:'#c98f63',n:'#b57e56',e:'#3a3025',d:'#523a2a'},
+  wi:{r:'#452763',R:'#583381',g:'#588243',e:'#2a2140',n:'#456434'},
+  ph:{b:'#4a6373',d:'#c8d8dc',l:'#6f8f9f',e:'#5fb8a3',m:'#2a3d47'},
+  dp:{b:'#2f7bb5',l:'#dff3ff',e:'#1d3244',f:'#39719b'}
+};
+/* 使用单侧镜像（* = 镜像轴），保证左右完全对称 */
+var SPR={
+  steve:{p:PAL.mc,r:[
+    "____hhhhhhhh____",
+    "___hhhhhhhhhh___",
+    "___hssssssssh___",
+    "__hhseesseeshh__",
+    "___hssssssssh___",
+    "___hsmmmmmmsh___",
+    "____ssssssss____",
+    "____ssssssss____",
+    "___cccccccccc___",
+    "__cccccccccccc__",
+    "__ccsccccccscc__",
+    "__ccsccccccscc__",
+    "____pppppppp____",
+    "____pbbppbbp____",
+    "____pbbppbbp____",
+    "____bbbppbbb____"]},
+  alex:{p:PAL.ax,r:[
+    "____hhhhhhhh____",
+    "___hhhhhhhhhh___",
+    "___hhhhhhhhhh___",
+    "___hssssssssh___",
+    "__hhseesseeshh__",
+    "___hssssssssh___",
+    "___hssJJJJssh___",
+    "___hhsssssshh___",
+    "___hhKKKKKKhh___",
+    "__KKKKKKKKKKKK__",
+    "__KKsKKKKKKsKK__",
+    "__KKsKKKKKKsKK__",
+    "____llllllll____",
+    "____JllJJllJ____",
+    "____JllJJllJ____",
+    "____lllJJlll____"]},
+  creeper:{p:PAL.cr,r:[
+    "___gggggggggg___",
+    "__gggggggggggg__",
+    "__ggGGggggGGgg__",
+    "__ggGGggggGGgg__",
+    "__gggggggggggg__",
+    "__gggkkggkkggg__",
+    "__gggkkggkkggg__",
+    "__ggggkkkkgggg__",
+    "__ggggkkkkgggg__",
+    "__ggggkkkkgggg__",
+    "__gggggkkggggg__",
+    "__gggggggggggg__",
+    "___gggggggggg___",
+    "___gggggggggg___",
+    "___ggGGggGGgg___",
+    "___gggggggggg___"]},
+  enderman:{p:PAL.em,r:[
+    "___bbbbbbbbbb___",
+    "__bbbbbbbbbbbb__",
+    "__bbbbbbbbbbbb__",
+    "__bpppbbbbpppb__",
+    "__bpppbbbbpppb__",
+    "__bPPPbbbbPPPb__",
+    "__bbbbbbbbbbbb__",
+    "____bbbbbbbb____",
+    "___bbbbbbbbbb___",
+    "__bbbbbbbbbbbb__",
+    "__bbbbbbbbbbbb__",
+    "__cbbbbbbbbbbc__",
+    "__cbbbbbbbbbbc__",
+    "__cbbbbbbbbbbc__",
+    "___cbbbbbbbbc___",
+    "___ccbbbbbbcc___"]},
+  zombie:{p:PAL.zb,r:[
+    "___ssssssssss___",
+    "__ssssssssssss__",
+    "__ssssssssssss__",
+    "__sseesssseess__",
+    "__sseesssseess__",
+    "__ssssssssssss__",
+    "__ssssddddssss__",
+    "____ssssssss____",
+    "___cccccccccc___",
+    "__cccccccccccc__",
+    "__ccsccccccscc__",
+    "__ccsccccccscc__",
+    "____dddddddd____",
+    "____dCCddCCd____",
+    "____dCCddCCd____",
+    "____CCcddcCC____"]},
+  skeleton:{p:PAL.sk,r:[
+    "___bbbbbbbbbb___",
+    "__bbbbbbbbbbbb__",
+    "__bbbbbbbbbbbb__",
+    "_bbeebbbbbbeebb_",
+    "_bbeebbbbbbeebb_",
+    "__bbbbbbbbbbbb__",
+    "__bbbbbbbbbbbb__",
+    "___bbdbbbbdbb___",
+    "____bbbbbbbb____",
+    "___dbbbbbbbbd___",
+    "__dbbbbbbbbbbd__",
+    "__bbbbbbbbbbbb__",
+    "___bdbbbbbbdb___",
+    "___bbbbbbbbbb___",
+    "____dbbbbbbd____",
+    "____bbbbbbbb____"]},
+  wither:{p:PAL.wt,r:[
+    "____bbbbbbbb____",
+    "___bbbbbbbbbb___",
+    "___beebbbbeeb___",
+    "__dbbbbbbbbbbd__",
+    "dbbbddbbbbddbbbd",
+    "dbbbeebbbbeebbbd",
+    "dbbbbbbbbbbbbbbd",
+    "dbbbbbbbbbbbbbbd",
+    "_dbbbbbbbbbbbbd_",
+    "__rrrrrrrrrrrr__",
+    "__brrrrrrrrrrb__",
+    "__brrrrrrrrrrb__",
+    "__drrrrrrrrrrd__",
+    "___drrrrrrrrd___",
+    "____drrrrrrd____",
+    "_____dddddd_____"]},
+  dragon:{p:PAL.ed,r:[
+    "___w________w___",
+    "__wwbbbbbbbbww__",
+    "__wbbbddddbbbw__",
+    "__bbppbbbbppbb__",
+    "__bbbddddddbbb__",
+    "__bbbbbbbbbbbb__",
+    "___bbbbbbbbbb___",
+    "__dddddddddddd__",
+    "_ddllddddddlldd_",
+    "dbbbbbbbbbbbbbbd",
+    "_dbbbbbbbbbbbbd_",
+    "___bbbddddbbb___",
+    "___bbbddddbbb___",
+    "____bbddddbb____",
+    "____dd____dd____",
+    "____dd____dd____"]},
+  villager:{p:PAL.vg,r:[
+    "____rrrrrrrr____",
+    "___rrrrrrrrrr___",
+    "___rssssssssr___",
+    "__rreeeeeeeerr__",
+    "___rssssssssr___",
+    "__sssssnnsssss__",
+    "__sssssnnsssss__",
+    "____ssssssss____",
+    "___rrrrrrrrrr___",
+    "__rrrrrrrrrrrr__",
+    "__rrrssssssrrr__",
+    "__rrrssssssrrr__",
+    "___rrrrrrrrrr___",
+    "___rrrrrrrrrr___",
+    "___rrrrrrrrrr___",
+    "____dddddddd____"]},
+  witch:{p:PAL.wi,r:[
+    "_______RR_______",
+    "______RRRR______",
+    "_____RRRRRR_____",
+    "____RRRRRRRR____",
+    "__RRRRRRRRRRRR__",
+    "___gggggggggg___",
+    "__gggggggggggg__",
+    "__ggeeggggeegg__",
+    "_ggggggnngggggg_",
+    "_ggggggnngggggg_",
+    "__gggggggggggg__",
+    "__rrrrrrrrrrrr__",
+    "__RrrrrrrrrrrR__",
+    "__RrrrrrrrrrrR__",
+    "___rrrrrrrrrr___",
+    "___rrrrrrrrrr___"]},
+  phantom:{p:PAL.ph,r:[
+    "bb_____________b",
+    "bbb___________bb",
+    "bbbb_________bbb",
+    "bbbbb_______bbbb",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
+    "_bbbbeebbeebbbb_",
+    "__bbbbbbbbbbbb__",
+    "__llllllllllll__",
+    "___llllllllll___",
+    "____llllllll____",
+    "_____llllll_____",
+    "______llll______",
+    "_______ll_______",
+    "______b__b______",
+    "_____bb__bb_____"]},
+  dolphin:{p:PAL.dp,r:[
+    "_______bbb______",
+    "______bbbbb_____",
+    "_____bbbllbbb___",
+    "____bbblllbbbb__",
+    "__bbbbllllbbbbbb",
+    "_bbbbbllllbbbbbb",
+    "_bbebbblllbbbbbb",
+    "bbbbbbbllbbbbb__",
+    "bbbbbbbbbbbbbb__",
+    "_bbbbbbbbbbbbb__",
+    "__bbbbbbbbbbbb__",
+    "___bbbbbbbbbb___",
+    "____bbbbbbbb____",
+    "______bbbb______",
+    "______fbbf______",
+    "_____ff__ff_____"]}
+};
+var ORDER=['steve','alex','creeper','enderman','zombie','skeleton','wither','dragon','villager','witch','phantom','dolphin'];
+
+var spriteCache={};
+function spriteOf(id){
+  if(spriteCache[id])return spriteCache[id];
+  var d=SPR[id],map=d.p,rows=d.r,h=rows.length,w=rows[0].length,grid=[],y,x,chr;
+  for(y=0;y<16;y++){
+    var row=(rows[y]!==undefined)?rows[y]:'';
+    var line=new Array(16);
+    for(x=0;x<16;x++){
+      if(row.charAt(x)==='*'){
+        chr=(x<=7)?row.charAt(15-x):row.charAt(x);
+        if(chr==='*')chr='_';
+      }else{
+        chr=row.charAt(x)||'_';
+      }
+      line[x]=(chr==='_'||chr==='')?null:(map[chr]||null);
+    }
+    grid.push(line);
+  }
+  spriteCache[id]={w:w,h:h,grid:grid};
+  return spriteCache[id];
+}
+function isDark(id){
+  var s=spriteOf(id),y,x,c,sum=0,n=0;
+  for(y=0;y<s.h;y++)for(x=0;x<s.w;x++){
+    c=s.grid[y][x];
+    if(!c||c.charAt(0)!=='#'||c.length<7)continue;
+    sum+=(parseInt(c.substr(1,2),16)*.299+parseInt(c.substr(3,2),16)*.587+parseInt(c.substr(5,2),16)*.114);
+    n++;
+  }
+  return n?(sum/n)<130:false;   /* 阈值偏向「需要加深描边」的浅色角色 */
+}
+function isPale(id){
+  var s=spriteOf(id),y,x,c,r,g,b,mx,mn,l,sat,n=0,pale=0;
+  for(y=0;y<s.h;y++)for(x=0;x<s.w;x++){
+    c=s.grid[y][x];
+    if(!c||c.charAt(0)!=='#'||c.length<7)continue;
+    r=parseInt(c.substr(1,2),16);g=parseInt(c.substr(3,2),16);b=parseInt(c.substr(5,2),16);
+    mx=Math.max(r,g,b);mn=Math.min(r,g,b);
+    l=(mx+mn)/2;sat=mx===mn?0:(mx-mn)/(l>127?(2-mx/255-mn/255):(mx/255+mn/255))*100;
+    n++;if(l>168&&sat<26)pale++;
+  }
+  return n?(pale/n)>.5:false;   /* 以浅色像素为主（骷髅 / 海豚 / 村民）→ 需要浅灰描边 */
+}
+/* 浅色主题下：浅色角色加浅灰描边、深色角色加白色描边，保证在任何底色上都能看清 */
+function rimColor(id){
+  return isPale(id)?'rgba(92,112,118,.30)':'rgba(255,255,255,.55)';
+}
+function paintSprite(cv,id,px,rim){
+  var s=spriteOf(id);
+  cv.width=16*px;cv.height=16*px;
+  var c=cv.getContext('2d');c.imageSmoothingEnabled=false;
+  var x,y,col;
+  if(rim){
+    for(y=-1;y<=s.h;y++)for(x=-1;x<=s.w;x++){
+      if(x>=0&&y>=0&&x<s.w&&y<s.h&&s.grid[y][x])continue;
+      var touch=false,nb=[[1,0],[-1,0],[0,1],[0,-1]],k;
+      for(k=0;k<4;k++){
+        var nx=x+nb[k][0],ny=y+nb[k][1];
+        if(nx>=0&&ny>=0&&nx<s.w&&ny<s.h&&s.grid[ny][nx]){touch=true;break;}
+      }
+      if(!touch)continue;
+      c.fillStyle=rimColor(id);
+      c.fillRect(x*px,y*px,px,px);
+    }
+  }
+  for(y=0;y<s.h;y++)for(x=0;x<s.w;x++){
+    col=s.grid[y][x];if(!col)continue;
+    c.fillStyle=col;c.fillRect(x*px,y*px,px,px);
+  }
+  return cv;
+}
+function spriteImg(id,px){
+  var cv=document.createElement('canvas');
+  paintSprite(cv,id,px,px>=4);
+  return cv.toDataURL();
+}
+function spriteImgSoft(id,px){
+  var cv=document.createElement('canvas');
+  paintSprite(cv,id,px,false);
+  if(!isDark(id))return cv.toDataURL();
+  /* 深色角色改用浅色面板承载 */
+  var cv2=document.createElement('canvas');
+  cv2.width=cv.width;cv2.height=cv.height;
+  var c2=cv2.getContext('2d');
+  c2.fillStyle='#b9d8e2';c2.fillRect(0,0,cv2.width,cv2.height);
+  c2.drawImage(cv,0,0);
+  return cv2.toDataURL();
+}
+function blankSprite(cv,px){
+  var c=cv.getContext('2d');c.imageSmoothingEnabled=false;
+  c.fillStyle='#ffffff';c.fillRect(0,0,cv.width,cv.height);
+  c.fillStyle='#c9d7d8';c.fillRect(2,2,cv.width-4,2);c.fillRect(2,2,2,cv.height-4);
+  c.fillStyle='#17766b';c.fillRect(px*2,px*6,px*4,px*4);
+  c.fillStyle='#213033';c.fillRect(px*10,px*4,px*3,px);c.fillRect(px*10,px*8,px*3,px);
+}
+
+/* 挖矿小游戏的方块 */
+var BLOCKS=[
+  {id:'dirt',   name:'泥土', pts:1, w:46, x:0, y:0},
+  {id:'grass',  name:'草方块',pts:1, w:24, x:1, y:0},
+  {id:'stone',  name:'石头', pts:2, w:16, x:2, y:0},
+  {id:'coal',   name:'煤矿', pts:3, w:9,  x:3, y:0},
+  {id:'iron',   name:'铁矿', pts:4, w:6,  x:0, y:1},
+  {id:'gold',   name:'金矿', pts:5, w:4,  x:1, y:1},
+  {id:'diamond',name:'钻石', pts:8, w:2,  x:2, y:1}
+];
+var SHEET=null,SHEET_READY=false;
+(function buildSheet(){
+  var cv=document.createElement('canvas');cv.width=64;cv.height=32;
+  var c=cv.getContext('2d');c.imageSmoothingEnabled=false;
+  /* 一格石头底：4x4 个像素块，带深浅棋盘 + 两个暗点 */
+  var ROCK=[[0,0,'#a3abb2'],[1,0,'#8f97a0'],[2,0,'#a3abb2'],[3,0,'#8f97a0'],
+            [0,1,'#8f97a0'],[1,1,'#a3abb2'],[2,1,'#8f97a0'],[3,1,'#a3abb2'],
+            [0,2,'#a3abb2'],[1,2,'#8f97a0'],[2,2,'#a3abb2'],[3,2,'#8f97a0'],
+            [0,3,'#8f97a0'],[1,3,'#a3abb2'],[2,3,'#8f97a0'],[3,3,'#a3abb2']];
+  function cell(cx,cy,pxs){
+    var k,px,py;
+    for(k=0;k<pxs.length;k++){px=pxs[k][0];py=pxs[k][1];c.fillStyle=pxs[k][2];c.fillRect((cx+px)*4,(cy+py)*4,4,4);}
+  }
+  function rock(cx,cy){cell(cx,cy,ROCK);}
+  function speck(cx,cy,list,col){
+    var k;c.fillStyle=col;
+    for(k=0;k<list.length;k++)c.fillRect((cx+list[k][0])*4,(cy+list[k][1])*4,4,4);
+  }
+  /* 泥土 (0,0)：完整泥土格 */
+  cell(0,0,[[0,0,'#7a5236'],[1,0,'#8b5a3c'],[2,0,'#7a5236'],[3,0,'#8b5a3c'],
+            [0,1,'#8b5a3c'],[1,1,'#7a5236'],[2,1,'#8b5a3c'],[3,1,'#7a5236'],
+            [0,2,'#7a5236'],[1,2,'#8b5a3c'],[2,2,'#7a5236'],[3,2,'#8b5a3c'],
+            [0,3,'#8b5a3c'],[1,3,'#7a5236'],[2,3,'#8b5a3c'],[3,3,'#70462d']]);
+  /* 草方块 (1,0)：顶排草 + 泥土身 */
+  cell(1,0,[[0,0,'#5aa544'],[1,0,'#6dbb4c'],[2,0,'#5aa544'],[3,0,'#6dbb4c'],
+            [0,1,'#8b5a3c'],[1,1,'#7a5236'],[2,1,'#8b5a3c'],[3,1,'#7a5236'],
+            [0,2,'#7a5236'],[1,2,'#8b5a3c'],[2,2,'#7a5236'],[3,2,'#8b5a3c'],
+            [0,3,'#8b5a3c'],[1,3,'#7a5236'],[2,3,'#8b5a3c'],[3,3,'#7a5236']]);
+  /* 石头 (2,0) */
+  rock(2,0);
+  speck(2,0,[[0,2],[3,1]],'#7a828b');
+  /* 煤矿 (3,0)：石头 + 黑点 */
+  rock(3,0);
+  speck(3,0,[[1,1],[2,1],[3,2],[1,2],[0,3]],'#22252b');
+  /* 铁矿 (0,1)：石头 + 浅褐点 */
+  rock(0,1);
+  speck(0,1,[[1,0],[2,1],[1,2],[3,3],[2,3]],'#d2a077');
+  /* 金矿 (1,1)：石头 + 金色点 */
+  rock(1,1);
+  speck(1,1,[[1,0],[2,1],[1,2],[3,3],[2,3]],'#e8b429');
+  /* 钻石 (2,1)：石头 + 青色点 */
+  rock(2,1);
+  speck(2,1,[[1,0],[2,0],[3,2],[1,2],[0,1],[2,3]],'#3fc9c4');
+  SHEET=cv;SHEET_READY=true;
+})();
+function drawBlock(ctx,id,size,x,y){
+  var b=null,i;
+  for(i=0;i<BLOCKS.length;i++)if(BLOCKS[i].id===id)b=BLOCKS[i];
+  if(!b||!SHEET_READY)return;
+  ctx.imageSmoothingEnabled=false;
+  ctx.drawImage(SHEET,b.x*16,b.y*16,16,16,x,y,size,size);
+}
+/* 苦力怕爆炸贴图 */
+var BOOM=null;
+(function(){
+  var cv=document.createElement('canvas');cv.width=32;cv.height=32;
+  var c=cv.getContext('2d'),i,x,y;
+  var g1=['#fff8dc','#ffd94d','#e89a1c','#c4443a','#7f352b'];
+  for(i=0;i<g1.length;i++){
+    var r=13-i*2;
+    for(y=-r;y<=r;y++)for(x=-r;x<=r;x++){
+      if(x*x+y*y<=r*r&&((x+y+i)%2===0)){
+        c.fillStyle=g1[i];c.fillRect(16+x,16+y,1,1);
+      }
+    }
+  }
+  BOOM=cv;
+})();
+function boomEl(){
+  var cv=document.createElement('canvas');cv.width=112;cv.height=112;
+  cv.className='boom';cv.getContext('2d').drawImage(BOOM,0,0,112,112);
+  return cv;
+}
+
+/* =========================================================================
+   3. 背景粒子动画
+   ========================================================================= */
+(function bg(){
+  var cv=$('#bg'),c=cv.getContext('2d');
+  var dpr=Math.min(window.devicePixelRatio||1,2);
+  var W=0,H=0,clouds=[],bits=[],t=0,raf=null;
+  var COL=['#8fd8ce','#a8cfe6','#bcdcc4','#c9d9de'];
+  function resize(){
+    W=cv.width=Math.floor(window.innerWidth*dpr);
+    H=cv.height=Math.floor(window.innerHeight*dpr);
+    cv.style.width=window.innerWidth+'px';cv.style.height=window.innerHeight+'px';
+    build();
+  }
+  function build(){
+    clouds=[];bits=[];
+    var i,j,r;
+    var n=clamp(Math.round(W/dpr/420),2,4);
+    for(i=0;i<n;i++){
+      r=2+Math.floor(Math.random()*3);
+      clouds.push({x:Math.random()*W,y:Math.random()*H*0.9,r:r,s:Math.round(r*9*dpr),
+        vx:(6+Math.random()*9)*dpr/60,a:.16+Math.random()*.18,c:COL[i%COL.length],bob:Math.random()*6.28});
+    }
+    var m=clamp(Math.round(W*H/(dpr*dpr)/46000),8,24);
+    for(j=0;j<m;j++){
+      bits.push({x:Math.random()*W,y:Math.random()*H,s:(2+Math.floor(Math.random()*2))*dpr,
+        vy:-(6+Math.random()*14)*dpr/60,vx:(Math.random()-.5)*.3*dpr,
+        a:.12+Math.random()*.20,ph:Math.random()*6.28});
+    }
+  }
+  /* 圆润的像素云：逐像素点出，保留方块感 */
+  function cloud(x,y,r,px,col){
+    c.fillStyle=col;
+    var dx,dy;
+    for(dy=0;dy<r;dy++)for(dx=-r+1;dx<r;dx++){
+      if(dx*dx+dy*dy*1.35>r*r)continue;
+      c.fillRect(Math.round(x+dx*px),Math.round(y+dy*px),px,px);
+    }
+  }
+  function frame(){
+    t+=1/60;
+    c.clearRect(0,0,W,H);
+    var i,p,bob;
+    for(i=0;i<clouds.length;i++){
+      p=clouds[i];
+      p.x+=p.vx;
+      if(p.x-p.r*p.s>W+40){p.x=-p.r*p.s-20;p.y=Math.random()*H*0.92;}
+      bob=Math.sin(t*.5+p.bob)*2*dpr;
+      c.globalAlpha=p.a;
+      cloud(p.x,p.y+bob,p.r,p.s,p.c);
+      c.globalAlpha=p.a*.4;
+      cloud(p.x-p.s,p.y+bob-p.s,p.r-1,p.s,'#ffffff');
+    }
+    for(i=0;i<bits.length;i++){
+      p=bits[i];
+      p.y+=p.vy;p.x+=p.vx+Math.sin(t*.8+p.ph)*.1*dpr;
+      if(p.y<-12){p.y=H+8;p.x=Math.random()*W;}
+      if(p.x<-10)p.x=W+8;if(p.x>W+8)p.x=-8;
+      c.globalAlpha=p.a;
+      c.fillStyle='#ffffff';c.fillRect(Math.round(p.x),Math.round(p.y),p.s,p.s);
+      c.globalAlpha=p.a*.75;
+      c.fillStyle='#5fbfae';c.fillRect(Math.round(p.x),Math.round(p.y+p.s),p.s,Math.max(1,Math.round(p.s*.35)));
+    }
+    c.globalAlpha=1;
+    raf=requestAnimationFrame(frame);
+  }
+  window.addEventListener('resize',resize,{passive:true});
+  resize();frame();
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){if(raf)cancelAnimationFrame(raf);raf=null;}
+    else if(!raf)frame();
+  });
+})();
+
+/* =========================================================================
+   4. 角色库（性格向量 / 称号 / 文案）
+     向量 = [活跃, 耐心, 冒险, 内敛, 力量, 黑暗]  0~100
+   ========================================================================= */
+var CHARS={
+  steve:{name:'史蒂夫',en:'Steve',traits:[58,76,46,40,62,20],danger:30,partner:'alex',
+    tags:['稳重','全能','耐心强','可靠'],
+    title:'方块基石・万物开端',
+    quote:'“第一块木头，永远是我砍下来的。”',
+    desc:['你是这个世界最原始、也最可靠的那种存在。别人还在犹豫要不要出发，你已经握着石镐走进了第一片森林。',
+      '你不追求花哨，只在意「这件事有没有做完」。挖矿、种田、盖房、修路 —— 你属于那种嘴上不说什么，回头却把整个基地建好的人。',
+      '你的耐心不是慢，而是稳。别人三分钟热度的时候，你已经在做第二十次了。'],
+    dangerNote:'危险等级低：你不主动惹事，但没人敢动你盖的房子。'},
+  alex:{name:'爱丽克丝',en:'Alex',traits:[70,62,60,44,58,30],danger:38,partner:'steve',
+    tags:['灵活','果敢','上进','会规划'],
+    title:'翠林行者・迅捷之刃',
+    quote:'“路不通？那就自己开一条。”',
+    desc:['你天生带着一股「往前走」的劲儿。别人在纠结路线，你已经翻过山、穿过丛林、站在地图边缘了。',
+      '你既有史蒂夫式的踏实，又多了几分自己的判断：你整理箱子、规划农田、把家安在视野最好的位置 —— 你是那种既有执行力、又有审美的人。',
+      '你不怕麻烦，只怕原地不动。'],
+    dangerNote:'危险等级中低：你出手很有分寸，但准头从不含糊。'},
+  creeper:{name:'苦力怕',en:'Creeper',traits:[76,24,88,44,66,42],danger:78,partner:'zombie',
+    tags:['活泼','冲动','爆发力强','不经意搞大事'],
+    title:'随性爆炸・氛围制造师',
+    quote:'“嘶——（这是我要说的话全部）”',
+    desc:['你身上有一种别人学不来的「突然」。安静的时候特别安静，一旦决定行动，能量是爆炸式的。',
+      '你从来没有恶意，但总能制造全场最大的动静：本来只是路过，最后变成了全场焦点。朋友对你的评价高度统一 —— 「有你在，永远不会无聊」。',
+      '你的问题从来不是不够强，而是收不住。给自己留半秒数「嘶」的时间，你会成为最可怕的对手。'],
+    dangerNote:'危险等级高：你在场时，所有人的屏幕都会亮一下。'},
+  enderman:{name:'末影人',en:'Enderman',traits:[50,58,54,92,62,78],danger:70,partner:'phantom',
+    tags:['高冷','爱独处','反应快','喜欢黑夜'],
+    title:'静默独行・暗夜行者',
+    quote:'“别看我。我也不会看你。”',
+    desc:['你不合群，但不是不能合群 —— 你只是更习惯一个人待着。人多的地方你自动开启省电模式，独处时你的世界才真正开始运转。',
+      '你的反应极快，眼睛很尖，别人还没看清局势，你已经搬着整块方块离开了。你有自己的一套规则，不喜欢被盯着、被催着、被打扰。',
+      '你不是冷漠，只是把温度留给了极少数人。'],
+    dangerNote:'危险等级高：挑衅你的代价，通常是一次措手不及的瞬移背刺。'},
+  zombie:{name:'僵尸',en:'Zombie',traits:[46,30,54,48,50,58],danger:52,partner:'creeper',
+    tags:['憨厚','执着','随和','不放弃'],
+    title:'不死执念・暗夜打工人',
+    quote:'“天亮了？那我明天再来。”',
+    desc:['你最大的天赋是「不放弃」。被打退一次、两次、十次，你依然会出现在门口，继续敲门。',
+      '你不聪明也不狡猾，但你从不内耗：目标简单，脚步不停，一天走一步也算赢。你的随和让你在任何队伍里都很好相处 —— 只是偶尔有点执拗。',
+      '别小看这种笨拙的坚持，很多大事都是这么磨出来的。'],
+    dangerNote:'危险等级中：单个你并不可怕，成群的时候就很吵。'},
+  skeleton:{name:'骷髅',en:'Skeleton',traits:[46,56,50,68,54,70],danger:60,partner:'witch',
+    tags:['冷静','精准','疏离','夜行'],
+    title:'白骨神射・静夜之弦',
+    quote:'“算好抛物线，然后放手。”',
+    desc:['你是个理性到近乎冷血的人。别人凭冲动，你凭计算 —— 距离、角度、时机，你在心里早就算过一遍了。',
+      '你不喜欢近身的纠缠，更擅长站在安全距离，一击解决。你话不多，笑得也少，但你的判断常常是最准的那一个。',
+      '你需要的不是热情，是一点点温度。'],
+    dangerNote:'危险等级中高：你不出手则已，出手往往正中要害。'},
+  wither:{name:'凋灵',en:'Wither',traits:[62,30,72,70,88,88],danger:96,partner:'dragon',
+    tags:['强大','压迫感','独裁','破坏力'],
+    title:'凋零君王・三首裁决',
+    quote:'“我不需要朋友，我需要臣服。”',
+    desc:['你走到哪里，气压就低到哪里。你天生带着一种「别挡路」的气场，不需要喊，不需要解释，别人自然会给你让出空间。',
+      '你的强大是压倒性的，而且你并不掩饰这一点。你要的从来不是参与，而是主导：规则你定，节奏你控，结果你说了算。',
+      '只是记得 —— 破坏比建造容易得多，你真正的挑战是学会「留下点什么」。'],
+    dangerNote:'危险等级极高：你出现的时候，连天空都会变暗。'},
+  dragon:{name:'末影龙',en:'Ender Dragon',traits:[70,38,82,80,92,84],danger:100,partner:'wither',
+    tags:['霸气','强势','喜欢挑战','少说话'],
+    title:'深渊主宰・天际孤王',
+    quote:'“想见我？先走到世界的尽头。”',
+    desc:['你是天生的终局。别人在支线里忙碌，你本身就是一个需要被攻略的目标。你不需要朋友，也不需要观众 —— 你只需要一个配得上的对手。',
+      '你寡言、强势、绝不妥协。你厌恶平庸的重复，渴望真正的挑战：更高的山、更深的洞、更强的对手。你输得起，但你不接受「算了」。',
+      '你一个人守着整片虚空，也一个人扛着整片虚空。孤独对你来说不是代价，是王座的一部分。'],
+    dangerNote:'危险等级满格：整座末地，都算你的地盘。'},
+  villager:{name:'村民',en:'Villager',traits:[34,78,20,54,34,24],danger:10,partner:'alex',
+    tags:['温和','会过日子','务实','守规矩'],
+    title:'绿野守序・安稳经营家',
+    quote:'“嗯。”（并掏出了三颗绿宝石）',
+    desc:['你热爱秩序与安稳。天亮开门，天黑关门，货架摆整齐，账目算清楚 —— 你的生活有一种让人安心的节拍。',
+      '你不爱冒险，但你极其擅长「把日子过好」。别人在外面拼命，你在家里囤货、种田、交易，然后把所有人都照顾得妥妥当当。',
+      '你看起来最好欺负，但真正撑起这个世界的，往往是你这样的人。'],
+    dangerNote:'危险等级极低：唯一的攻击方式，是价格谈判。'},
+  witch:{name:'女巫',en:'Witch',traits:[44,70,58,70,60,66],danger:66,partner:'skeleton',
+    tags:['聪慧','神秘','有手段','爱研究'],
+    title:'秘药调制・暗夜智者',
+    quote:'“别怕，这瓶只是有点苦。”',
+    desc:['你相信知识比拳头更管用。别人硬冲，你翻配方：一瓶药水、一个时机，就能把局面翻过来。',
+      '你喜欢待在自己的小屋里研究东西，也享受别人看不懂你的感觉。你有手段、有耐心、有一点点算计 —— 但你并不会滥用它。',
+      '你的强大不在于正面，而在于你总比对手多准备了三种方案。'],
+    dangerNote:'危险等级较高：你身上永远有没喝完的瓶子。'},
+  phantom:{name:'幻翼',en:'Phantom',traits:[72,24,72,66,54,92],danger:72,partner:'enderman',
+    tags:['夜行','自由','随性','扰人清梦'],
+    title:'夜翼游魂・噩梦邮差',
+    quote:'“还不睡？那我来了。”',
+    desc:['你是彻底的夜行动物。白天属于别人，深夜才属于你 —— 那时候你脑子最清醒，灵感最多，也最不想睡觉。',
+      '你自由、散漫、有点坏心眼。你不喜欢被安排，也不喜欢被催促，宁可绕一大圈也不走别人指的路。朋友被你折腾得又气又笑。',
+      '你是那种「让人睡不好觉」的存在 —— 但没你在，夜晚会少一半意思。'],
+    dangerNote:'危险等级较高：你的攻击方式是「让别人也别想睡」。'},
+  dolphin:{name:'海豚',en:'Dolphin',traits:[82,50,54,32,44,16],danger:8,partner:'alex',
+    tags:['阳光','好动','治愈','爱带路'],
+    title:'逐浪欢鸣・深海引路人',
+    quote:'“跟上我！那边有好东西！”',
+    desc:['你是那种一出现就让气氛变好的人。你爱玩、爱闹、爱探索，路过谁都想拽着一起走。',
+      '你的快乐很简单：游得快一点、跳得高一点、认识新朋友。你天生有「带路」的本能 —— 看到别人迷茫，你会主动游过去，把人领到正确的方向。',
+      '你的力量不是攻击，是让人愿意继续玩下去。'],
+    dangerNote:'危险等级最低：你唯一的攻击性，是抢着带路。'}
+};
+var CHAR_IDS=ORDER.slice();
+
+/* 选择题 → 向量增量 */
+var QUESTIONS=[
+  {q:'你更喜欢白天探险，还是黑夜探险？',ice:'昼夜偏好',opts:[
+    {t:'白天。阳光底下什么都看得清',d:['activity','patience'],v:[8,6,-4,-3,0,0]},
+    {t:'黄昏。白天黑夜的缝隙最迷人',d:['darkness','risk'],v:[4,2,6,2,0,10]},
+    {t:'黑夜。怪物的节奏才是我的节奏',d:['darkness','risk'],v:[2,-2,10,6,4,14]}
+  ]},
+  {q:'遇到难题，你的第一反应是——',ice:'应对方式',opts:[
+    {t:'正面硬刚，先撞上去再说',d:['strength','risk'],v:[10,-6,12,0,12,0]},
+    {t:'躲起来，蓄力，等机会',d:['patience','introversion'],v:[-4,10,-2,8,4,4]},
+    {t:'悄悄绕路，从背后解决',d:['introversion','patience'],v:[2,6,4,12,2,2]}
+  ]},
+  {q:'你的性格更接近哪一种？',ice:'性格底色',opts:[
+    {t:'温柔佛系，不想伤害任何人',d:['patience','sociable'],v:[-6,10,-12,-4,-14,0]},
+    {t:'活泼冲动，想到就去做',d:['activity','risk'],v:[14,-8,10,0,2,0]},
+    {t:'高冷寡言，不太想说话',d:['introversion','darkness'],v:[-4,4,0,16,4,8]}
+  ]},
+  {q:'朋友眼中的你，更接近哪个词？',ice:'他人印象',opts:[
+    {t:'可靠——有事找你准没错',d:['reliable','patience'],v:[-2,10,-4,0,8,0]},
+    {t:'神秘——总感觉你有秘密',d:['introversion','darkness'],v:[-2,2,4,14,4,10]},
+    {t:'搞笑——气氛担当，笑点在你身上',d:['activity','sociable'],v:[12,-2,2,0,0,2]},
+    {t:'强势——你说的话就是决定',d:['strength','risk'],v:[4,-2,10,2,14,2]}
+  ]},
+  {q:'如果只能选一种超能力，你要——',ice:'超能力',opts:[
+    {t:'瞬移：一秒出现在任何地方',d:['agility','introversion'],v:[4,0,8,10,2,4]},
+    {t:'飞行：没有我到不了的地方',d:['activity','risk'],v:[14,0,10,-2,4,2]},
+    {t:'爆炸：让一切重新开始',d:['risk','strength'],v:[8,-8,18,0,14,4]},
+    {t:'治愈：把受伤的都治好',d:['patience','sociable'],v:[-6,12,-8,-2,-10,0]},
+    {t:'力量：一拳解决所有问题',d:['strength'],v:[8,-2,8,2,18,2]}
+  ]}
+];
+
+/* =========================================================================
+   5. 状态与流程
+   ========================================================================= */
+var S={
+  gi:0, qi:0,
+  mining:null, dodge:null, build:null,
+  answers:[], scores:{mining:0,dodge:0,build:0},
+  result:null, lastIdx:0, awarded:[]
+};
+var FLOW=[
+  {type:'game',key:'mining'},
+  {type:'q',i:0},{type:'q',i:1},
+  {type:'game',key:'dodge'},
+  {type:'q',i:2},{type:'q',i:3},
+  {type:'game',key:'build'},
+  {type:'q',i:4}
+];
+var TRAIT_KEYS=['activity','patience','risk','introversion','strength','darkness'];
+var TRAIT_LABEL={activity:'活跃度',patience:'耐心值',risk:'冒险欲',introversion:'内敛度',strength:'力量感',darkness:'暗夜倾向'};
+var V=null; /* 向量累加器 */
+
+function show(id){
+  ['view-boot','view-intro','view-quiz','view-result'].forEach(function(v){
+    var n=document.getElementById(v);if(n)n.hidden=(v!==id);
+  });
+  var card=$('#card');
+  card.style.animation='none';void card.offsetWidth;card.style.animation='';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function setProgress(){
+  var pct=Math.round(S.gi/FLOW.length*100);
+  $('#pFill').style.width=pct+'%';
+  $('#pText').textContent='进度 '+S.gi+' / '+FLOW.length;
+  $('#pStage').textContent=(FLOW[S.gi]&&FLOW[S.gi].type==='game')?'🎮 小游戏':'📜 性格题';
+}
+function playMode(on){
+  var card=$('#card');
+  if(on)card.classList.add('playing');else card.classList.remove('playing');
+}
+function next(){
+  S.gi++;
+  if(S.gi>=FLOW.length){finish();return;}
+  try{
+    var st=FLOW[S.gi];
+    setProgress();
+    if(st.type==='game')gameIntro(st.key);
+    else questionView(st.i);
+  }catch(e){
+    window.__flowError=(e&&e.stack)||String(e);
+    if(window.console&&console.error)console.error('流程渲染失败:',e);
+  }
+}
+
+/* ---------- 小游戏：开场说明 ---------- */
+var GAMEMETA={
+  mining:{n:'MINI GAME 1 / 3',t:'快速挖方块',rule:'10 秒内点掉屏幕上的方块。<b>矿石分值更高</b>，点空地会扣时间。',
+    tip:'测你的手速与耐心',icon:'⛏️'},
+  dodge:{n:'MINI GAME 2 / 3',t:'躲避苦力怕',rule:'用 <b>← →</b>（或左右半屏）移动，别被苦力怕碰到。生存 <b>10 秒</b>，越久越好。',
+    tip:'测你的反应与走位',icon:'💥'},
+  build:{n:'MINI GAME 3 / 3',t:'极速搭建',rule:'<b>4 秒</b>，在空地上随便摆方块。堆高、铺平、还是乱摆——都算你的风格。',
+    tip:'测你的性格风格',icon:'🧱'}
+};
+function gameIntro(key){
+  var m=GAMEMETA[key],st=$('#stage');
+  st.innerHTML='';
+  var wrap=el('div',{class:'view'});
+  wrap.innerHTML=
+    '<div class="center">'+
+      '<div class="q-num">'+m.n+'</div>'+
+      '<h2 class="h2">'+m.icon+' '+m.t+'</h2>'+
+      '<p class="sub">'+m.rule+'</p>'+
+      '<p class="small">'+m.tip+'</p>'+
+      '<div class="divider"></div>'+
+      '<button class="btn big" type="button" id="gStart">开始</button>'+
+      '<p class="small" style="margin-top:10px">没玩好也没关系，人格题才是主角 ✨</p>'+
+    '</div>';
+  st.appendChild(wrap);
+  var btn=$('#gStart');
+  btn.addEventListener('click',function(){
+    Sfx.unlock();Sfx.click();
+    playMode(true);
+    if(key==='mining')startMining();
+    else if(key==='dodge')startDodge();
+    else startBuild();
+  });
+  btn.focus();
+}
+
+/* 游戏结束小结 */
+function gameDone(key,score,comment,metrics){
+  S.scores[key]=score;
+  playMode(false);
+  var st=$('#stage');
+  st.innerHTML='';
+  var wrap=el('div',{class:'view'});
+  wrap.innerHTML=
+    '<div class="center">'+
+      '<div class="q-num">MINI GAME 完成</div>'+
+      '<h2 class="h2">'+GAMEMETA[key].icon+' '+GAMEMETA[key].t+'</h2>'+
+      '<p class="rtitle" style="font-size:44px;color:#1b2a2e;margin:8px 0 0">'+score+'</p>'+
+      '<p class="sub" style="margin-top:4px">'+comment+'</p>'+
+      '<div class="divider"></div>'+
+      '<button class="btn" type="button" id="gNext">继续 ▶</button>'+
+    '</div>';
+  st.appendChild(wrap);
+  $('#gNext').addEventListener('click',function(){Sfx.click();next();});
+  $('#gNext').focus();
+}
+
+/* ---------- 游戏 1：挖方块 ---------- */
+function startMining(){
+  var st=$('#stage');st.innerHTML='';
+  var wrap=el('div',{class:'view'});
+  wrap.innerHTML=
+    '<div class="game-hud">'+
+      '<div class="chip">⛏️ 得分 <b id="mScore">0</b></div>'+
+      '<div class="chip">💎 矿石 <b id="mOre">0</b></div>'+
+      '<div class="chip time">⏱ <b id="mTime">10.0</b>s</div>'+
+    '</div>'+
+    '<div class="stage" id="mStage">'+
+      '<div class="timerbar" id="mBar"></div>'+
+      '<div class="ground"></div>'+
+      '<img class="pc shovel" id="mCursor" alt="" src="'+spriteImg('steve',3)+'" style="display:none">'+
+    '</div>'+
+    '<div class="small center" style="margin-top:10px">点方块挖矿 · 点空地会扣时间</div>';
+  st.appendChild(wrap);
+  var stage=$('#mStage');
+  var target=Math.min(560,Math.max(300,$('#card').clientWidth-30));
+  stage.style.width=target+'px';
+  stage.style.height=Math.round(target*0.66)+'px';
+  var W2=stage.clientWidth,H2=stage.clientHeight;
+
+  var score=0,ore=0,hits=0,miss=0,spawnMiss=0,left=10.0,over=false;
+  var blocks=[],spawnAcc=0,last=performance.now(),raf=null;
+  var cursor=$('#mCursor');
+
+  function spawn(){
+    var tot=0,i;for(i=0;i<BLOCKS.length;i++)tot+=BLOCKS[i].w;
+    var r=Math.random()*tot,acc=0,pick=BLOCKS[0];
+    for(i=0;i<BLOCKS.length;i++){acc+=BLOCKS[i].w;if(r<=acc){pick=BLOCKS[i];break;}}
+    var size=Math.round(W2*0.125);
+    size=clamp(size,38,60);
+    var b={def:pick,size:size,born:performance.now(),
+      x:8+Math.random()*Math.max(1,W2-size-16),
+      y:H2-46-size-Math.random()*Math.max(1,H2-46-size-70)};
+    b.node=el('canvas',{class:'pc',width:32,height:32});
+    b.node.style.width=size+'px';b.node.style.height=size+'px';
+    drawBlock(b.node.getContext('2d'),pick.id,32,0,0);
+    b.node.style.transform='translate('+b.x+'px,'+b.y+'px)';
+    stage.appendChild(b.node);
+    blocks.push(b);
+  }
+  function popScore(x,y,txt){
+    var s=el('div',{class:'score-pop',text:txt});
+    s.style.left=x+'px';s.style.top=y+'px';stage.appendChild(s);
+    setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},800);
+  }
+  function hurt(msg){
+    miss++;left=Math.max(0,left-0.5);
+    Sfx.miss();stage.style.boxShadow='inset 0 0 0 3px #c3d3d2, inset 0 0 42px rgba(196,68,58,.35)';
+    setTimeout(function(){stage.style.boxShadow='';},160);
+    if(msg)popScore(lastx,lasty,msg);
+  }
+  var lastx=0,lasty=0;
+  function hitTest(cx,cy){
+    var i,b,size;
+    for(i=blocks.length-1;i>=0;i--){
+      b=blocks[i];size=b.size;
+      if(cx>=b.x&&cx<=b.x+size&&cy>=b.y&&cy<=b.y+size)return b;
+    }
+    return null;
+  }
+  stage.addEventListener('pointerdown',function(e){
+    if(over)return;
+    var r=stage.getBoundingClientRect();
+    var cx=e.clientX-r.left,cy=e.clientY-r.top;
+    lastx=cx;lasty=cy;
+    hitTest(cx,cy);
+    var b=hitTest(cx,cy);
+    if(b){
+      hits++;
+      score+=b.def.pts;
+      if(b.def.pts>=3)ore++;
+      if(b.def.pts>=3)Sfx.ore();else Sfx.dig();
+      popScore(b.x+b.size/2-8,b.y,'+'+b.def.pts);
+      /* 碎块粒子 */
+      var i,pt;
+      for(i=0;i<5;i++){
+        pt=el('div');
+        pt.style.cssText='position:absolute;width:6px;height:6px;background:'+(b.def.pts>=3?'#17766b':'#8b5a3c')+
+          ';left:'+(b.x+b.size/2)+'px;top:'+(b.y+b.size/2)+'px;pointer-events:none';
+        stage.appendChild(pt);
+        (function(node,dx,dy){
+          var t0=performance.now();
+          (function anim(){
+            var k=(performance.now()-t0)/380;
+            if(k>=1){if(node.parentNode)node.parentNode.removeChild(node);return;}
+            node.style.transform='translate('+(dx*k*40)+'px,'+(dy*k*40+k*k*40)+'px)';
+            node.style.opacity=String(1-k);
+            requestAnimationFrame(anim);
+          })();
+        })(pt,Math.random()*2-1,Math.random()*-1.2);
+      }
+      stage.removeChild(b.node);
+      blocks.splice(blocks.indexOf(b),1);
+      $('#mScore').textContent=score;$('#mOre').textContent=ore;
+    }else{
+      hurt('');
+      popScore(cx-10,cy,'-0.5s');
+    }
+  });
+  stage.addEventListener('pointermove',function(e){
+    var r=stage.getBoundingClientRect();
+    var x=e.clientX-r.left,y=e.clientY-r.top;
+    cursor.style.display='block';
+    cursor.style.transform='translate('+(x-19)+'px,'+(y-30)+'px)';
+  });
+  stage.addEventListener('pointerleave',function(){cursor.style.display='none';});
+
+  var acc=0,firstFrame=true;
+  function loop(now){
+    if(over)return;
+    /* 首帧对齐时钟：避免「说明页停留时间」被算进倒计时 */
+    if(firstFrame){firstFrame=false;last=now;}
+    var dt=Math.min(.05,(now-last)/1000);last=now;
+    left-=dt;
+    acc+=dt;
+    if(left<=0){left=0;end();return;}
+    var score10=score;
+    /* 生成 */
+    spawnAcc+=dt;
+    var interval=clamp(.62-hits*0.008,0.28,0.62);
+    if(spawnAcc>=interval){
+      spawnAcc=0;
+      if(blocks.length<9)spawn();
+    }
+    /* 超时消失 */
+    var i,b;
+    for(i=blocks.length-1;i>=0;i--){
+      b=blocks[i];
+      if(now-b.born>2200){
+        stage.removeChild(b.node);blocks.splice(i,1);spawnMiss++;
+      }
+    }
+    $('#mTime').textContent=left.toFixed(1);
+    var pct=left/10*100;
+    $('#mBar').style.width=pct+'%';
+    if(left<3.2)$('#mBar').classList.add('warn');else $('#mBar').classList.remove('warn');
+    if(left<3.05&&left+dt>=3.05)Sfx.tick();
+    raf=requestAnimationFrame(loop);
+  }
+  function end(){
+    over=true;
+    if(raf)cancelAnimationFrame(raf);
+    cursor.style.display='none';
+    var total=hits+miss;
+    var eff=hits>0?score/hits:0;
+    var acc2=total>0?hits/total:0.55;
+    S.mining={score:score,hits:hits,miss:miss,ore:ore,spawnMiss:spawnMiss,eff:eff,acc:acc2};
+    /* 写回向量 */
+    var addA=clamp(hits*0.8,0,13);
+    var addR=clamp(ore*1.1,0,10);
+    var addP=clamp((acc2-0.45)*22+ (hits>=6?1:0),-6,9);
+    addTrait('activity',addA);addTrait('strength',addR);addTrait('patience',addP);
+    S.gameBonus=S.gameBonus||{};
+    S.gameBonus.miner=clamp((acc2*0.7+hits/22*0.3-0.5)*20,-6,6);
+    S.gameBonus.burst=clamp((eff-2.4)*2.2,-4,6);
+    var comment;
+    if(score>=26)comment='手速炸裂！你挖穿了一整条矿脉 💎';
+    else if(score>=16)comment='节奏很稳，是个熟练工 ⛏️';
+    else if(score>=8)comment='不慌不忙，挖得挺从容 🙂';
+    else comment='……你在看风景，对吧？🌿';
+    Sfx.win();
+    gameDone('mining',score,comment);
+  }
+  spawn();spawn();spawn();
+  raf=requestAnimationFrame(loop);
+}
+
+/* ---------- 游戏 2：躲苦力怕 ---------- */
+function startDodge(){
+  var st=$('#stage');st.innerHTML='';
+  var wrap=el('div',{class:'view'});
+  wrap.innerHTML=
+    '<div class="game-hud">'+
+      '<div class="chip">❤️ 生命 <b id="dHp">3</b></div>'+
+      '<div class="chip">😰 惊险 <b id="dN">0</b></div>'+
+      '<div class="chip time">⏱ <b id="dTime">10.0</b>s</div>'+
+    '</div>'+
+    '<div class="stage" id="dStage">'+
+      '<div class="timerbar" id="dBar"></div>'+
+      '<div class="ground"></div>'+
+      '<img class="pc" id="dPlayer" alt="" src="'+spriteImg('alex',3)+'" style="width:38px;height:38px;display:none">'+
+      '<div class="stage-msg" id="dMsg"><b>READY?</b><span class="small">点击画面开始</span></div>'+
+    '</div>'+
+    '<div class="gpad"><button class="btn ghost" id="dLeft" type="button">◀</button><button class="btn ghost" id="dRight" type="button">▶</button></div>'+
+    '<div class="small center" style="margin-top:8px">键盘 ← → 或 A / D 也可以</div>';
+  st.appendChild(wrap);
+  var stage=$('#dStage');
+  var target=Math.min(560,Math.max(300,$('#card').clientWidth-30));
+  stage.style.width=target+'px';stage.style.height=Math.round(target*0.7)+'px';
+  var W2=stage.clientWidth,H2=stage.clientHeight;
+  var pw=38,ph=38,groundY=H2-46-ph-4;
+  var p={x:W2/2-pw/2,vx:0,dir:0,hp:3};
+  var player=$('#dPlayer'),msg=$('#dMsg');
+  player.style.display='block';
+  player.style.width=pw+'px';player.style.height=ph+'px';
+  function placePlayer(){
+    player.style.transform='translate('+p.x+'px,'+groundY+'px) scaleX('+(p.dir<0?-1:1)+')';
+    player.style.transformOrigin='center';
+    player.style.left='0';player.style.top='0';
+  }
+  placePlayer();
+  var started=false,over=false,invuln=0,left=10.0,last=nowMs(),startAt=0;
+  var DODGE_TIME=10;
+  var mobs=[],spawnAcc=0,near=0,travel=0,raf=null,shake=0;
+  var keys={};
+  function keyHandler(e,down){
+    var k=e.key;
+    if(!started&&down&&(k==='ArrowLeft'||k==='ArrowRight'||k==='a'||k==='A'||k==='d'||k==='D'||k===' '||k==='Enter')){
+      begin();
+    }
+    if(k==='ArrowLeft'||k==='a'||k==='A'){keys.l=down;e.preventDefault();}
+    if(k==='ArrowRight'||k==='d'||k==='D'){keys.r=down;e.preventDefault();}
+    if(k===' ')e.preventDefault();
+  }
+  var kd=function(e){keyHandler(e,true);},ku=function(e){keyHandler(e,false);};
+  document.addEventListener('keydown',kd);document.addEventListener('keyup',ku);
+
+  var half=Math.floor(W2/2);
+  function pointerMove(e){
+    if(!started||over)return;
+    var r2=stage.getBoundingClientRect();
+    var x=e.clientX-r2.left;
+    keys.touch=(x<half)?-1:1;
+  }
+  /* 三重冗余：pointer / mouse / touch 都能开始并控制 */
+  function onDown(e){
+    if(!started&&!over){begin();}
+    pointerMove(e);
+  }
+  if(window.PointerEvent)stage.addEventListener('pointerdown',onDown);
+  stage.addEventListener('mousedown',onDown);
+  stage.addEventListener('touchstart',function(e){
+    if(!started&&!over)begin();
+    pointerMove(e.touches&&e.touches[0]?e.touches[0]:e);
+  },{passive:true});
+  stage.addEventListener('pointermove',function(e){pointerMove(e);});
+  stage.addEventListener('mousemove',function(e){pointerMove(e);});
+  ['pointerup','pointercancel','mouseup','mouseleave','touchend'].forEach(function(ev){
+    stage.addEventListener(ev,function(){keys.touch=0;});
+  });
+  /* 方向键：多事件冗余，按下即移动，松手/移出即停 */
+  function bindPad(node,key){
+    function on(){keys[key]=true;}
+    function off(){keys[key]=false;}
+    if(window.PointerEvent){
+      node.addEventListener('pointerdown',on);
+      node.addEventListener('pointerup',off);
+      node.addEventListener('pointerleave',off);
+      node.addEventListener('pointercancel',off);
+    }else{
+      node.addEventListener('mousedown',on);
+      node.addEventListener('mouseup',off);
+      node.addEventListener('mouseleave',off);
+      node.addEventListener('touchstart',function(e){on();e.preventDefault();},{passive:false});
+      node.addEventListener('touchend',off);
+    }
+  }
+  bindPad($('#dLeft'),'l');
+  bindPad($('#dRight'),'r');
+
+  function mob(){
+    var big=Math.random()<0.22;
+    return {size:big?50:38, fast:big?1.18:1, x:10+Math.random()*Math.max(1,W2-60),
+      y:-52, vy:(0.10+left*0.012+Math.random()*0.06)*(big?1.1:1), node:null};
+  }
+  function addMob(){
+    var m=mob();
+    m.node=el('img',{class:'pc',alt:'',src:spriteImg('creeper',3)});
+    m.node.style.width=m.size+'px';m.node.style.height=m.size+'px';
+    m.node.style.transform='translate('+m.x+'px,'+m.y+'px)';
+    stage.appendChild(m.node);mobs.push(m);
+  }
+  function begin(){
+    started=true;Sfx.unlock();Sfx.click();
+    if(msg&&msg.parentNode)msg.parentNode.removeChild(msg);
+    last=nowMs();
+    startAt=last;
+    left=DODGE_TIME;
+    raf=requestAnimationFrame(loop);
+  }
+  var spawnAcc2=0,dodgeFirst=true;
+  function loop(now){
+    if(over)return;
+    if(dodgeFirst){dodgeFirst=false;last=nowMs();}
+    var frameNow=nowMs();
+    var dt=Math.min(.05,(frameNow-last)/1000);last=frameNow;
+    if(started){
+      /* 用真实时间戳计时，不受帧率/虚拟时钟影响 */
+      left=DODGE_TIME-(nowMs()-startAt)/1000;
+      if(left<=0){left=0;return end();}
+    }
+    var dir=0;
+    if(keys.l)dir-=1;
+    if(keys.r)dir+=1;
+    if(keys.touch)dir+=keys.touch;
+    if(dir!==0)p.dir=dir;
+    var speed=W2*1.1;
+    p.x=clamp(p.x+dir*speed*dt,2,W2-pw-2);
+    travel+=Math.abs(dir*speed*dt);
+    placePlayer();
+    if(invuln>0)invuln-=dt;
+    player.style.opacity=(invuln>0&&Math.floor(invuln*12)%2===0)?'0.35':'1';
+    /* 生成 */
+    spawnAcc2+=dt;
+    var interval=clamp(0.62-(10-left)*0.032,0.30,0.66);
+    if(spawnAcc2>=interval&&started){spawnAcc2=0;addMob();}
+    /* 更新 */
+    var i,m,hitGround;
+    for(i=mobs.length-1;i>=0;i--){
+      m=mobs[i];
+      m.y+=m.vy*60*dt;
+      m.node.style.transform='translate('+m.x+'px,'+m.y+'px)';
+      if(m.y+18>groundY&&m.y<groundY+14){ /* 与玩家同一水平层 */
+        var overlap=!(p.x+pw<m.x+6||p.x>m.x+m.size-6);
+        if(overlap){
+          var dist=Math.abs((p.x+pw/2)-(m.x+m.size/2));
+          if(dist<m.size*0.95)near++;
+          if(invuln<=0){
+            p.hp--;invuln=1.15;shake=1;Sfx.hurt();
+            $('#dHp').textContent=Math.max(0,p.hp);
+            stage.style.boxShadow='inset 0 0 0 3px #c3d3d2, inset 0 0 60px rgba(196,68,58,.4)';
+            setTimeout(function(){stage.style.boxShadow='';},220);
+          }
+          explode(m);
+          if(p.hp<=0){return end();}
+          continue;
+        }
+      }
+      if(m.y>H2+70){stage.removeChild(m.node);mobs.splice(i,1);}
+    }
+    if(shake>0){shake-=dt*4;stage.style.transform='translate('+(Math.random()*4-2)*shake+'px,'+(Math.random()*4-2)*shake+'px)';}
+    else stage.style.transform='';
+    $('#dTime').textContent=left.toFixed(1);
+    $('#dN').textContent=near;
+    var pct2=left/10*100;
+    $('#dBar').style.width=pct2+'%';
+    if(left<3.2)$('#dBar').classList.add('warn');else $('#dBar').classList.remove('warn');
+    raf=requestAnimationFrame(loop);
+  }
+  function explode(m){
+    var b=boomEl();
+    b.style.left=(m.x+m.size/2-28)+'px';b.style.top=(m.y+m.size/2-28)+'px';
+    stage.appendChild(b);
+    setTimeout(function(){if(b.parentNode)b.parentNode.removeChild(b);},460);
+    if(m.node&&m.node.parentNode)stage.removeChild(m.node);
+    mobs.splice(mobs.indexOf(m),1);
+  }
+  function end(){
+    over=true;
+    if(raf)cancelAnimationFrame(raf);
+    document.removeEventListener('keydown',kd);document.removeEventListener('keyup',ku);
+    var surviveMs=startAt?(nowMs()-startAt):0;
+    var survive=clamp(surviveMs/1000,0,10);
+    S.dodge={survive:survive,hp:p.hp,travel:travel,near:near};
+    addTrait('activity',clamp(travel/90,0,12));
+    addTrait('risk',clamp(near*1.5-2,0,10));
+    addTrait('patience',clamp((survive/10)*8,0,8));
+    S.gameBonus=S.gameBonus||{};
+    S.gameBonus.walker=clamp((travel/900-0.5)*14,-6,6);
+    S.gameBonus.steadfast=clamp((survive/10*0.6+(p.hp/3)*0.4-0.5)*16,-6,6);
+    Sfx.win();
+    var comment;
+    if(p.hp===3&&survive>=9.5)comment='一滴血都没掉，走位教科书 🕺';
+    else if(survive>=7)comment='基本躲开了，反应不错 ⚡';
+    else if(survive>=4)comment='挨了几下，但撑住了 💪';
+    else comment='……你和苦力怕，好像挺聊得来 💥';
+    gameDone('dodge',Math.round(survive*10),comment);
+  }
+}
+
+/* ---------- 游戏 3：极速搭建 ---------- */
+function startBuild(){
+  var st=$('#stage');st.innerHTML='';
+  var wrap=el('div',{class:'view'});
+  wrap.innerHTML=
+    '<div class="game-hud">'+
+      '<div class="chip">🧱 方块 <b id="bCount">0</b></div>'+
+      '<div class="chip">📐 最高 <b id="bHigh">0</b></div>'+
+      '<div class="chip time">⏱ <b id="bTime">4.0</b>s</div>'+
+    '</div>'+
+    '<div class="stage grab" id="bStage">'+
+      '<div class="timerbar" id="bBar"></div>'+
+      '<div class="ground"></div>'+
+      '<div class="grid-wrap" id="bWrap"></div>'+
+    '</div>'+
+    '<div class="small center" style="margin-top:10px">按住拖动可以连续放置 · 想怎么摆就怎么摆</div>';
+  st.appendChild(wrap);
+  var stage=$('#bStage');
+  var target=Math.min(560,Math.max(300,$('#card').clientWidth-30));
+  stage.style.width=target+'px';stage.style.height=Math.round(target*0.72)+'px';
+  var H2=stage.clientHeight;
+  var cell=Math.round((H2-46)/7);
+  var cols=Math.ceil(target/cell);
+  var cellW=Math.round((target-2)/cols);
+  var cv=el('canvas',{width:cols*16,height:7*16});
+  cv.style.cssText='position:absolute;left:0;top:0;width:'+(cols*cellW)+'px;height:'+(7*cell)+'px;image-rendering:pixelated';
+  $('#bWrap').appendChild(cv);
+  var ctx=cv.getContext('2d');ctx.imageSmoothingEnabled=false;
+  var grid=[],y,x;
+  for(y=0;y<7;y++){grid.push([]);for(x=0;x<cols;x++)grid[y].push(-1);}
+  var PALETTE=['dirt','grass','stone','gold','diamond','coal','iron'];
+  var flatCount=0,colorSet={},maxY=7,placed=0,dirtyBlocks=0;
+  var done=false,dragging=false,left=4.0,last=performance.now(),raf=null,buildFirst=true;
+
+  function draw(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    for(var yy=0;yy<7;yy++)for(var xx=0;xx<cols;xx++){
+      var v=grid[yy][xx];if(v<0)continue;      /* 存的是调色板下标 */
+      drawBlock(ctx,PALETTE[v],16,xx*16,yy*16);
+      ctx.strokeStyle='rgba(31,58,60,.12)';ctx.lineWidth=1;
+      ctx.strokeRect(xx*16+.5,yy*16+.5,15,15);
+    }
+  }
+  function put(cx,cy){
+    var r=stage.getBoundingClientRect();
+    var x=Math.floor((cx-r.left)/cellW),yy=Math.floor((cy-r.top)/cell);
+    if(x<0||x>=cols||yy<0||yy>=7)return;
+    if(grid[yy][x]>=0)return;
+    var idx=Math.floor(Math.random()*PALETTE.length);   /* 必须是下标，不能存字符串 */
+    var ci=PALETTE[idx];
+    grid[yy][x]=idx;placed++;
+    colorSet[ci]=1;
+    if(yy===6)flatCount++;
+    if(yy<maxY)maxY=yy;
+    /* 悬空检测 */
+    if(yy<6&&grid[yy+1][x]<0)dirtyBlocks++;
+    draw();
+    Sfx.dig();
+    $('#bCount').textContent=placed;
+    $('#bHigh').textContent=(7-maxY);
+  }
+  stage.addEventListener('pointerdown',function(e){
+    if(done)return;
+    dragging=true;stage.setPointerCapture&&stage.setPointerCapture(e.pointerId);
+    put(e.clientX,e.clientY);
+  });
+  stage.addEventListener('pointermove',function(e){if(dragging&&!done)put(e.clientX,e.clientY);});
+  ['pointerup','pointercancel','pointerleave'].forEach(function(ev){
+    stage.addEventListener(ev,function(){dragging=false;});
+  });
+
+  draw();
+  function loop(now){
+    if(done)return;
+    if(buildFirst){buildFirst=false;last=now;}
+    var dt=Math.min(.05,(now-last)/1000);last=now;
+    left-=dt;
+    if(left<=0){left=0;return end();}
+    $('#bTime').textContent=left.toFixed(1);
+    $('#bBar').style.width=(left/4*100)+'%';
+    if(left<1.3)$('#bBar').classList.add('warn');
+    raf=requestAnimationFrame(loop);
+  }
+  raf=requestAnimationFrame(loop);
+
+  function end(){
+    done=true;
+    if(raf)cancelAnimationFrame(raf);
+    var height=Math.max(0,7-maxY);
+    var flatRatio=placed>0?flatCount/placed:0;
+    var colorVariety=Object.keys(colorSet).length;
+    var dirtyRatio=placed>0?dirtyBlocks/placed:0;
+    S.build={placed:placed,height:height,flatRatio:flatRatio,colors:colorVariety,dirty:dirtyRatio};
+    addTrait('strength',clamp((placed-14)*0.9+height*1.6,0,14));
+    addTrait('patience',clamp(flatRatio*16,0,12));
+    addTrait('risk',clamp((dirtyRatio*8)+(colorVariety-2)*1.6,0,12));
+    addTrait('activity',clamp(placed*0.35,0,7));
+    S.gameBonus=S.gameBonus||{};
+    S.gameBonus.architect=clamp((flatRatio*0.6+colorVariety/7*0.4-0.45)*18,-6,6);
+    S.gameBonus.tower=clamp((height-2)*2.2,-4,8);
+    S.gameBonus.chaos=clamp((dirtyRatio-0.35)*14,-4,6);
+    Sfx.win();
+    var comment;
+    if(placed===0)comment='你选择了……什么都不做。很哲学 🧘';
+    else if(height>=4)comment='直接往上冲，你的野心写在高度上 🗼';
+    else if(flatRatio>0.75)comment='铺得又平又整齐，强迫症狂喜 📏';
+    else if(dirtyRatio>0.4)comment='不规则、跳跃、留白——很有个性 🌀';
+    else comment='有结构、有想法的小建筑 🧱';
+    gameDone('build',placed,comment);
+  }
+}
+
+/* ---------- 向量累加 ---------- */
+function addTrait(key,val){
+  var i=TRAIT_KEYS.indexOf(key);
+  if(i>=0)V[i]+=val;
+}
+
+/* ---------- 选择题视图 ---------- */
+function questionView(i){
+  var q=QUESTIONS[i],st=$('#stage');
+  st.innerHTML='';
+  var wrap=el('div',{class:'view'});
+  var box=el('div');
+  box.innerHTML=
+    '<div class="q-num">QUESTION '+(i+1)+' / 5 · '+q.ice+'</div>'+
+    '<h2 class="q-text">'+q.q+'</h2>'+
+    '<div class="opts" id="optsBox"></div>'+
+    '<p class="small" style="margin-top:12px">凭第一直觉选，别想太久 ✨</p>';
+  wrap.appendChild(box);
+  st.appendChild(wrap);
+  var ob=$('#optsBox');
+  var keys=['A','B','C','D','E'];
+  q.opts.forEach(function(o,idx){
+    var b=el('button',{class:'opt',type:'button'});
+    b.innerHTML='<span class="k">'+keys[idx]+'</span><span>'+o.t+'</span>';
+    b.addEventListener('mouseenter',function(){Sfx.hover();});
+    b.addEventListener('click',function(){
+      Sfx.click();
+      S.answers[i]=idx;
+      var j;for(j=0;j<o.v.length;j++)V[j]+=o.v[j];
+      $$('.opt',ob).forEach(function(n){n.classList.remove('me');});
+      b.classList.add('me');
+      setTimeout(next,240);
+    });
+    ob.appendChild(b);
+  });
+}
+
+/* =========================================================================
+   6. 结果计算
+   ========================================================================= */
+/* 六维原始分 → 人格百分制 的标定上限
+   （数值来自上千次模拟：普通玩家在各维的原始峰值，保证分数可读且区分度足够） */
+var SCALE=[58,59,58,48,47,33];
+function normTraits(V){
+  var out=[],i;
+  for(i=0;i<6;i++)out.push(Math.round(clamp(V[i]/SCALE[i]*100,0,100)));
+  return out;
+}
+function computeResult(seedStr){
+  /* 先把原始六维标定到人格百分制，再与角色向量比对 */
+  var player=normTraits(V);
+  var i,j,ch,best=null,bestRaw=-1;
+  var results=[];
+  for(i=0;i<CHAR_IDS.length;i++){
+    ch=CHAR_IDS[i];
+    var ideal=CHARS[ch].traits;
+    var sum=0;
+    for(j=0;j<6;j++){
+      var d=(player[j]-ideal[j])/100;
+      sum+=d*d;
+    }
+    var sim=Math.exp(-Math.sqrt(sum)*1.55);
+    var raw=sim;
+    if(ch==='steve')raw*=1+ (S.gameBonus.architect||0)/100*0.6 + (S.gameBonus.steadfast||0)/100*0.7;
+    if(ch==='alex')raw*=1+ (S.gameBonus.architect||0)/100*0.7 + (S.gameBonus.walker||0)/100*0.6;
+    if(ch==='villager')raw*=1+ (S.gameBonus.architect||0)/100*0.9 + (S.gameBonus.steadfast||0)/100*0.6;
+    if(ch==='creeper')raw*=1+ (S.gameBonus.chaos||0)/100*0.8 + (S.gameBonus.burst||0)/100*0.6;
+    if(ch==='zombie')raw*=1+ (S.gameBonus.steadfast||0)/100*0.5;
+    if(ch==='wither')raw*=1+ (S.gameBonus.tower||0)/100*0.7 + (S.gameBonus.chaos||0)/100*0.5;
+    if(ch==='dragon')raw*=1+ (S.gameBonus.tower||0)/100*0.8;
+    if(ch==='enderman')raw*=1+ (S.gameBonus.walker||0)/100*0.9;
+    if(ch==='phantom')raw*=1+ (S.gameBonus.walker||0)/100*0.7;
+    if(ch==='dolphin')raw*=1+ (S.gameBonus.walker||0)/100*0.5;
+    if(ch==='skeleton')raw*=1+ (S.gameBonus.miner||0)/100*0.7;
+    if(ch==='witch')raw*=1+ (S.gameBonus.miner||0)/100*0.6;
+    raw*=1+(makeRnd(seedStr+ch)()-0.5)*0.03;
+    results.push({id:ch,raw:raw});
+    if(raw>bestRaw){bestRaw=raw;best=ch;}
+  }
+  results.sort(function(a,b){return b.raw-a.raw;});
+  var second=results[1]?results[1].raw:0;
+  var match=clamp(round1(78+(bestRaw-0.42)*46),62,99);
+  if(bestRaw>0.9)match=99;
+  return {id:best,raw:bestRaw,second:second,match:match,rank:results};
+}
+function round1(v){return Math.round(v*10)/10;}
+
+function renderResult(res,retest){
+  var ch=CHARS[res.id];
+  var traits=normTraits(V);
+  /* 危险等级：角色基础危险度 + 你本人的力量/冒险倾向（低耐心会加成） */
+  var danger=Math.round(clamp(
+    ch.danger*0.55 + traits[4]*0.22 + traits[2]*0.14 + (50-traits[1])*0.08 + 5, 5, 100));
+  var partner=CHARS[ch.partner];
+  var view=$('#view-result');
+  view.innerHTML='';
+  var box=el('div',{class:'view'});
+
+  var html='';
+  html+='<div class="result-head">';
+  html+='<div class="tag">本命角色匹配完成 · 匹配度 '+res.match+'%</div>';
+  html+='<div class="hero-box"><img class="hero big" id="heroImg" alt="'+ch.name+' 像素立绘"></div>';
+  html+='<h2 class="rname">'+ch.name+'</h2>';
+  html+='<div class="rtitle">「'+ch.title+'」</div>';
+  html+='<div class="rquote">'+ch.quote+'</div>';
+  html+='<div style="margin-top:10px">';
+  for(var i=0;i<ch.tags.length;i++)html+='<span class="tag">#'+ch.tags[i]+'</span>';
+  html+='</div>';
+  html+='<div class="matchline">英文名 '+ch.en+' · 六维人格综合判定'+
+    (res.raw-res.second<0.02?' · 与第二名仅差毫厘 ⚖️':'')+'</div>';
+  html+='</div>';
+
+  html+='<div class="divider"></div>';
+
+  html+='<div class="grid2">';
+  html+='<div><h3 class="h2">🧬 专属人物解读</h3><div class="rdesc">';
+  for(var d=0;d<ch.desc.length;d++)html+='<p>'+ch.desc[d]+'</p>';
+  html+='</div></div>';
+  html+='<div>';
+  html+='<h3 class="h2">📊 你的人格六维</h3><div class="traits">';
+  for(var t=0;t<6;t++){
+    html+='<div class="trait"><span class="tname">'+TRAIT_LABEL[TRAIT_KEYS[t]]+'</span>'+
+      '<span class="tbar"><i data-w="'+traits[t]+'"></i></span>'+
+      '<span class="tval">'+traits[t]+'</span></div>';
+  }
+  html+='</div>';
+  html+='<h3 class="h2" style="margin-top:18px">☠️ MC 危险等级</h3><div class="danger">'+
+    '<span class="dnum">'+danger+'</span><span class="small"> / 100</span>'+
+    '<div class="dbar"><i data-w="'+danger+'"></i></div>'+
+    '<p class="small">'+ch.dangerNote+'</p></div>';
+  html+='</div></div>';
+
+  html+='<div class="divider"></div>';
+  html+='<h3 class="h2">🤝 匹配你的 MCCP 搭档</h3>';
+  html+='<div class="partner">'+
+    '<canvas id="partnerCv" width="96" height="96"></canvas>'+
+    '<div><div class="pn">'+partner.name+' <span class="small">'+partner.en+'</span></div>'+
+    '<div class="pd">「'+partner.title+'」</div>'+
+    '<div class="pd" style="margin-top:4px">'+partner.tags.join(' · ')+'</div>'+
+    '<div class="pd" style="margin-top:6px;color:#17766b">你负责'+
+      (traits[4]>=60?'开路':(traits[1]>=60?'守家':'搅局'))+
+      '，TA 负责'+(CHARS[ch.partner].traits[4]>=70?'收尾':'兜底')+'。</div>'+
+    '</div></div>';
+
+  html+='<div class="divider"></div>';
+  html+='<div class="actions">'+
+    '<button class="btn gold" id="rPoster" type="button">🖼 保存海报</button>'+
+    '<button class="btn" id="rCopy" type="button">📋 复制结果</button>'+
+    '<button class="btn ghost" id="rShare" type="button">🔗 分享好友</button>'+
+    '<button class="btn ghost" id="rAgain" type="button">🔄 重新测试</button>'+
+    '</div>';
+  html+='<p class="small center" style="margin-top:12px">小游戏成绩：挖矿 '+S.scores.mining+' · 躲避 '+S.scores.dodge+' · 搭建 '+S.scores.build+'</p>';
+
+  box.innerHTML=html;
+  view.appendChild(box);
+
+  var heroImg=$('#heroImg');
+  if(heroImg)heroImg.src=spriteImg(res.id,15);
+  paintSprite($('#partnerCv'),ch.partner,7,true);
+
+  setTimeout(function(){
+    $$('.tbar i,.dbar i',view).forEach(function(n){n.style.width=(n.getAttribute('data-w')||0)+'%';});
+  },120);
+
+  $('#rAgain').addEventListener('click',function(){Sfx.click();restart();});
+  $('#rCopy').addEventListener('click',function(){copyResult(res,traits,danger);});
+  $('#rPoster').addEventListener('click',function(){Sfx.click();makePoster(res,traits,danger);});
+  var shareBtn=$('#rShare');
+  if(navigator.share){
+    shareBtn.addEventListener('click',function(){
+      Sfx.click();
+      navigator.share({title:'我的本命 MC 角色是'+ch.name,text:shareText(res,traits,danger)}).catch(function(){});
+    });
+  }else{
+    shareBtn.addEventListener('click',function(){
+      Sfx.click();
+      copyText(shareText(res,traits,danger),'分享文案已复制，发给好友吧 ✅');
+    });
+  }
+  if(retest&&!retest.first){
+    toast('命运重roll了一次：'+ch.name+' 🎲');
+  }
+}
+function shareText(res,traits,danger){
+  var ch=CHARS[res.id];
+  return '我的本命 MC 角色是【'+ch.name+'】\n称号：'+ch.title+'\n危险等级：'+danger+'/100\n搭档：'+CHARS[ch.partner].name+'\n—— 你的本命 MC 角色测试';
+}
+function copyResult(res,traits,danger){
+  var ch=CHARS[res.id];
+  var lines=[];
+  lines.push('【我的本命 MC 角色】'+ch.name+'（'+ch.en+'）');
+  lines.push('专属称号：'+ch.title);
+  lines.push('匹配度：'+res.match+'%');
+  lines.push('标签：'+ch.tags.join(' / '));
+  lines.push('危险等级：'+danger+'/100');
+  lines.push('MCCP 搭档：'+CHARS[ch.partner].name);
+  lines.push('人格六维：'+TRAIT_KEYS.map(function(k,i){return TRAIT_LABEL[k]+traits[i];}).join(' '));
+  lines.push('小游戏：挖矿 '+S.scores.mining+' / 躲避 '+S.scores.dodge+' / 搭建 '+S.scores.build);
+  lines.push('“'+ch.quote.replace(/[“”]/g,'')+'”');
+  var txt=lines.join('\n');
+  copyText(txt,'结果已复制，去分享吧 ✅');
+}
+/* 统一复制：兼容「同步抛错」与「返回 rejected promise」两种失败 */
+function copyText(txt,okMsg){
+  var done=false;
+  function ok(){ if(done)return; done=true; toast(okMsg); }
+  function manual(){ if(done)return; done=true; fallbackCopy(txt); }
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(ok,manual);
+      setTimeout(function(){if(!done)manual();},600);
+      return;
+    }
+  }catch(e){}
+  manual();
+}
+function fallbackCopy(txt){
+  var ta=el('textarea');
+  ta.value=txt;ta.style.cssText='position:fixed;left:-9999px;top:0';
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');toast('结果已复制 ✅');}catch(e){toast('复制失败，请手动选择文本');}
+  document.body.removeChild(ta);
+}
+
+/* 海报生成（两遍排版：先量总高，超出画布则切换紧凑模式） */
+function makePoster(res,traits,danger,noDownload){
+  var ch=CHARS[res.id],partner=CHARS[ch.partner];
+  var W=720,H=1180,dpr=1.6,lastY=0,MARGIN=60;
+  var cv=el('canvas',{width:W*dpr,height:H*dpr});
+  var c=cv.getContext('2d');c.scale(dpr,dpr);
+  c.imageSmoothingEnabled=false;
+  var sp=spriteOf(res.id),sp2=spriteOf(ch.partner);
+
+  function font(size,weight){return weight+' '+size+'px "Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif';}
+  function setFont(size,weight){c.font=font(size,weight||500);}
+  function textW(s,size,weight){setFont(size,weight||700);return c.measureText(String(s)).width;}
+  function wrapLines(s,maxW,size){
+    setFont(size,500);
+    var line='',n=1,chars=String(s).split(''),j,t;
+    for(j=0;j<chars.length;j++){
+      t=line+chars[j];
+      if(c.measureText(t).width>maxW&&line){n++;line=chars[j];}else line=t;
+    }
+    return n;
+  }
+
+  /* ---------- 内容定义：给定紧凑参数，返回纵向净高（不含左右边距） ---------- */
+  function descLines(){var n=0,k;for(k=0;k<ch.desc.length;k++)n+=wrapLines(ch.desc[k],W-176,18)+1;return n;}
+  function bodyHeight(C){
+    var y=0,k;
+    y+=34;                                   /* 标题 */
+    y+=16*C.px+24+C.gap;                     /* 立绘卡 */
+    y+=C.name+C.nameGap;                     /* 角色名 */
+    y+=20+C.gap;                             /* 英文 / 匹配度 */
+    y+=C.title+C.gap;                        /* 称号 */
+    y+=32+C.gap;                             /* 标签行 */
+    y+=descLines()*C.lead+40+C.gap;          /* 解读卡 */
+    y+=Math.round(C.danger*1.6)+20+C.gap;    /* 危险等级 */
+    y+=30+6*C.lead+(C.tick-8)+C.gap;         /* 六维 */
+    y+=16*C.pxP+24+C.gap;                    /* 搭档卡 */
+    y+=C.quote+18+20;                        /* 引文 + 页脚 */
+    return y;
+  }
+  var FULL={px:13,pxP:6,name:54,nameGap:16,title:30,quote:22,tick:22,lead:26,gap:22,danger:34};
+  var TIGHT={px:10,pxP:5,name:44,nameGap:12,title:24,quote:18,tick:20,lead:21,gap:12,danger:28};
+  var C=FULL;
+  if(bodyHeight(C)+MARGIN*2>H)C=TIGHT;
+  var overflow=bodyHeight(C)+MARGIN*2-H;
+  if(overflow>0)C.lead=Math.max(17,C.lead-Math.ceil(overflow/16));
+
+  /* ---------- 绘制工具 ---------- */
+  function txt(s,x,y,size,color,align,weight,ls){
+    c.fillStyle=color;c.textAlign=align||'left';c.textBaseline='top';
+    setFont(size,weight||700);
+    if(ls){var chars=String(s).split(''),cx=x,tot=0,j;
+      for(j=0;j<chars.length;j++)tot+=c.measureText(chars[j]).width+ls;
+      if(align==='center')cx=x-tot/2;
+      for(j=0;j<chars.length;j++){c.fillText(chars[j],cx,y);cx+=c.measureText(chars[j]).width+ls;}
+    } else c.fillText(s,x,y);
+  }
+  function wrap(s,x,y0,maxW,size,color,lh){
+    setFont(size,500);
+    c.fillStyle=color;c.textAlign='left';c.textBaseline='top';
+    var line='',yy=y0,j,chars=String(s).split('');
+    for(j=0;j<chars.length;j++){
+      var t=line+chars[j];
+      if(c.measureText(t).width>maxW&&line){c.fillText(line,x,yy);yy+=lh;line=chars[j];}else line=t;
+    }
+    if(line)c.fillText(line,x,yy);
+    return yy+lh;
+  }
+  function rr(x,y,w,h){
+    c.fillStyle='rgba(255,255,255,.94)';c.fillRect(x,y,w,h);
+    c.fillStyle='#17766b';
+    c.fillRect(x,y,18,4);c.fillRect(x,y,4,18);
+    c.fillRect(x+w-18,y,18,4);c.fillRect(x+w-4,y,4,18);
+    c.fillRect(x,y+h-4,18,4);c.fillRect(x,y+h-18,4,18);
+    c.fillRect(x+w-18,y+h-4,18,4);c.fillRect(x+w-4,y+h-18,4,18);
+    c.strokeStyle='#c3d3d2';c.lineWidth=2;c.strokeRect(x+1,y+1,w-2,h-2);
+  }
+  function drawSprite(s,px,x,y){
+    var ys,xs;
+    for(ys=0;ys<16;ys++)for(xs=0;xs<16;xs++){
+      var col=s.grid[ys][xs];if(!col)continue;
+      c.fillStyle=col;c.fillRect(x+xs*px,y+ys*px,px,px);
+    }
+  }
+  function rimSprite(s,px,x,y,id){
+    var nb=[[1,0],[-1,0],[0,1],[0,-1]],ys,xs,k;
+    c.fillStyle=rimColor(id);
+    for(ys=-1;ys<=16;ys++)for(xs=-1;xs<=16;xs++){
+      if(xs>=0&&ys>=0&&xs<16&&ys<16&&s.grid[ys][xs])continue;
+      var touch=false;
+      for(k=0;k<4;k++){
+        var nx=xs+nb[k][0],ny=ys+nb[k][1];
+        if(nx>=0&&ny>=0&&nx<16&&ny<16&&s.grid[ny][nx]){touch=true;break;}
+      }
+      if(!touch)continue;
+      c.fillRect(x+xs*px,y+ys*px,px,px);
+    }
+  }
+
+  /* ---------- 背景（浅色） ---------- */
+  var g=c.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,'#f7fbfa');g.addColorStop(.55,'#ffffff');g.addColorStop(1,'#e8f1f0');
+  c.fillStyle=g;c.fillRect(0,0,W,H);
+  c.strokeStyle='rgba(23,118,107,.07)';c.lineWidth=1;
+  var i;
+  for(i=0;i<W;i+=24){c.beginPath();c.moveTo(i,0);c.lineTo(i,H);c.stroke();}
+  for(i=0;i<H;i+=24){c.beginPath();c.moveTo(0,i);c.lineTo(W,i);c.stroke();}
+  var rg=c.createRadialGradient(W/2,330,40,W/2,330,420);
+  rg.addColorStop(0,'rgba(29,138,120,.10)');rg.addColorStop(1,'rgba(29,138,120,0)');
+  c.fillStyle=rg;c.fillRect(0,0,W,760);
+  for(i=0;i<70;i++){
+    c.globalAlpha=.06+Math.random()*.10;
+    c.fillStyle='#7fc9bd';
+    c.fillRect(Math.floor(Math.random()*W),Math.floor(Math.random()*H),2,2);
+  }
+  c.globalAlpha=1;
+
+  /* ---------- 顺序排版 ---------- */
+  var x0=MARGIN, x1=W-MARGIN, cw=x1-x0, y=MARGIN;
+  var k,j2;
+
+  /* 标题 */
+  txt('你的本命 MC 角色测试',W/2,y,22,'#17766b','center',700,2);
+  y+=34;
+  c.fillStyle='#c3d3d2';c.fillRect(x0,y-8,cw,3);
+
+  /* 立绘卡 */
+  var sw2=16*C.px,sx=(W-sw2)/2,sy=y+24;
+  rr(70,y,W-140,sw2+24+C.gap);
+  c.fillStyle='rgba(29,138,120,.10)';c.fillRect(sx-8,sy-8,sw2+16,sw2+16);
+  c.fillStyle='#ffffff';c.fillRect(sx-4,sy-4,sw2+8,sw2+8);
+  rimSprite(sp,C.px,sx,sy,res.id);
+  drawSprite(sp,C.px,sx,sy);
+  y+=sw2+24+C.gap;
+
+  /* 名称 */
+  c.shadowColor='#cfe0e2';c.shadowOffsetX=3;c.shadowOffsetY=3;
+  txt(ch.name,W/2,y,C.name,'#1b2a2e','center',800);
+  c.shadowColor='transparent';c.shadowOffsetX=0;c.shadowOffsetY=0;
+  y+=C.name+C.nameGap;
+  txt(ch.en.toUpperCase()+'   ·   匹配度 '+res.match+'%',W/2,y,18,'#5b6f75','center',500,1);
+  y+=20+C.gap;
+  txt('「'+ch.title+'」',W/2,y,C.title,'#a9760c','center',700,3);
+  y+=C.title+C.gap;
+
+  /* 标签 */
+  setFont(18,500);
+  var tags=ch.tags.map(function(t){return '#'+t;});
+  var widths=tags.map(function(t){return c.measureText(t).width+30;});
+  var tw=0;
+  for(j2=0;j2<widths.length;j2++)tw+=widths[j2]+12;
+  var tx=(W-tw)/2;
+  for(j2=0;j2<tags.length;j2++){
+    c.fillStyle='#f1f8f7';c.fillRect(tx,y,widths[j2],34);
+    c.strokeStyle='#c3d3d2';c.lineWidth=2;c.strokeRect(tx+1,y+1,widths[j2]-2,32);
+    txt(tags[j2],tx+15,y+8,18,'#17766b','left',500);
+    tx+=widths[j2]+12;
+  }
+  y+=32+C.gap;
+
+  /* 解读卡 */
+  var dl=descLines(),dh=dl*C.lead+40;
+  rr(60,y,W-120,dh);
+  var ty2=y+20;
+  for(k=0;k<ch.desc.length;k++)ty2=wrap(ch.desc[k],88,ty2,W-176,18,k===0?'#213033':'#5b6f75',C.lead)+C.lead;
+  y+=dh+C.gap;
+
+  /* 危险等级 */
+  txt('MC 危险等级',x0+12,y,20,'#17766b','left',700,1);
+  txt(String(danger)+' / 100',x1-12,y-6,C.danger,'#c4443a','right',800);
+  var dbx=x0+12,dby=y+Math.round(C.danger*1.15),dbw=cw-24,dbh=24;
+  c.fillStyle='#ffffff';c.fillRect(dbx-3,dby-3,dbw+6,dbh+6);
+  c.fillStyle='#e6eeed';c.fillRect(dbx,dby,dbw,dbh);
+  var dg=c.createLinearGradient(dbx,0,dbx+dbw,0);
+  dg.addColorStop(0,'#3f8f2f');dg.addColorStop(.55,'#a9760c');dg.addColorStop(1,'#c4443a');
+  c.fillStyle=dg;c.fillRect(dbx+2,dby+2,(dbw-4)*danger/100,dbh-4);
+  y+=Math.round(C.danger*1.6)+20+C.gap;
+
+  /* 六维 */
+  txt('人格六维',x0+12,y,20,'#17766b','left',700,1);
+  y+=30;
+  var tbw=W-300;
+  for(i=0;i<6;i++){
+    var ly=y+i*C.lead;
+    txt(TRAIT_LABEL[TRAIT_KEYS[i]],x0+12,ly,17,'#5b6f75','left',500);
+    c.fillStyle='#ffffff';c.fillRect(160,ly+3,tbw,16);
+    var tg=c.createLinearGradient(160,0,160+tbw,0);
+    tg.addColorStop(0,'#1d8a78');tg.addColorStop(1,'#25b394');
+    c.fillStyle=tg;c.fillRect(162,ly+5,(tbw-4)*traits[i]/100,12);
+    txt(String(traits[i]),x1-12,ly,17,'#17766b','right',700);
+  }
+  y+=6*C.lead+(C.tick-8)+C.gap;
+
+  /* 搭档 */
+  var psp=16*C.pxP,psx=x0+28,psy=y+28;
+  var cardH=psp+20+C.gap, cardBottom=y+cardH;
+  rr(60,y,W-120,cardH);
+  rimSprite(sp2,C.pxP,psx,psy,ch.partner);
+  drawSprite(sp2,C.pxP,psx,psy);
+  txt('MCCP 搭档',psx+psp+42,y+18,19,'#17766b','left',700,1);
+  txt(partner.name+'  ·  '+partner.title,psx+psp+42,y+18+(C.pxP<6?26:32),C.pxP<6?20:23,'#1b2a2e','left',700);
+  txt('小游戏  挖矿 '+S.scores.mining+' · 躲避 '+S.scores.dodge+' · 搭建 '+S.scores.build,
+    psx+psp+42,y+psp+2,15,'#5b6f75','left',500);
+
+  /* 引文 + 页脚（严格避开卡片底边，避免压线） */
+  y=cardBottom+22;
+  txt('“'+ch.quote.replace(/[“”]/g,'')+'”',W/2,y,C.quote,'#17766b','center',500);
+  y+=C.quote+18;
+  txt('你的本命 MC 角色测试 · 3 小游戏 + 5 道性格题',W/2,y,16,'#7d8f95','center',500,1);
+  lastY=y+20;
+
+  cv.toBlob(function(blob){
+    if(!blob){toast('海报生成失败 😢');return;}
+    window.__lastPoster={w:cv.width,h:cv.height,bytes:blob.size,contentH:Math.round(lastY),canvasH:H,overflow:Math.round(lastY-H),compact:C===TIGHT};
+    if(window.__posterLog)window.__posterLog({id:res.id,contentH:Math.round(lastY),canvasH:H,bytes:blob.size,overflow:Math.round(lastY-H)});
+    if(noDownload)return;
+    var url=URL.createObjectURL(blob);
+    var a=el('a',{href:url,download:'本命MC角色_'+ch.name+'.png'});
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},1200);
+    toast('海报已保存 🖼');
+  },'image/png');
+}
+
+/* =========================================================================
+   7. 结果揭晓动画
+   ========================================================================= */
+function finish(){
+  var view=$('#view-result');
+  view.innerHTML='';
+  var veil=el('div',{class:'reveal-veil'});
+  veil.innerHTML='<div class="q-num">ANALYZING YOUR SOUL…</div>'+
+    '<div class="rolltext" id="rollTxt">?</div>'+
+    '<div class="scan"><i></i></div>'+
+    '<p class="small" id="rollSub">正在比对 12 位本命角色的灵魂频率…</p>';
+  view.appendChild(veil);
+  var seed=S.answers.join('')+'|'+JSON.stringify(S.mining)+JSON.stringify(S.dodge)+JSON.stringify(S.build);
+  var res=computeResult(seed);
+  var subs=['读取你的手速曲线…','解析黑夜亲和度…','比对灵魂频率…','锁定唯一本命…'];
+  var n=0,i;
+  var roll=setInterval(function(){
+    var id=CHAR_IDS[Math.floor(Math.random()*CHAR_IDS.length)];
+    $('#rollTxt').textContent=CHARS[id].name;
+    $('#rollSub').textContent=subs[Math.min(subs.length-1,Math.floor(n/6))];
+    Sfx.tick();
+    n++;
+  },72);
+  setTimeout(function(){
+    clearInterval(roll);
+    Sfx.win();
+    renderResult(res,{first:true});
+    show('view-result');
+  },1560);
+}
+
+/* =========================================================================
+   8. 启动 / 重测
+   ========================================================================= */
+function resetState(){
+  S.gi=0;S.qi=0;S.answers=[];S.scores={mining:0,dodge:0,build:0};
+  S.gameBonus={};S.mining=null;S.dodge=null;S.build=null;
+  V=[0,0,0,0,0,0];
+}
+function restart(){
+  resetState();
+  Sfx.click();
+  $('#stage').innerHTML='';
+  show('view-intro');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function beginTest(){
+  resetState();
+  Sfx.unlock();Sfx.click();
+  $('#bgmBtn').setAttribute('aria-pressed','true');
+  $('#bgmBtn').textContent='♪ 音效 开';
+  show('view-quiz');
+  setProgress();
+  var st=FLOW[0];
+  if(st.type==='game')gameIntro(st.key);else questionView(st.i);
+}
+
+/* 开场：启动动画 */
+var bootTimers=[];
+(function boot(){
+  var lines=[
+    '> 初始化世界种子……OK',
+    '> 加载 12 位本命角色数据……OK',
+    '> 生成地形 · 噪声算法运行中……OK',
+    '> 注入性格测评引擎……OK',
+    '> 唤醒你的潜意识……'
+  ];
+  var fill=$('#bootFill'),log=$('#bootLog'),p=0,li=0;
+  var t=setInterval(function(){
+    p+=Math.random()*16+7;
+    if(p>100)p=100;
+    fill.style.width=p+'%';
+    if(li<lines.length){log.textContent=lines[li];li++;}
+    if(p>=100){
+      clearInterval(t);
+      bootTimers.push(setTimeout(function(){
+        show('view-intro');
+        startIntroSprite();
+      },480));
+    }
+  },230);
+  bootTimers.push(t);
+})();
+
+/* 开场角色轮播 */
+var INTRO_LINE={
+  steve:'“先砍棵树，再谈梦想。”',alex:'“路是自己开出来的。”',creeper:'“嘶——”',
+  enderman:'“……”',zombie:'“再敲一次门试试。”',skeleton:'“别动，我在瞄准。”',
+  wither:'“天空该暗下来了。”',dragon:'“走到尽头，才配见我。”',
+  villager:'“嗯。”（掏出绿宝石）',witch:'“要不要尝一口？”',
+  phantom:'“还不睡吗？”',dolphin:'“跟上我！”'
+};
+function startIntroSprite(){
+  var cv=$('#introSprite'),idx=0,timer=null;
+  cv.hidden=false;
+  function render(){
+    var id=ORDER[idx%ORDER.length];
+    cv.classList.add('swap');
+    setTimeout(function(){
+      cv.src=spriteImg(id,11);
+      $('#introLine').textContent=INTRO_LINE[id];
+      cv.classList.remove('swap');
+    },300);
+    idx++;
+  }
+  render();
+  timer=setInterval(function(){
+    if($('#view-intro').hidden)return;
+    render();
+  },2400);
+}
+
+/* 事件绑定 */
+$('#startBtn').addEventListener('click',beginTest);
+$('#bgmBtn').addEventListener('click',function(){
+  var on=Sfx.toggle();
+  this.setAttribute('aria-pressed',on?'true':'false');
+  this.textContent=on?'♪ 音效 开':'♪ 音效 关';
+  if(on){Sfx.unlock();Sfx.click();}
+});
+document.addEventListener('pointerdown',function once(){Sfx.unlock();document.removeEventListener('pointerdown',once);});
+
+/* 演示 / 自检入口：index.html#demo 直接查看结果页（不影响正常流程） */
+function demoResult(){
+  /* 取消启动动画，避免它稍后把视图切回开场页 */
+  bootTimers.forEach(function(t){clearInterval(t);clearTimeout(t);});
+  bootTimers=[];
+  var set={mining:14,dodge:7,build:11};
+  Sfx.__quiet=true;
+  var ans=[2,0,1,3,2];              /* 夜探 / 硬刚 / 高冷 / 强势 / 爆炸 */
+  S.answers=ans;
+  V=[0,0,0,0,0,0];
+  ans.forEach(function(oi,qi){QUESTIONS[qi].opts[oi].v.forEach(function(v,k){V[k]+=v;});});
+  V[0]+=clamp(13*0.8,0,13)+clamp(700/90,0,12)+clamp(16*0.35,0,7);
+  V[1]+=clamp((0.62-0.45)*22+1,-6,9)+clamp(7/10*8,0,8)+clamp(0.2*16,0,12);
+  V[2]+=clamp(3*1.1,0,10)+clamp(3*1.5-2,0,10)+clamp(0.5*8+(4-2)*1.6,0,12);
+  V[4]+=clamp(3*1.1,0,10)+clamp((16-14)*0.9+4*1.6,0,14);
+  S.scores=set;
+  S.gameBonus={miner:2,burst:1,walker:3,steadfast:2,architect:-2,tower:4,chaos:2};
+  show('view-result');
+  renderResult(computeResult('demo-seed-2024'),{first:true});
+}
+
+window.addEventListener('keydown',function(e){
+  if(e.key===' '||e.key==='Enter'){
+    var b=document.activeElement;
+    if(b&&(b.tagName==='BUTTON'))return;
+  }
+});
+if(location.hash==='#demo'||location.hash==='#shot'){
+  /* #shot：关闭动画，供自动化截图；两者都直达结果页 */
+  if(location.hash==='#shot')document.documentElement.className='no-anim';
+  setTimeout(demoResult,200);
+  window.addEventListener('load',function(){setTimeout(demoResult,200);});
+  /* 海报压测（仅 #demo 下可用）：为 12 个角色各画一张，回报绘制高度是否溢出画布 */
+  window.__makePosterFor=function(){
+    window.__posterResults=[];
+    window.__posterLog=function(info){
+      window.__posterResults.push(info);
+      if(window.__posterResults.length===ORDER.length)window.__posterLogDone=true;
+    };
+    ORDER.forEach(function(id){
+      makePoster({id:id,raw:.6,second:.5,match:88},CHARS[id].traits,50,true);
+    });
+    return ORDER.length;
+  };
+}
+})();
+</script>
+</body>
+</html>

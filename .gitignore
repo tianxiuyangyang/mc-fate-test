@@ -1,0 +1,11 @@
+# 构建/测试临时文件
+tools/_cdpprofile/
+tools/_shotprofile/
+tools/_probeprofile/
+tools/_posterprofile/
+tools/_syntax.js
+tools/_*.js
+
+Thumbs.db
+desktop.ini
+.DS_Store
