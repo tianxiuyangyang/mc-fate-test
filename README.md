@@ -1,12 +1,16 @@
 # 你的本命 MC 角色测试
 
+> 🌐 **在线地址**：https://tianxiuyangyang.github.io/mc-fate-test/
+> 📦 **仓库**：https://github.com/tianxiuyangyang/mc-fate-test
+
 一个**浅色像素风**、单文件的《我的世界》本命角色测试网站：**3 个小游戏 + 5 道性格题**（共 8 步，约 70 秒），综合判定 12 位高人气 MC 角色中属于你的那一位，并给出专属称号、人物解读、危险等级、MCCP 搭档与可保存的海报。
 
 配色为 MC 主题的**蓝绿灰浅色系**：白卡片 + 青绿强调色 + 浅灰蓝描边，背景是漂浮的像素云与上升光点，全部由 Canvas 绘制。
 
 ## 怎么打开
 
-直接双击 `index.html` 即可（纯本地、零依赖、无需联网、无需服务器）。
+- 在线直接访问上面的「在线地址」
+- 或者双击本地的 `index.html`（纯本地、零依赖、无需联网、无需服务器）
 
 > 想用本地服务器打开也行：`npx serve .` 或 `python -m http.server`，效果一致。
 
@@ -70,10 +74,12 @@
 
 ```
 index.html                 站点本体（单文件，自包含，无任何外部依赖）
+tools/deploy-github.js     一键部署到 GitHub Pages（建仓 → 提交 → 推送 → 开启 Pages）
 tools/e2e-test.js          端到端回归测试：无头浏览器真实点完 3 个游戏 + 5 道题
 tools/check-sprites.js     像素精灵数据校验（16×16 / 调色板 / 左右对称）
 tools/check-poster.js      海报排版压测：12 个角色各画一张，确认不溢出画布
 tools/export-poster.js     导出海报 PNG 供肉眼验收
+tools/shot-games.js        抓取小游戏进行中的截图
 tools/fix-sprites.js       精灵数据对称化工具（改像素数据时用）
 screenshots/               测试自动生成的截图与海报预览
 ```
@@ -85,7 +91,20 @@ node tools/check-sprites.js   # 校验 12 个像素精灵数据
 node tools/e2e-test.js        # 真机跑完整流程（31 项断言）并输出截图
 node tools/check-poster.js    # 压测海报排版
 node tools/export-poster.js   # 导出海报预览图
+node tools/shot-games.js      # 抓取游戏进行中截图
 ```
+
+## 更新网站内容
+
+改完 `index.html` 后，在项目目录执行：
+
+```bash
+git add -A
+git commit -m "更新说明"
+git push
+```
+
+推送后 GitHub Pages 会自动重新构建，约 1 分钟后刷新网页即可看到新版本。
 
 ## 自测结果（最近一次）
 
