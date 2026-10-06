@@ -38,6 +38,32 @@ function mkPlayer(kind) {
   };
 }
 const SCALE = [145, 79, 145, 220, 150];
+
+/* ---------- 开局天赋（与 index.html 保持一致） ---------- */
+const TALENTS = [
+  { id: 'wisdom', v: [0.29, 0.00, 0.00, 0.62, 0.14] },
+  { id: 'body', v: [0.86, 0.03, 0.21, 0.07, 0.00] },
+  { id: 'look', v: [0.07, 0.90, 0.00, 0.07, 0.00] },
+  { id: 'wealth', v: [0.07, 0.28, 0.00, 0.14, 0.52] },
+  { id: 'luck', v: [0.24, 0.17, 0.07, 0.14, 0.24] }
+];
+const TALENT_UNIT = 6, TALENT_TOTAL = 10, TALENT_CAP = 7;
+const TALENT_SAMPLES = true;
+function randomTalentPoints() {
+  const pts = [0, 0, 0, 0, 0];
+  let left = TALENT_TOTAL, guard = 0;
+  while (left > 0 && guard++ < 500) {
+    const t = Math.floor(Math.random() * 5);
+    if (pts[t] >= TALENT_CAP) continue;
+    pts[t]++; left--;
+  }
+  return pts;
+}
+function talentToRaw(points) {
+  const o = [0, 0, 0, 0, 0];
+  TALENTS.forEach((t, i) => { for (let j = 0; j < 5; j++) o[j] += t.v[j] * (points[i] || 0) * TALENT_UNIT; });
+  return o;
+}
 let makeRnd = s => { let h = 2166136261 >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = (h * 16777619) >>> 0; } h = h >>> 0 || 123456789; return () => { h = (h * 1103515245 + 12345) >>> 0; return h / 4294967296; }; };
 function rank(V, seed, mobs) {
   const p = V.map((v, i) => Math.round(clamp(v / SCALE[i] * 100, 0, 100)));
@@ -52,7 +78,7 @@ function rank(V, seed, mobs) {
 }
 
 /* ---- 采样玩家答卷 <-> 归一化坐标 的对照表 ---- */
-const N = 4000;
+const N = Number(process.env.N || 12000);
 const samples = [];
 const colSums = [0, 0, 0, 0, 0];
 for (let n = 0; n < N; n++) {
@@ -61,6 +87,13 @@ for (let n = 0; n < N; n++) {
   ans.forEach((oi, qi) => Q[qi].opts[oi].v.forEach((v, k) => V[k] += v));
   const g = playGames(mkPlayer(['normal', 'keen', 'extreme'][n % 3]));
   for (let i = 0; i < 5; i++) V[i] += g[i];
+  /* 关键：把「开局天赋」也纳入玩家分布，否则角色坐标会停在无天赋的位置，
+     加入天赋后玩家整体偏移，处于角落的角色就再也匹配不到 */
+  if (TALENT_SAMPLES) {
+    const tp = randomTalentPoints();
+    const tr = talentToRaw(tp);
+    for (let i = 0; i < 5; i++) V[i] += tr[i];
+  }
   const p = V.map((v, i) => Math.round(clamp(v / SCALE[i] * 100, 0, 100)));
   samples.push({ p, key: String(n) });
   p.forEach((v, i) => colSums[i] += v);
@@ -97,22 +130,48 @@ function nearestSampleDist(mob) {
   }
   return best;
 }
+/* 该点附近的玩家样本密度（越大说明越拥挤，放在这里会抢走很多答卷）
+   返回 0~1 的拥挤度：统计有多少比例的样本落在距离 R 以内 */
+const DENS_R = 20;
+function sampleDensity(mob) {
+  let near = 0;
+  for (let i = 0; i < samples.length; i++) {
+    const p = samples[i].p;
+    let s = 0;
+    for (let k = 0; k < 5; k++) s += Math.pow(p[k] - mob.v[DIMS[k]], 2);
+    if (s < DENS_R * DENS_R) near++;
+  }
+  return near / samples.length;
+}
+function byIdOf(id) { return MOBS.find(m => m.id === id) || { zh: id }; }
 function neighbours(mob) {
   const out = [];
-  for (let k = 0; k < 5; k++) for (const step of [3, -3]) {
+  /* 先大步长再小步长，避免卡在局部最优 */
+  for (let k = 0; k < 5; k++) for (const step of [6, -6, 3, -3, 1, -1]) {
     const c = { id: mob.id, zh: mob.zh, v: Object.assign({}, mob.v) };
     c.v[DIMS[k]] = clamp(c.v[DIMS[k]] + step, 6, 96);
     out.push(c);
   }
   return out;
 }
-for (let round = 1; round <= 40; round++) {
+const MAX_ROUND = Number(process.env.ROUNDS || 200);
+for (let round = 1; round <= MAX_ROUND; round++) {
   const hits = hitCounts(MOBS);
   const misses = MOBS.filter(m => hits[m.id] === 0);
-  if (!misses.length) { console.log('第 ' + round + ' 轮：全部可命中 ✅'); break; }
-  console.log('第 ' + round + ' 轮：' + misses.length + ' 个 → ' +
-    misses.map(m => m.zh + '(最近样本 ' + nearestSampleDist(m).toFixed(1) + ')').join('、'));
-  misses.forEach(m => {
+  /* 过度集中的角色也要挪动：否则「全高」角落的角色会吃掉大部分答卷 */
+  const ranked = Object.entries(hits).sort((a, b) => b[1] - a[1]);
+  const CAP_SHARE = 0.16;                    /* 单个角色最多占 16% 的答卷 */
+  const tooHot = ranked.filter(([, v]) => v > N * CAP_SHARE).slice(0, 6)
+    .map(([id]) => MOBS.find(m => m.id === id)).filter(Boolean);
+  if (!misses.length && !tooHot.length) { console.log('第 ' + round + ' 轮：全部可命中且分布均匀 ✅'); break; }
+  if (round <= 6 || round % 20 === 0) {
+    console.log('第 ' + round + ' 轮：未命中 ' + misses.length + ' 个' +
+      (tooHot.length ? '，过度集中 ' + tooHot.length + ' 个（最高 ' + byIdOf(ranked[0][0]).zh + ' ' + (ranked[0][1] / N * 100).toFixed(1) + '%）' : '') +
+      (misses.length ? ' → ' + misses.map(m => m.zh).join('、') : ''));
+  }
+  /* 先处理未命中（必须能命中），再处理过热（分散分布） */
+  const toMove = misses.concat(tooHot.filter(m => misses.indexOf(m) < 0));
+  toMove.forEach(m => {
     let bestV = null, bestScore = 1e9;
     const cands = [{ v: m.v }].concat(neighbours(m));
     cands.forEach(c => {
@@ -123,12 +182,15 @@ for (let round = 1; round <= 40; round++) {
         for (let k = 0; k < 5; k++) s += Math.pow(o.v[DIMS[k]] - c.v[DIMS[k]], 2);
         sep = Math.min(sep, Math.sqrt(s));
       }
-      const score = nearestSampleDist(c) + (sep < 10 ? (10 - sep) * 5 : 0);
+      /* 目标：到最近玩家样本尽量近（保证可命中）+ 与邻居保持间距（避免重合） */
+      let score = nearestSampleDist(c) + (sep < 6 ? (6 - sep) * 4 : 0);
+      /* 过热角色：强力偏好低密度区域（36 分的距离量级 vs 密度 0~1，系数取 40 才有可比性） */
+      if (tooHot.indexOf(m) >= 0) score += sampleDensity(c) * 40;
       if (score < bestScore) { bestScore = score; bestV = c.v; }
     });
     if (bestV) m.v = bestV;
   });
-  if (round === 40) { console.log('❌ 40 轮仍未全部可命中'); process.exit(1); }
+  if (round === MAX_ROUND) { console.log('❌ ' + MAX_ROUND + ' 轮仍未收敛'); process.exit(1); }
 }
 
 const hits = hitCounts(MOBS);

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#eef4f3">
-<meta name="description" content="你的本命 MC 角色测试 —— 3 个小游戏 + 7 道性格题，从 72 位角色中测出你的我的世界本命角色与专属称号。">
+<meta name="description" content="你的本命 MC 角色测试 —— 10 点开局天赋 + 3 个小游戏 + 7 道性格题，从 72 位角色中测出你的我的世界本命角色与专属称号。">
 <title>你的本命 MC 角色测试 · 潜意识的像素人格</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230d1520'/%3E%3Crect x='2' y='2' width='12' height='12' fill='%234ec9b0'/%3E%3Crect x='2' y='2' width='6' height='6' fill='%232f8f7c'/%3E%3C/svg%3E">
 <style>
@@ -209,6 +209,40 @@ h1,h2,h3{margin:0 0 12px;line-height:1.35;letter-spacing:1px}
 }
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 
+/* ---------- 天赋分配 ---------- */
+.talent-pool{display:flex;align-items:center;gap:10px;background:#f2f9f8;border:3px solid var(--line);
+  padding:10px 14px;margin:4px 0 16px;font-size:14px;color:var(--dim)}
+.talent-pool b{font-size:26px;line-height:1;color:var(--mint-l);min-width:34px;text-align:center}
+.talent-pool b.empty{color:#3f8f2f}
+.talent-pool .small{margin-left:auto;color:#63767c}
+.talents{display:grid;gap:10px;margin-bottom:16px}
+.talent{display:grid;grid-template-columns:46px 1fr auto;align-items:center;gap:12px;
+  background:linear-gradient(180deg,#ffffff,#f6faf9);border:3px solid var(--line);padding:10px 12px;
+  box-shadow:0 3px 0 #c9d8d8;transition:.16s}
+.talent.on{border-color:var(--mint-d);background:linear-gradient(180deg,#ffffff,#eef8f6)}
+.talent.full{border-color:var(--gold);background:linear-gradient(180deg,#fffdf5,#fdf7e6)}
+.t-ico{width:46px;height:46px;display:grid;place-items:center;font-size:22px;border:2px solid var(--line)}
+.t-body{min-width:0}
+.t-name{font-weight:700;color:#1b2a2e;font-size:15px;display:flex;align-items:center;gap:8px}
+.t-aff{font-size:11.5px;font-weight:400;color:var(--mint-d);letter-spacing:.5px}
+.t-desc{font-size:12.5px;color:var(--dim);margin:2px 0 6px}
+.t-bar{height:8px;background:#e6eeed;border:2px solid var(--line);overflow:hidden}
+.t-bar i{display:block;height:100%;width:0;transition:width .18s ease, background .18s}
+.t-ctrl{display:flex;align-items:center;gap:4px}
+.t-btn{width:34px;height:34px;font:inherit;font-size:19px;font-weight:700;line-height:1;cursor:pointer;
+  background:linear-gradient(180deg,#ffffff,#eef4f3);border:3px solid var(--line);color:var(--mint-l);
+  box-shadow:0 3px 0 #c9d8d8;transition:transform .08s, filter .12s;-webkit-tap-highlight-color:transparent}
+.t-btn:hover{filter:brightness(1.05);border-color:var(--mint)}
+.t-btn:active{transform:translateY(3px);box-shadow:0 0 0 #c9d8d8}
+.t-num{min-width:26px;text-align:center;font-size:19px;color:#9fb3c0;transition:color .15s}
+.tag.talent-tag{font-weight:700}
+@media (max-width:520px){
+  .talent{grid-template-columns:38px 1fr auto;gap:9px;padding:9px}
+  .t-ico{width:38px;height:38px;font-size:18px}
+  .t-btn{width:30px;height:30px;font-size:17px}
+  .t-num{min-width:20px;font-size:17px}
+}
+
 /* ---------- 结果页 ---------- */
 .result-head{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
 .hero-box{position:relative;display:grid;place-items:center;padding:10px 0 4px;width:100%;min-height:214px}
@@ -301,7 +335,7 @@ html.no-anim .toast.on{opacity:1 !important}
       <div class="boot-bar"><i id="bootFill"></i></div>
       <div class="boot-log" id="bootLog">&gt; 初始化世界种子…</div>
       <div class="divider"></div>
-      <div class="hint">提示：本测试含 3 个小游戏 + 7 道性格题，约 2 分钟</div>
+      <div class="hint">提示：先分配 10 点天赋，再玩 3 个小游戏 + 7 道性格题，约 2 分钟</div>
     </section>
 
     <!-- 开场页 -->
@@ -318,9 +352,10 @@ html.no-anim .toast.on{opacity:1 !important}
       <div class="grid2" style="margin-top:18px">
         <div>
           <h3 class="h2">玩法说明</h3>
+          <p class="small">✨ <b>开局天赋</b>：10 点天赋点分配在智慧 / 体能 / 形象 / 财富 / 运气上，决定你后续更容易遇到哪一类角色。</p>
           <p class="small">🎮 <b>3 个小游戏</b>：挖方块 / 躲苦力怕 / 速度搭建 —— 测你的手速、反应与性格风格。</p>
           <p class="small">📜 <b>7 道性格题</b>：探索偏好、应对方式、他人印象、力量取向、耐性、环境、规则观。</p>
-          <p class="small">✨ <b>综合判定</b>：性格五维（行动 / 外向 / 侵略 / 耐心 / 创造守护）+ 小游戏行为数据，从 72 位角色中锁定唯一本命。</p>
+          <p class="small">🧭 <b>综合判定</b>：天赋 + 小游戏行为 + 性格五维（行动 / 外向 / 侵略 / 耐心 / 创造守护），从 72 位角色中锁定唯一本命。</p>
         </div>
         <div>
           <h3 class="h2">你会得到</h3>
@@ -482,60 +517,60 @@ var HMOBS=[
   {id:'alex',zh:'爱丽克丝',en:'Alex',t:'humanoid',c1:'#4f8f52',c2:'#8a6034',eye:'#2f6b35',d:38,tag:'灵活 果敢 会规划 上进',deco:'',v:[74,52,46,64,78]},
   {id:'villager',zh:'村民',en:'Villager',t:'humanoid',c1:'#7a5a44',c2:'#d3a07a',eye:'#2a2118',d:10,tag:'温和 交易 守序 居家',deco:'',v:[30,62,10,88,95]},
   {id:'witch',zh:'女巫',en:'Witch',t:'humanoid',c1:'#4a2a6b',c2:'#5f8a48',eye:'#191126',d:66,tag:'聪慧 神秘 药水 算计',deco:'witch_hat',v:[48,26,62,84,56]},
-  {id:'illusioner',zh:'幻术师',en:'Illusioner',t:'humanoid',c1:'#3a4a8a',c2:'#7a8ac4',eye:'#2a1f45',d:74,tag:'神秘 诡计 隐身 远程',deco:'helmet',v:[42,18,74,72,30]},
+  {id:'illusioner',zh:'幻术师',en:'Illusioner',t:'humanoid',c1:'#3a4a8a',c2:'#7a8ac4',eye:'#2a1f45',d:74,tag:'神秘 诡计 隐身 远程',deco:'helmet',v:[48,12,80,72,30]},
   {id:'pillager',zh:'掠夺者',en:'Pillager',t:'humanoid',c1:'#6b6f7a',c2:'#8b5a3c',eye:'#2a2118',d:70,tag:'效率 行动 掠夺 弩箭',deco:'helmet',v:[72,34,78,44,26]},
   {id:'vindicator',zh:'卫道士',en:'Vindicator',t:'humanoid',c1:'#6b6b74',c2:'#4a4a52',eye:'#2a2118',d:76,tag:'近战 凶悍 突进 斧头',deco:'helmet',v:[76,30,88,32,18]},
-  {id:'evoker',zh:'唤魔者',en:'Evoker',t:'humanoid',c1:'#8a8f9a',c2:'#3f4a5c',eye:'#5f8a48',d:88,tag:'召唤 诡计 掌控 远程',deco:'helmet',v:[38,22,86,78,34]},
+  {id:'evoker',zh:'唤魔者',en:'Evoker',t:'humanoid',c1:'#8a8f9a',c2:'#3f4a5c',eye:'#5f8a48',d:88,tag:'召唤 诡计 掌控 远程',deco:'helmet',v:[44,22,86,78,34]},
   {id:'piglin',zh:'猪灵',en:'Piglin',t:'humanoid',c1:'#c98f6e',c2:'#a9760c',eye:'#3a2a05',d:64,tag:'交易 族群 规则 好斗',deco:'ears',v:[66,44,72,48,40]},
   {id:'piglin_brute',zh:'猪灵蛮兵',en:'Piglin Brute',t:'humanoid',c1:'#b57e56',c2:'#8a5a2c',eye:'#4a2a05',d:82,tag:'蛮力 狂暴 正面 硬刚',deco:'ears',v:[82,28,96,22,14]},
   {id:'snow_golem',zh:'雪傀儡',en:'Snow Golem',t:'humanoid',c1:'#e8eef2',c2:'#c96a26',eye:'#2a2118',d:16,tag:'守护 温顺 巡逻 雪球',deco:'',v:[44,40,24,70,84]},
   {id:'iron_golem',zh:'铁傀儡',en:'Iron Golem',t:'humanoid',c1:'#c9ccd1',c2:'#7a5a44',eye:'#2a2118',d:58,tag:'守护 厚实 可靠 硬扛',deco:'helmet',v:[40,38,58,76,96]},
   {id:'wandering_trader',zh:'流浪商人',en:'Wandering Trader',t:'humanoid',c1:'#3f6a9a',c2:'#6b8ac4',eye:'#2a2118',d:10,tag:'漂泊 见闻 交易 独行',deco:'helmet',v:[46,56,12,68,62]},
-  {id:'zombie',zh:'僵尸',en:'Zombie',t:'zombie',c1:'#4f9147',c2:'#3b6fa8',eye:'#0e0f14',d:52,tag:'执着 憨厚 不放弃 夜行',deco:'',v:[38,30,56,54,24]},
-  {id:'husk',zh:'尸壳',en:'Husk',t:'zombie',c1:'#9a8f6b',c2:'#7a6f4a',eye:'#2a2418',d:56,tag:'坚韧 干旱 耐受 缓慢',deco:'',v:[24,22,55,72,20]},
-  {id:'drowned',zh:'溺尸',en:'Drowned',t:'zombie',c1:'#3f8a7a',c2:'#2a6b6b',eye:'#0e2a2a',d:60,tag:'水生 突袭 夜行 三叉戟',deco:'',v:[52,20,68,58,18]},
-  {id:'skeleton',zh:'骷髅',en:'Skeleton',t:'zombie',c1:'#cfd6c6',c2:'#8d9489',eye:'#111318',d:60,tag:'精准 冷静 疏离 弓手',deco:'',v:[50,16,62,76,22]},
-  {id:'stray',zh:'流浪者',en:'Stray',t:'zombie',c1:'#b8cdd6',c2:'#8aa3ad',eye:'#1a2a33',d:64,tag:'寒冷 迟缓 远程 独行',deco:'',v:[30,12,60,80,20]},
-  {id:'bogged',zh:'沼骸',en:'Bogged',t:'zombie',c1:'#8a9a6b',c2:'#5f6b3a',eye:'#1a2410',d:62,tag:'沼泽 毒箭 迟缓 隐忍',deco:'',v:[26,14,56,84,22]},
-  {id:'wither_skeleton',zh:'凋灵骷髅',en:'Wither Skeleton',t:'zombie',c1:'#3a3f4a',c2:'#5a5f6a',eye:'#c04a2a',d:86,tag:'高攻 压迫 下界 石剑',deco:'wither',v:[68,18,94,34,12]},
-  {id:'zombified_piglin',zh:'僵尸猪灵',en:'Zombified Piglin',t:'zombie',c1:'#5f8a48',c2:'#c98f6e',eye:'#2a1f10',d:54,tag:'群体 中立 报复 皮厚',deco:'',v:[46,48,70,38,26]},
-  {id:'pig',zh:'猪',en:'Pig',t:'quadruped',c1:'#e8a0a8',c2:'#c97f8a',eye:'#2a1818',d:6,tag:'憨厚 贪吃 随遇而安 温和',deco:'',v:[40,66,10,48,36]},
+  {id:'zombie',zh:'僵尸',en:'Zombie',t:'zombie',c1:'#4f9147',c2:'#3b6fa8',eye:'#0e0f14',d:52,tag:'执着 憨厚 不放弃 夜行',deco:'',v:[74,30,38,60,30]},
+  {id:'husk',zh:'尸壳',en:'Husk',t:'zombie',c1:'#9a8f6b',c2:'#7a6f4a',eye:'#2a2418',d:56,tag:'坚韧 干旱 耐受 缓慢',deco:'',v:[66,22,49,78,20]},
+  {id:'drowned',zh:'溺尸',en:'Drowned',t:'zombie',c1:'#3f8a7a',c2:'#2a6b6b',eye:'#0e2a2a',d:60,tag:'水生 突袭 夜行 三叉戟',deco:'',v:[52,8,74,70,30]},
+  {id:'skeleton',zh:'骷髅',en:'Skeleton',t:'zombie',c1:'#cfd6c6',c2:'#8d9489',eye:'#111318',d:60,tag:'精准 冷静 疏离 弓手',deco:'',v:[62,10,62,76,22]},
+  {id:'stray',zh:'流浪者',en:'Stray',t:'zombie',c1:'#b8cdd6',c2:'#8aa3ad',eye:'#1a2a33',d:64,tag:'寒冷 迟缓 远程 独行',deco:'',v:[54,6,60,80,20]},
+  {id:'bogged',zh:'沼骸',en:'Bogged',t:'zombie',c1:'#8a9a6b',c2:'#5f6b3a',eye:'#1a2410',d:62,tag:'沼泽 毒箭 迟缓 隐忍',deco:'',v:[50,14,56,84,22]},
+  {id:'wither_skeleton',zh:'凋灵骷髅',en:'Wither Skeleton',t:'zombie',c1:'#3a3f4a',c2:'#5a5f6a',eye:'#c04a2a',d:86,tag:'高攻 压迫 下界 石剑',deco:'wither',v:[80,18,94,34,12]},
+  {id:'zombified_piglin',zh:'僵尸猪灵',en:'Zombified Piglin',t:'zombie',c1:'#5f8a48',c2:'#c98f6e',eye:'#2a1f10',d:54,tag:'群体 中立 报复 皮厚',deco:'',v:[70,48,70,38,26]},
+  {id:'pig',zh:'猪',en:'Pig',t:'quadruped',c1:'#e8a0a8',c2:'#c97f8a',eye:'#2a1818',d:6,tag:'憨厚 贪吃 随遇而安 温和',deco:'',v:[40,66,16,66,36]},
   {id:'cow',zh:'牛',en:'Cow',t:'quadruped',c1:'#5a4636',c2:'#e8e4dc',eye:'#2a2118',d:6,tag:'温和 供给 踏实 慢节奏',deco:'',v:[26,72,8,66,54]},
-  {id:'sheep',zh:'羊',en:'Sheep',t:'quadruped',c1:'#efeae0',c2:'#d6cec0',eye:'#2a2118',d:4,tag:'温顺 群体 无忧 跟随',deco:'',v:[30,88,6,56,42]},
+  {id:'sheep',zh:'羊',en:'Sheep',t:'quadruped',c1:'#efeae0',c2:'#d6cec0',eye:'#2a2118',d:4,tag:'温顺 群体 无忧 跟随',deco:'',v:[30,88,6,62,42]},
   {id:'wolf',zh:'狼',en:'Wolf',t:'quadruped',c1:'#d8d8d0',c2:'#8a8a82',eye:'#c4443a',d:44,tag:'忠诚 守护 群居 出击',deco:'',v:[78,70,66,54,58]},
   {id:'ocelot',zh:'豹猫',en:'Ocelot',t:'quadruped',c1:'#e0a860',c2:'#3a2a18',eye:'#5f8a48',d:14,tag:'警觉 独行 谨慎 敏捷',deco:'',v:[70,22,34,78,28]},
-  {id:'cat',zh:'猫',en:'Cat',t:'quadruped',c1:'#d8b48a',c2:'#6b4a2a',eye:'#5f8a48',d:8,tag:'傲娇 独立 慵懒 好奇',deco:'',v:[42,28,30,62,32]},
+  {id:'cat',zh:'猫',en:'Cat',t:'quadruped',c1:'#d8b48a',c2:'#6b4a2a',eye:'#5f8a48',d:8,tag:'傲娇 独立 慵懒 好奇',deco:'',v:[60,28,30,62,32]},
   {id:'fox',zh:'狐狸',en:'Fox',t:'quadruped',c1:'#d97a3a',c2:'#f0e6dc',eye:'#2a2118',d:26,tag:'机灵 随性 夜行 偷蛋',deco:'',v:[84,34,44,52,30]},
   {id:'llama',zh:'羊驼',en:'Llama',t:'quadruped',c1:'#e0d6c0',c2:'#a08a6a',eye:'#2a2118',d:34,tag:'高冷 护卫 吐口水 倔强',deco:'',v:[36,40,52,68,60]},
   {id:'horse',zh:'马',en:'Horse',t:'quadruped',c1:'#8a5a34',c2:'#3a2a1a',eye:'#2a1818',d:14,tag:'自由 奔放 探索 快速',deco:'',v:[88,54,26,46,34]},
   {id:'creeper',zh:'苦力怕',en:'Creeper',t:'blob',c1:'#57c04a',c2:'#245c22',eye:'#0b1409',d:78,tag:'活泼 冲动 爆发 不经意搞大事',deco:'speck',v:[72,40,92,10,16]},
-  {id:'slime',zh:'史莱姆',en:'Slime',t:'blob',c1:'#5fc95f',c2:'#3a8f3a',eye:'#1a2a1a',d:40,tag:'随性 弹跳 分裂 乐天',deco:'speck',v:[66,72,34,24,22]},
-  {id:'magma_cube',zh:'岩浆怪',en:'Magma Cube',t:'blob',c1:'#c4443a',c2:'#3a2018',eye:'#e89a1c',d:72,tag:'暴躁 分裂 灼热 冲撞',deco:'speck',v:[79,26,96,14,19]},
-  {id:'silverfish',zh:'蠹虫',en:'Silverfish',t:'blob',c1:'#9aa0a8',c2:'#6a7078',eye:'#2a2a30',d:48,tag:'隐匿 突袭 成群 躁动',deco:'speck',v:[74,46,62,36,14]},
-  {id:'endermite',zh:'末影螨',en:'Endermite',t:'blob',c1:'#5a3a7b',c2:'#2a1f45',eye:'#b471ff',d:50,tag:'微小 钻洞 短命 执念',deco:'speck',v:[68,30,58,32,16]},
-  {id:'snowman',zh:'雪人',en:'Snowman',t:'blob',c1:'#eef4f8',c2:'#c9d6dd',eye:'#2a2118',d:10,tag:'天真 短暂 守护 融化',deco:'speck',v:[40,60,12,54,74]},
+  {id:'slime',zh:'史莱姆',en:'Slime',t:'blob',c1:'#5fc95f',c2:'#3a8f3a',eye:'#1a2a1a',d:40,tag:'随性 弹跳 分裂 乐天',deco:'speck',v:[72,72,34,30,22]},
+  {id:'magma_cube',zh:'岩浆怪',en:'Magma Cube',t:'blob',c1:'#c4443a',c2:'#3a2018',eye:'#e89a1c',d:72,tag:'暴躁 分裂 灼热 冲撞',deco:'speck',v:[85,26,96,14,19]},
+  {id:'silverfish',zh:'蠹虫',en:'Silverfish',t:'blob',c1:'#9aa0a8',c2:'#6a7078',eye:'#2a2a30',d:48,tag:'隐匿 突袭 成群 躁动',deco:'speck',v:[80,46,62,36,14]},
+  {id:'endermite',zh:'末影螨',en:'Endermite',t:'blob',c1:'#5a3a7b',c2:'#2a1f45',eye:'#b471ff',d:50,tag:'微小 钻洞 短命 执念',deco:'speck',v:[80,36,58,44,16]},
+  {id:'snowman',zh:'雪人',en:'Snowman',t:'blob',c1:'#eef4f8',c2:'#c9d6dd',eye:'#2a2118',d:10,tag:'天真 短暂 守护 融化',deco:'speck',v:[40,60,12,60,74]},
   {id:'armadillo',zh:'犰狳',en:'Armadillo',t:'blob',c1:'#b09a7a',c2:'#8a7458',eye:'#2a2118',d:12,tag:'卷缩 防御 谨慎 独处',deco:'speck',v:[20,18,14,88,46]},
-  {id:'chicken',zh:'鸡',en:'Chicken',t:'bird',c1:'#efeae0',c2:'#c4443a',eye:'#2a2118',d:4,tag:'怯懦 轻盈 下蛋 慌乱',deco:'bigeye',v:[49,56,10,42,35]},
+  {id:'chicken',zh:'鸡',en:'Chicken',t:'bird',c1:'#efeae0',c2:'#c4443a',eye:'#2a2118',d:4,tag:'怯懦 轻盈 下蛋 慌乱',deco:'bigeye',v:[55,62,28,48,41]},
   {id:'parrot',zh:'鹦鹉',en:'Parrot',t:'bird',c1:'#c4443a',c2:'#3f8f2f',eye:'#2a2118',d:12,tag:'活泼 好动 爱热闹 模仿',deco:'bigeye',v:[82,92,22,32,38]},
-  {id:'bat',zh:'蝙蝠',en:'Bat',t:'bird',c1:'#4a3a34',c2:'#2a201c',eye:'#c4443a',d:18,tag:'夜行 倒挂 不安 洞穴',deco:'bigeye',v:[72,26,30,40,20]},
+  {id:'bat',zh:'蝙蝠',en:'Bat',t:'bird',c1:'#4a3a34',c2:'#2a201c',eye:'#c4443a',d:18,tag:'夜行 倒挂 不安 洞穴',deco:'bigeye',v:[72,32,36,64,27]},
   {id:'axolotl',zh:'美西螈',en:'Axolotl',t:'bird',c1:'#f0a8c0',c2:'#c96a98',eye:'#2a1820',d:6,tag:'治愈 好奇 水中 温柔',deco:'bigeye',v:[58,62,8,64,58]},
-  {id:'tropical_fish',zh:'热带鱼',en:'Tropical Fish',t:'bird',c1:'#e8a01c',c2:'#3fa8c4',eye:'#2a2118',d:2,tag:'绚丽 悠闲 群游 观赏',deco:'bigeye',v:[44,78,6,52,40]},
+  {id:'tropical_fish',zh:'热带鱼',en:'Tropical Fish',t:'bird',c1:'#e8a01c',c2:'#3fa8c4',eye:'#2a2118',d:2,tag:'绚丽 悠闲 群游 观赏',deco:'bigeye',v:[50,78,24,52,40]},
   {id:'frog',zh:'青蛙',en:'Frog',t:'bird',c1:'#8a9a4a',c2:'#5f6b2a',eye:'#2a2118',d:20,tag:'跳跃 捕食 水陆 机敏',deco:'bigeye',v:[64,44,38,54,30]},
-  {id:'tadpole',zh:'蝌蚪',en:'Tadpole',t:'bird',c1:'#5a4a34',c2:'#3a2f22',eye:'#1a1410',d:2,tag:'幼小 成长 群聚 柔弱',deco:'bigeye',v:[36,84,13,45,26]},
+  {id:'tadpole',zh:'蝌蚪',en:'Tadpole',t:'bird',c1:'#5a4a34',c2:'#3a2f22',eye:'#1a1410',d:2,tag:'幼小 成长 群聚 柔弱',deco:'bigeye',v:[36,84,13,69,26]},
   {id:'dolphin',zh:'海豚',en:'Dolphin',t:'fish',c1:'#5c9fd6',c2:'#c6ecff',eye:'#132234',d:8,tag:'阳光 好动 治愈 爱带路',deco:'',v:[92,86,18,44,42]},
-  {id:'squid',zh:'鱿鱼',en:'Squid',t:'fish',c1:'#3a4a5c',c2:'#8a9aa8',eye:'#1a222c',d:8,tag:'安静 深水 被动 漂流',deco:'tentacle',v:[34,38,22,62,28]},
-  {id:'glow_squid',zh:'发光鱿鱼',en:'Glow Squid',t:'fish',c1:'#3fb8a8',c2:'#8ff0e0',eye:'#1a3a34',d:8,tag:'幽光 深海 沉静 梦幻',deco:'tentacle',v:[28,32,16,74,44]},
-  {id:'cod',zh:'鳕鱼',en:'Cod',t:'fish',c1:'#b09468',c2:'#8a7050',eye:'#2a2118',d:2,tag:'随波 温和 群体 游荡',deco:'',v:[38,76,8,50,30]},
+  {id:'squid',zh:'鱿鱼',en:'Squid',t:'fish',c1:'#3a4a5c',c2:'#8a9aa8',eye:'#1a222c',d:8,tag:'安静 深水 被动 漂流',deco:'tentacle',v:[40,38,28,74,28]},
+  {id:'glow_squid',zh:'发光鱿鱼',en:'Glow Squid',t:'fish',c1:'#3fb8a8',c2:'#8ff0e0',eye:'#1a3a34',d:8,tag:'幽光 深海 沉静 梦幻',deco:'tentacle',v:[34,32,16,74,44]},
+  {id:'cod',zh:'鳕鱼',en:'Cod',t:'fish',c1:'#b09468',c2:'#8a7050',eye:'#2a2118',d:2,tag:'随波 温和 群体 游荡',deco:'',v:[38,76,14,68,30]},
   {id:'salmon',zh:'鲑鱼',en:'Salmon',t:'fish',c1:'#c96a48',c2:'#8a4a34',eye:'#2a1818',d:2,tag:'洄游 逆流 坚持 群体',deco:'',v:[60,72,22,66,32]},
-  {id:'pufferfish',zh:'河豚',en:'Pufferfish',t:'fish',c1:'#e8c44a',c2:'#8a6a1a',eye:'#2a2118',d:26,tag:'警戒 膨胀 有毒 防御',deco:'shell',v:[32,34,48,70,36]},
+  {id:'pufferfish',zh:'河豚',en:'Pufferfish',t:'fish',c1:'#e8c44a',c2:'#8a6a1a',eye:'#2a2118',d:26,tag:'警戒 膨胀 有毒 防御',deco:'shell',v:[44,34,48,70,36]},
   {id:'turtle',zh:'海龟',en:'Turtle',t:'fish',c1:'#5f9a5f',c2:'#3a6b3a',eye:'#1a2a1a',d:10,tag:'耐心 长寿 守巢 稳健',deco:'shell',v:[22,48,14,94,66]},
   {id:'bee',zh:'蜜蜂',en:'Bee',t:'flyer',c1:'#e8b429',c2:'#3a2a05',eye:'#2a2118',d:30,tag:'勤劳 群体 护巢 采蜜',deco:'',v:[80,84,48,62,72]},
   {id:'allay',zh:'悦灵',en:'Allay',t:'flyer',c1:'#5fd6d3',c2:'#3fa8c4',eye:'#1d3244',d:8,tag:'创造 收集 友善 轻盈',deco:'',v:[62,70,6,58,90]},
-  {id:'vex',zh:'恼鬼',en:'Vex',t:'flyer',c1:'#9fc4d6',c2:'#5f8aa0',eye:'#c4443a',d:66,tag:'飘忽 顽劣 穿墙 突袭',deco:'twin',v:[86,36,74,26,12]},
+  {id:'vex',zh:'恼鬼',en:'Vex',t:'flyer',c1:'#9fc4d6',c2:'#5f8aa0',eye:'#c4443a',d:66,tag:'飘忽 顽劣 穿墙 突袭',deco:'twin',v:[92,36,74,26,12]},
   {id:'breeze',zh:'旋风人',en:'Breeze',t:'flyer',c1:'#8a7ac4',c2:'#c9c0f0',eye:'#5f4aa8',d:62,tag:'轻盈 弹跳 风刃 灵动',deco:'',v:[88,30,64,42,24]},
-  {id:'blaze',zh:'烈焰人',en:'Blaze',t:'flyer',c1:'#e8a01c',c2:'#c4443a',eye:'#fff8dc',d:80,tag:'灼热 悬浮 连射 冲动',deco:'',v:[78,24,88,20,14]},
-  {id:'ghast',zh:'恶魂',en:'Ghast',t:'flyer',c1:'#efeae8',c2:'#c9c0bd',eye:'#2a2118',d:70,tag:'孤高 哀鸣 远程 敏感',deco:'tentacles',v:[32,12,68,56,18]},
-  {id:'phantom',zh:'幻翼',en:'Phantom',t:'flyer',c1:'#37505f',c2:'#7fa0b2',eye:'#a8f0dc',d:72,tag:'夜行 自由 随性 扰人清梦',deco:'twin',v:[90,24,72,28,16]},
+  {id:'blaze',zh:'烈焰人',en:'Blaze',t:'flyer',c1:'#e8a01c',c2:'#c4443a',eye:'#fff8dc',d:80,tag:'灼热 悬浮 连射 冲动',deco:'',v:[90,24,88,20,14]},
+  {id:'ghast',zh:'恶魂',en:'Ghast',t:'flyer',c1:'#efeae8',c2:'#c9c0bd',eye:'#2a2118',d:70,tag:'孤高 哀鸣 远程 敏感',deco:'tentacles',v:[56,12,80,68,24]},
+  {id:'phantom',zh:'幻翼',en:'Phantom',t:'flyer',c1:'#37505f',c2:'#7fa0b2',eye:'#a8f0dc',d:72,tag:'夜行 自由 随性 扰人清梦',deco:'twin',v:[90,30,72,34,16]},
   {id:'spider',zh:'蜘蛛',en:'Spider',t:'bug',c1:'#3a2a24',c2:'#8a2f1c',eye:'#c4443a',d:56,tag:'潜伏 织网 夜行 耐心',deco:'',v:[64,20,70,82,30]},
   {id:'cave_spider',zh:'洞穴蜘蛛',en:'Cave Spider',t:'bug',c1:'#2a4a4a',c2:'#5f9a6b',eye:'#c4443a',d:58,tag:'剧毒 狭窄 突袭 阴冷',deco:'',v:[70,16,80,68,22]},
   {id:'enderman',zh:'末影人',en:'Enderman',t:'bug',c1:'#0f0f16',c2:'#2a1f45',eye:'#b471ff',d:70,tag:'高冷 独处 瞬移 黑夜',deco:'',v:[76,8,60,74,26]},
@@ -544,7 +579,7 @@ var HMOBS=[
   {id:'camel',zh:'骆驼',en:'Camel',t:'bug',c1:'#d8b878',c2:'#a08a4a',eye:'#2a2118',d:12,tag:'沉稳 长途 高傲 耐性',deco:'hump',v:[26,44,20,90,72]},
   {id:'mooshroom',zh:'哞菇',en:'Mooshroom',t:'bug',c1:'#c4443a',c2:'#e8e4dc',eye:'#2a2118',d:6,tag:'奇特 蘑菇 孤岛 温和',deco:'hump',v:[28,58,12,74,64]},
   {id:'ender_dragon',zh:'末影龙',en:'Ender Dragon',t:'huge',c1:'#191024',c2:'#9a83c4',eye:'#e455c8',d:100,tag:'霸气 强势 挑战 少言',deco:'',v:[90,14,98,40,30]},
-  {id:'wither',zh:'凋灵',en:'Wither',t:'huge',c1:'#3a3f4a',c2:'#8a2f1c',eye:'#c04a2a',d:96,tag:'强大 压迫 独裁 破坏',deco:'three_head',v:[68,10,99,26,12]},
+  {id:'wither',zh:'凋灵',en:'Wither',t:'huge',c1:'#3a3f4a',c2:'#8a2f1c',eye:'#c04a2a',d:96,tag:'强大 压迫 独裁 破坏',deco:'three_head',v:[80,10,99,26,12]},
   {id:'warden',zh:'监守者',en:'Warden',t:'huge',c1:'#1a3a44',c2:'#3fb8b8',eye:'#5fe8e0',d:100,tag:'深渊 感知 无声 绝对',deco:'',v:[58,6,96,76,10]},
   {id:'ravager',zh:'劫掠兽',en:'Ravager',t:'huge',c1:'#5a4a3a',c2:'#2a2018',eye:'#c4443a',d:88,tag:'冲撞 蛮力 破坏 正面',deco:'tusks',v:[86,18,94,18,14]},
   {id:'elder_guardian',zh:'远古守卫者',en:'Elder Guardian',t:'huge',c1:'#3a6b6b',c2:'#8aa8a0',eye:'#e8a01c',d:84,tag:'领域 威严 缓慢 诅咒',deco:'',v:[30,26,82,86,52]},
@@ -1482,6 +1517,7 @@ var S={
 };
 /* 测评流程：3 小游戏 + 7 题，穿插进行 */
 var FLOW=[
+  {type:'talent'},
   {type:'game',key:'mining'},
   {type:'q',i:0},{type:'q',i:1},
   {type:'game',key:'dodge'},
@@ -1491,6 +1527,42 @@ var FLOW=[
 ];
 var DIMS=['action','extra','aggro','care','build'];
 var DIM_LABEL={action:'行动力',extra:'外向度',aggro:'侵略倾向',care:'耐心 / 谨慎',build:'创造 / 守护'};
+/* =========================================================================
+   4.5 天赋系统：开局分配 10 点，影响五维与角色匹配
+   每个天赋把点数映射到 5 维（数值为「每点提供的原始分」= 归一化 1 分）
+   ========================================================================= */
+var TALENTS=[
+  {id:'wisdom', name:'智慧', icon:'📖', desc:'看得懂规则，也算得清下一步',
+   v:[0.30,0.00,0.00,0.52,0.18], col:'#3f6ab8'},
+  {id:'body',   name:'体能', icon:'💪', desc:'身体先动起来，脑子随后就到',
+   v:[0.72,0.05,0.18,0.05,0.00], col:'#c4443a'},
+  {id:'look',   name:'形象', icon:'✨', desc:'站在人群里，光会自己找过来',
+   v:[0.10,0.78,0.00,0.12,0.00], col:'#c96a98'},
+  {id:'wealth', name:'财富', icon:'💎', desc:'资源到位，很多事就不算难事',
+   v:[0.12,0.28,-0.08,0.10,0.52], col:'#a9760c'},
+  {id:'luck',   name:'运气', icon:'🍀', desc:'说不上为什么，但总是刚刚好',
+   v:[0.22,0.22,0.05,0.18,0.22], col:'#3f8f2f'}
+];
+var TALENT_TOTAL=10;      /* 总共可分配点数 */
+var TALENT_CAP=7;         /* 单项上限 */
+var TALENT_ROWS=['action','extra','aggro','care','build'];
+
+/* 玩家天赋 → 原始分增量（加到归一化前的向量上） */
+function talentToRaw(points){
+  var out=[0,0,0,0,0],t,i,j;
+  for(t=0;t<TALENTS.length;t++){
+    var p=points[t]||0;if(!p)continue;
+    for(j=0;j<5;j++)out[j]+=TALENTS[t].v[j]*p*TALENT_UNIT;
+  }
+  return out;
+}
+/* 匹配加成：天赋只通过「五维向量」影响匹配，这里不再叠加亲和度乘数。
+   原因：乘数会与距离判定互相干扰 —— 在角色坐标分布密集的区域，
+   一个固定百分比的乘数会稳定偏向同一个角色，实测使 20+ 个角色无法被匹配到。
+   去掉后天赋是干净的维度偏移：投入哪项天赋，就更容易匹配到对应倾向的角色。 */
+function talentBonus(){
+  return 0;
+}
 var DIM_DESC={
   action:'出手快、爱动弹、说走就走',
   extra:'爱热闹、要陪伴、和别人在一起才有电',
@@ -1498,7 +1570,9 @@ var DIM_DESC={
   care:'沉得住、算得清、不轻易冒险',
   build:'爱建造、爱收集、想守住在意的东西'
 };
-var V=null; /* 5 维累加器 */
+var V=null;              /* 5 维累加器（归一化前的原始分） */
+var TALENT_UNIT=6;      /* 天赋强度系数：10 点天赋 ≈ 题目总跨度的 1/4，避免压过后面的题目与小游戏 */
+var TALENT_POINTS=[0,0,0,0,0];  /* 玩家分配的天赋点 */
 
 function show(id){
   ['view-boot','view-intro','view-quiz','view-result'].forEach(function(v){
@@ -1512,7 +1586,8 @@ function setProgress(){
   var pct=Math.round(S.gi/FLOW.length*100);
   $('#pFill').style.width=pct+'%';
   $('#pText').textContent='进度 '+S.gi+' / '+FLOW.length;
-  $('#pStage').textContent=(FLOW[S.gi]&&FLOW[S.gi].type==='game')?'🎮 小游戏':'📜 性格题';
+  var t0=FLOW[S.gi]&&FLOW[S.gi].type;
+  $('#pStage').textContent=(t0==='game')?'🎮 小游戏':(t0==='talent'?'✨ 天赋分配':'📜 性格题');
 }
 function playMode(on){
   var card=$('#card');
@@ -1524,7 +1599,8 @@ function next(){
   try{
     var st=FLOW[S.gi];
     setProgress();
-    if(st.type==='game')gameIntro(st.key);
+    if(st.type==='talent')talentView();
+    else if(st.type==='game')gameIntro(st.key);
     else questionView(st.i);
   }catch(e){
     window.__flowError=(e&&e.stack)||String(e);
@@ -2214,6 +2290,100 @@ var FX=(function(){
   return {burst:burst,clear:function(){parts=[];}};
 })();
 
+/* ---------- 天赋分配界面 ---------- */
+function talentView(){
+  var st=$('#stage');
+  st.innerHTML='';
+  var P=TALENT_POINTS,i;
+
+  function left(){var s=0;for(var k=0;k<5;k++)s+=P[k];return TALENT_TOTAL-s;}
+
+  var wrap=el('div',{class:'view'});
+  wrap.innerHTML=
+    '<div class="q-num">✨ TALENT · 开局天赋</div>'+
+    '<h2 class="q-text">假如重来一世，你选择的天赋是什么？</h2>'+
+    '<p class="sub">共 <b>10</b> 点天赋点，每项最多 <b>7</b> 点 —— 它会决定你后续遇到什么样的自己。</p>'+
+    '<div class="talent-pool"><span>剩余点数</span><b id="tLeft">10</b><span class="small" id="tHint">分配完才能继续</span></div>'+
+    '<div class="talents" id="tList"></div>'+
+    '<button class="btn big block" id="tGo" type="button" disabled>确定天赋，开始测试</button>'+
+    '<p class="small center" style="margin-top:8px">后面还有 3 个小游戏 + 7 道题，天赋只占判定的一部分 ✨</p>';
+  st.appendChild(wrap);
+
+  var list=$('#tList');
+  TALENTS.forEach(function(t,idx){
+    var row=el('div',{class:'talent','data-idx':idx});
+    row.innerHTML=
+      '<div class="t-ico" style="background:'+t.col+'22;border-color:'+t.col+'">'+t.icon+'</div>'+
+      '<div class="t-body"><div class="t-name">'+t.name+
+        '<span class="t-aff" id="aff'+idx+'"></span></div>'+
+        '<div class="t-desc">'+t.desc+'</div>'+
+        '<div class="t-bar"><i id="bar'+idx+'"></i></div></div>'+
+      '<div class="t-ctrl">'+
+        '<button class="t-btn" type="button" data-act="-" data-i="'+idx+'" aria-label="减少">−</button>'+
+        '<b class="t-num" id="num'+idx+'">0</b>'+
+        '<button class="t-btn" type="button" data-act="+" data-i="'+idx+'" aria-label="增加">+</button>'+
+      '</div>';
+    list.appendChild(row);
+  });
+
+  function render(){
+    var L=left(),k;
+    for(k=0;k<5;k++){
+      $('#num'+k).textContent=P[k];
+      $('#bar'+k).style.width=(P[k]/TALENT_CAP*100)+'%';
+      $('#bar'+k).style.background=TALENTS[k].col;
+      $('#num'+k).style.color=P[k]?TALENTS[k].col:'#9fb3c0';
+      var row=list.querySelector('[data-idx="'+k+'"]');
+      row.classList.toggle('on',P[k]>0);
+      row.classList.toggle('full',P[k]>=TALENT_CAP);
+    }
+    $('#tLeft').textContent=L;
+    $('#tLeft').classList.toggle('empty',L===0);
+    var go=$('#tGo');
+    go.disabled=(L!==0);
+    $('#tHint').textContent=(L===0)?('已分配 '+TALENT_TOTAL+' 点'):('还需分配 '+L+' 点');
+    /* 每个天赋的「倾向」提示：按该天赋对各维的真实影响（v/SCALE）排序取前两项。
+       注意不能直接比 v —— 各维的标定上限 SCALE 不同，换算成归一化分才准。 */
+    for(k=0;k<5;k++){
+      var eff=[],j;
+      for(j=0;j<5;j++)eff.push({i:j,w:TALENTS[k].v[j]/SCALE[j]});
+      eff.sort(function(a,b){return b.w-a.w;});
+      var el2=$('#aff'+k);
+      if(P[k]>0&&eff[0].w>0){
+        el2.textContent='倾向 '+DIM_LABEL[DIMS[eff[0].i]]+(eff[1].w>0.15*eff[0].w?' · '+DIM_LABEL[DIMS[eff[1].i]]:'');
+      }else el2.textContent='';
+    }
+  }
+
+  list.addEventListener('click',function(e){
+    var b=e.target.closest?e.target.closest('.t-btn'):null;
+    if(!b)return;
+    var i2=Number(b.getAttribute('data-i')),act=b.getAttribute('data-act');
+    if(act==='+'){
+      if(P[i2]>=TALENT_CAP){toast(TALENTS[i2].name+' 最多只能点 '+TALENT_CAP+' 点');Sfx.miss();return;}
+      if(left()<=0){toast('天赋点已经用完了');Sfx.miss();return;}
+      P[i2]++;Sfx.click();
+    }else{
+      if(P[i2]<=0)return;
+      P[i2]--;Sfx.click();
+    }
+    render();
+  });
+
+  $('#tGo').addEventListener('click',function(){
+    if(left()!==0)return;
+    Sfx.unlock();Sfx.click();Sfx.win();
+    var raw=talentToRaw(P);
+    for(var k=0;k<5;k++)addDim(k,raw[k]);
+    S.talent=P.slice();
+    FX.burst({rect:this.getBoundingClientRect(),kind:'spark',n:56});
+    setTimeout(next,260);
+  });
+
+  render();
+  if(left()===TALENT_TOTAL)Sfx.hover();
+}
+
 /* ---------- 选择题视图 ---------- */
 function questionView(i){
   var q=QUESTIONS[i],st=$('#stage');
@@ -2282,7 +2452,7 @@ function computeResult(seedStr){
     if(m.id==='armadillo'&&lb.indexOf('筑巢者')>=0)bonus+=0.08;
     if(m.id==='turtle'&&lb.indexOf('苟住流')>=0)bonus+=0.08;
     if(m.id==='skeleton'&&lb.indexOf('稳准手')>=0)bonus+=0.05;
-    raw*=1+bonus;
+    raw*=1+bonus+talentBonus(m,S.talent||[0,0,0,0,0]);
     /* 确定性微扰动（避免并列，且同一份答卷结果稳定） */
     raw*=1+(makeRnd(seedStr+m.id)()-0.5)*0.03;
     res.push({id:m.id,raw:raw});
@@ -2349,6 +2519,13 @@ function renderResult(res,retest){
   html+='</div></div>';
 
   html+='<div class="divider"></div>';
+  if(S.talent&&S.talent.some(function(x){return x>0;})){
+    html+='<h3 class="h2">✨ 你选择的天赋</h3><div style="margin-bottom:8px">';
+    S.talent.forEach(function(p,k){
+      if(p>0)html+='<span class="tag talent-tag" style="border-color:'+TALENTS[k].col+'">'+TALENTS[k].icon+' '+TALENTS[k].name+' +'+p+'</span>';
+    });
+    html+='</div>';
+  }
   html+='<h3 class="h2">🤝 匹配你的 MCCP 搭档</h3>';
   html+='<div class="partner">'+
     '<canvas id="partnerCv" width="96" height="96"></canvas>'+
@@ -2455,6 +2632,8 @@ function copyResult(res,dims,danger){
   L.push('专属称号：'+(cp.title||''));
   L.push('匹配度：'+res.match+'%　危险等级：'+danger+'/100');
   L.push('特征：'+m.tag.split(' ').join(' / '));
+  if(S.talent&&S.talent.some(function(x){return x>0;}))
+    L.push('开局天赋：'+S.talent.map(function(p,k){return p>0?TALENTS[k].name+p:null;}).filter(Boolean).join(' '));
   L.push('性格五维：'+DIMS.map(function(d,k){return DIM_LABEL[d]+dims[k];}).join('　'));
   L.push('MCCP 搭档：'+MOB_BY_ID[pickPartner(res.id)].zh);
   if(S.gameLabels&&S.gameLabels.length)L.push('游玩风格：'+S.gameLabels.join(' / '));
@@ -2520,7 +2699,7 @@ function makePoster(res,traits,danger,noDownload){
     y+=descLines()*C.lead+40+C.gap;          /* 解读卡 */
     y+=Math.round(C.danger*1.6)+20+C.gap;    /* 危险等级 */
     y+=30+5*C.lead+(C.tick-8)+C.gap;         /* 五维 */
-    y+=16*C.pxP+24+C.gap;                    /* 搭档卡 */
+    y+=(S.talent&&S.talent.some(function(x){return x>0;})?26:0)+16*C.pxP+24+C.gap;   /* 天赋行 + 搭档卡 */
     y+=C.quote+18+20;                        /* 引文 + 页脚 */
     return y;
   }
@@ -2678,6 +2857,12 @@ function makePoster(res,traits,danger,noDownload){
   y+=5*C.lead+(C.tick-8)+C.gap;
 
   /* 搭档 */
+  /* 天赋行 */
+  if(S.talent&&S.talent.some(function(x){return x>0;})){
+    var tNames=S.talent.map(function(p,k){return p>0?TALENTS[k].name+' +'+p:null;}).filter(Boolean).join('　');
+    txt('天赋  '+tNames,x0+12,y,17,'#5b6f75','left',500);
+    y+=26;
+  }
   var psp=16*C.pxP,psx=x0+28,psy=y+28;
   var cardH=psp+20+C.gap, cardBottom=y+cardH;
   rr(60,y,W-120,cardH);
@@ -2745,6 +2930,7 @@ function finish(){
 function resetState(){
   S.gi=0;S.qi=0;S.answers=[];S.scores={mining:0,dodge:0,build:0};
   S.mining=null;S.dodge=null;S.build=null;S.gameLabels=[];
+  S.talent=[0,0,0,0,0];TALENT_POINTS=[0,0,0,0,0];
   V=[0,0,0,0,0];                       /* 5 维：行动 / 外向 / 侵略 / 耐心 / 创造 */
 }
 function restart(){
@@ -2762,7 +2948,9 @@ function beginTest(){
   show('view-quiz');
   setProgress();
   var st=FLOW[0];
-  if(st.type==='game')gameIntro(st.key);else questionView(st.i);
+  if(st.type==='talent')talentView();
+  else if(st.type==='game')gameIntro(st.key);
+  else questionView(st.i);
 }
 
 /* 开场：启动动画 */

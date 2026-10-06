@@ -126,10 +126,50 @@ const check = (ok, label) => { console.log((ok ? '  ✓ ' : '  ✗ ') + label); 
     check(spr, '开场页角色像素立绘已渲染（且淡入完成）');
     await shot('01-intro.png');
 
-    /* ---------- 2. 三个小游戏 + 五道题 ---------- */
+    /* ---------- 2. 天赋分配 → 三个小游戏 + 七道题 ---------- */
     await clickSel('#startBtn');
     await sleep(400);
     check(await evalJs(`!document.getElementById('view-quiz').hidden`), '点击「开始测试」进入测评页');
+
+    /* 开局天赋（第一步） */
+    const tal = await evalJs(`(function(){
+      var rows=document.querySelectorAll('.talent');
+      var nums=document.querySelectorAll('.t-num');
+      var go=document.getElementById('tGo');
+      return {rows:rows.length, nums:nums.length, left:(document.getElementById('tLeft')||{}).textContent,
+        disabled:go?go.disabled:null, q:(document.querySelector('.q-text')||{}).textContent||''};
+    })()`);
+    check(tal.rows === 5 && tal.nums === 5, '天赋分配界面有 5 项天赋（' + tal.rows + '）');
+    check(/重来一世/.test(tal.q), '天赋题面正确：' + tal.q);
+    check(tal.left === '10', '初始剩余 10 点（' + tal.left + '）');
+    check(tal.disabled === true, '未分配完时按钮为禁用');
+    /* 加满 7 点体能（验证上限） */
+    for (let k = 0; k < 9; k++) { await clickSel(`.t-btn[data-act="+"][data-i="1"]`); await sleep(70); }
+    const capped = await evalJs(`(function(){
+      return {body:(document.querySelectorAll('.t-num')[1]||{}).textContent,
+        left:(document.getElementById('tLeft')||{}).textContent,
+        full:!!document.querySelector('.talent.full')};
+    })()`);
+    check(capped.body === '7', '单项最多 7 点（实际 ' + capped.body + '）');
+    check(capped.full, '满点时有视觉提示');
+    check(capped.left === '3', '已扣到剩余 3 点（' + capped.left + '）');
+    /* 剩下 3 点给智慧 */
+    for (let k = 0; k < 3; k++) { await clickSel(`.t-btn[data-act="+"][data-i="0"]`); await sleep(70); }
+    const done = await evalJs(`(function(){
+      var go=document.getElementById('tGo');
+      return {left:(document.getElementById('tLeft')||{}).textContent, disabled:go.disabled,
+        values:Array.prototype.map.call(document.querySelectorAll('.t-num'),function(n){return n.textContent;})};
+    })()`);
+    check(done.left === '0' && done.disabled === false, '分配完 10 点后按钮可点（剩余 ' + done.left + '）');
+    check(done.values.join('') === '37000', '天赋点分配正确：智慧3 体能7（' + done.values.join('/') + '）');
+    /* 减号回退再补回，验证可撤销 */
+    await clickSel(`.t-btn[data-act="-"][data-i="1"]`); await sleep(120);
+    check(await evalJs(`(document.getElementById('tGo')||{}).disabled`) === true, '减少点数后按钮重新禁用');
+    await clickSel(`.t-btn[data-act="+"][data-i="1"]`); await sleep(120);
+    await shot('09-talent.png');
+    await clickSel('#tGo');
+    await sleep(500);
+    check(await evalJs(`!!document.querySelector('#gStart')`), '确定天赋后进入挖方块游戏');
 
     /* 游戏一：挖方块 */
     await clickSel('#gStart');
@@ -270,11 +310,14 @@ const check = (ok, label) => { console.log((ok ? '  ✓ ' : '  ✗ ') + label); 
       return {ok:true, pix:n, w:cv.width, h:cv.height};
     })()`);
     check(fx.ok, '答题粒子特效画布 #fx 已创建');
-    /* 重开一轮，快速跑到第一题，答完立刻采样粒子 */
+    /* 重开一轮：先过天赋步，再快速跑到第一题，答完立刻采样粒子 */
     await clickSel('#rAgain'); await sleep(700);
     await clickSel('#startBtn'); await sleep(500);
-    const onGame1 = await evalJs(`!!document.querySelector('#gStart')`);
-    if (onGame1) {                       /* 第一个环节是挖矿，直接开始并跳过 */
+    check(await evalJs(`!!document.querySelector('.talent')`), '重开后第一步仍是天赋分配');
+    for (let k = 0; k < 5; k++) { await clickSel(`.t-btn[data-act="+"][data-i="${k}"]`); await sleep(60); }
+    for (let k = 0; k < 5; k++) { await clickSel(`.t-btn[data-act="+"][data-i="${k}"]`); await sleep(60); }
+    await clickSel('#tGo'); await sleep(500);
+    if (await evalJs(`!!document.querySelector('#gStart')`)) {   /* 第一个小游戏直接跳过 */
       await clickSel('#gStart'); await sleep(300);
       const t9 = Date.now();
       while (Date.now() - t9 < 11200) { if (await evalJs(`!!document.querySelector('#gNext')`)) break; await sleep(400); }

@@ -71,9 +71,9 @@
   "d": 74,
   "tag": "神秘 诡计 隐身 远程",
   "v": {
-   "action": 42,
-   "extra": 18,
-   "aggro": 74,
+   "action": 48,
+   "extra": 12,
+   "aggro": 80,
    "care": 72,
    "build": 30
   },
@@ -119,7 +119,7 @@
   "d": 88,
   "tag": "召唤 诡计 掌控 远程",
   "v": {
-   "action": 38,
+   "action": 44,
    "extra": 22,
    "aggro": 86,
    "care": 78,
@@ -215,11 +215,11 @@
   "d": 52,
   "tag": "执着 憨厚 不放弃 夜行",
   "v": {
-   "action": 38,
+   "action": 74,
    "extra": 30,
-   "aggro": 56,
-   "care": 54,
-   "build": 24
+   "aggro": 38,
+   "care": 60,
+   "build": 30
   },
   "profile": "中等行动力、社交中性、中等侵略、中等耐心、弱创造"
  },
@@ -231,10 +231,10 @@
   "d": 56,
   "tag": "坚韧 干旱 耐受 缓慢",
   "v": {
-   "action": 24,
+   "action": 66,
    "extra": 22,
-   "aggro": 55,
-   "care": 72,
+   "aggro": 49,
+   "care": 78,
    "build": 20
   },
   "profile": "慢节奏、内向、中等侵略、高耐心、弱创造"
@@ -248,10 +248,10 @@
   "tag": "水生 突袭 夜行 三叉戟",
   "v": {
    "action": 52,
-   "extra": 20,
-   "aggro": 68,
-   "care": 58,
-   "build": 18
+   "extra": 8,
+   "aggro": 74,
+   "care": 70,
+   "build": 30
   },
   "profile": "中等行动力、内向、中等侵略、中等耐心、弱创造"
  },
@@ -263,8 +263,8 @@
   "d": 60,
   "tag": "精准 冷静 疏离 弓手",
   "v": {
-   "action": 50,
-   "extra": 16,
+   "action": 62,
+   "extra": 10,
    "aggro": 62,
    "care": 76,
    "build": 22
@@ -279,8 +279,8 @@
   "d": 64,
   "tag": "寒冷 迟缓 远程 独行",
   "v": {
-   "action": 30,
-   "extra": 12,
+   "action": 54,
+   "extra": 6,
    "aggro": 60,
    "care": 80,
    "build": 20
@@ -295,7 +295,7 @@
   "d": 62,
   "tag": "沼泽 毒箭 迟缓 隐忍",
   "v": {
-   "action": 26,
+   "action": 50,
    "extra": 14,
    "aggro": 56,
    "care": 84,
@@ -311,7 +311,7 @@
   "d": 86,
   "tag": "高攻 压迫 下界 石剑",
   "v": {
-   "action": 68,
+   "action": 80,
    "extra": 18,
    "aggro": 94,
    "care": 34,
@@ -327,7 +327,7 @@
   "d": 54,
   "tag": "群体 中立 报复 皮厚",
   "v": {
-   "action": 46,
+   "action": 70,
    "extra": 48,
    "aggro": 70,
    "care": 38,
@@ -345,8 +345,8 @@
   "v": {
    "action": 40,
    "extra": 66,
-   "aggro": 10,
-   "care": 48,
+   "aggro": 16,
+   "care": 66,
    "build": 36
   },
   "profile": "中等行动力、社交中性、无侵略、中等耐心、中等创造"
@@ -378,7 +378,7 @@
    "action": 30,
    "extra": 88,
    "aggro": 6,
-   "care": 56,
+   "care": 62,
    "build": 42
   },
   "profile": "中等行动力、外向、无侵略、中等耐心、中等创造"
@@ -423,7 +423,7 @@
   "d": 8,
   "tag": "傲娇 独立 慵懒 好奇",
   "v": {
-   "action": 42,
+   "action": 60,
    "extra": 28,
    "aggro": 30,
    "care": 62,
@@ -503,10 +503,10 @@
   "d": 40,
   "tag": "随性 弹跳 分裂 乐天",
   "v": {
-   "action": 66,
+   "action": 72,
    "extra": 72,
    "aggro": 34,
-   "care": 24,
+   "care": 30,
    "build": 22
   },
   "profile": "中等行动力、外向、中等侵略、急躁、弱创造"
@@ -519,7 +519,7 @@
   "d": 72,
   "tag": "暴躁 分裂 灼热 冲撞",
   "v": {
-   "action": 79,
+   "action": 85,
    "extra": 26,
    "aggro": 96,
    "care": 14,
@@ -535,7 +535,7 @@
   "d": 48,
   "tag": "隐匿 突袭 成群 躁动",
   "v": {
-   "action": 74,
+   "action": 80,
    "extra": 46,
    "aggro": 62,
    "care": 36,
@@ -551,10 +551,10 @@
   "d": 50,
   "tag": "微小 钻洞 短命 执念",
   "v": {
-   "action": 68,
-   "extra": 30,
+   "action": 80,
+   "extra": 36,
    "aggro": 58,
-   "care": 32,
+   "care": 44,
    "build": 16
   },
   "profile": "中等行动力、社交中性、中等侵略、中等耐心、弱创造"
@@ -570,7 +570,7 @@
    "action": 40,
    "extra": 60,
    "aggro": 12,
-   "care": 54,
+   "care": 60,
    "build": 74
   },
   "profile": "中等行动力、社交中性、无侵略、中等耐心、强创造守护"
@@ -599,11 +599,11 @@
   "d": 4,
   "tag": "怯懦 轻盈 下蛋 慌乱",
   "v": {
-   "action": 49,
-   "extra": 56,
-   "aggro": 10,
-   "care": 42,
-   "build": 35
+   "action": 55,
+   "extra": 62,
+   "aggro": 28,
+   "care": 48,
+   "build": 41
   },
   "profile": "中等行动力、社交中性、无侵略、急躁、中等创造"
  },
@@ -632,10 +632,10 @@
   "tag": "夜行 倒挂 不安 洞穴",
   "v": {
    "action": 72,
-   "extra": 26,
-   "aggro": 30,
-   "care": 40,
-   "build": 20
+   "extra": 32,
+   "aggro": 36,
+   "care": 64,
+   "build": 27
   },
   "profile": "高行动力、内向、中等侵略、中等耐心、弱创造"
  },
@@ -663,9 +663,9 @@
   "d": 2,
   "tag": "绚丽 悠闲 群游 观赏",
   "v": {
-   "action": 44,
+   "action": 50,
    "extra": 78,
-   "aggro": 6,
+   "aggro": 24,
    "care": 52,
    "build": 40
   },
@@ -698,7 +698,7 @@
    "action": 36,
    "extra": 84,
    "aggro": 13,
-   "care": 45,
+   "care": 69,
    "build": 26
   },
   "profile": "中等行动力、外向、无侵略、中等耐心、弱创造"
@@ -727,10 +727,10 @@
   "d": 8,
   "tag": "安静 深水 被动 漂流",
   "v": {
-   "action": 34,
+   "action": 40,
    "extra": 38,
-   "aggro": 22,
-   "care": 62,
+   "aggro": 28,
+   "care": 74,
    "build": 28
   },
   "profile": "中等行动力、社交中性、无侵略、中等耐心、中等创造"
@@ -743,7 +743,7 @@
   "d": 8,
   "tag": "幽光 深海 沉静 梦幻",
   "v": {
-   "action": 28,
+   "action": 34,
    "extra": 32,
    "aggro": 16,
    "care": 74,
@@ -761,8 +761,8 @@
   "v": {
    "action": 38,
    "extra": 76,
-   "aggro": 8,
-   "care": 50,
+   "aggro": 14,
+   "care": 68,
    "build": 30
   },
   "profile": "中等行动力、外向、无侵略、中等耐心、中等创造"
@@ -791,7 +791,7 @@
   "d": 26,
   "tag": "警戒 膨胀 有毒 防御",
   "v": {
-   "action": 32,
+   "action": 44,
    "extra": 34,
    "aggro": 48,
    "care": 70,
@@ -855,7 +855,7 @@
   "d": 66,
   "tag": "飘忽 顽劣 穿墙 突袭",
   "v": {
-   "action": 86,
+   "action": 92,
    "extra": 36,
    "aggro": 74,
    "care": 26,
@@ -887,7 +887,7 @@
   "d": 80,
   "tag": "灼热 悬浮 连射 冲动",
   "v": {
-   "action": 78,
+   "action": 90,
    "extra": 24,
    "aggro": 88,
    "care": 20,
@@ -903,11 +903,11 @@
   "d": 70,
   "tag": "孤高 哀鸣 远程 敏感",
   "v": {
-   "action": 32,
+   "action": 56,
    "extra": 12,
-   "aggro": 68,
-   "care": 56,
-   "build": 18
+   "aggro": 80,
+   "care": 68,
+   "build": 24
   },
   "profile": "中等行动力、内向、中等侵略、中等耐心、弱创造"
  },
@@ -920,9 +920,9 @@
   "tag": "夜行 自由 随性 扰人清梦",
   "v": {
    "action": 90,
-   "extra": 24,
+   "extra": 30,
    "aggro": 72,
-   "care": 28,
+   "care": 34,
    "build": 16
   },
   "profile": "高行动力、内向、高侵略、急躁、弱创造"
@@ -1063,7 +1063,7 @@
   "d": 96,
   "tag": "强大 压迫 独裁 破坏",
   "v": {
-   "action": 68,
+   "action": 80,
    "extra": 10,
    "aggro": 99,
    "care": 26,

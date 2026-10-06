@@ -62,9 +62,17 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
   for (let i = 0; i < 40; i++) { await sleep(300); if (await evalJs(`!!document.getElementById('view-intro') && !document.getElementById('view-intro').hidden`)) break; }
 
-  /* 挖矿进行中 */
+  /* 开局天赋：随意分配 10 点后继续 */
   await clickSel('#startBtn');
   await sleep(400);
+  if (await evalJs(`!!document.querySelector('.talent')`)) {
+    for (let k = 0; k < 5; k++) { await clickSel(`.t-btn[data-act="+"][data-i="${k}"]`); await sleep(60); }
+    for (let k = 0; k < 5; k++) { await clickSel(`.t-btn[data-act="+"][data-i="${k}"]`); await sleep(60); }
+    await clickSel('#tGo');
+    await sleep(450);
+  }
+
+  /* 挖矿进行中 */
   await clickSel('#gStart');
   await sleep(2500);
   for (let i = 0; i < 6; i++) {
