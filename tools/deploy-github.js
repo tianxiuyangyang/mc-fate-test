@@ -63,20 +63,27 @@ function say(s) { console.log(s); }
   git(['config', 'credential.helper', '']);
 
   /* ---------- 3. 提交 ---------- */
-  const GITIGNORE = [
-    '# 构建/测试临时文件',
-    'tools/_cdpprofile/', 'tools/_shotprofile/', 'tools/_probeprofile/',
-    'tools/_posterprofile/', 'tools/_syntax.js', 'tools/_*.js',
-    '', 'Thumbs.db', 'desktop.ini', '.DS_Store', ''
-  ].join('\n');
-  fs.writeFileSync(path.join(ROOT, '.gitignore'), GITIGNORE, 'utf8');
-  fs.writeFileSync(path.join(ROOT, '.nojekyll'), '', 'utf8');
+  /* .gitignore / .nojekyll 仅在缺失时创建，避免覆盖已有内容 */
+  const giPath = path.join(ROOT, '.gitignore');
+  if (!fs.existsSync(giPath)) {
+    fs.writeFileSync(giPath, [
+      '# 构建/测试临时文件',
+      'tools/_cdpprofile/', 'tools/_shotprofile/', 'tools/_probeprofile/',
+      'tools/_posterprofile/', 'tools/_syntax.js',
+      '', 'Thumbs.db', 'desktop.ini', '.DS_Store', ''
+    ].join('\n'), 'utf8');
+    say('· 已生成 .gitignore');
+  }
+  const njPath = path.join(ROOT, '.nojekyll');
+  if (!fs.existsSync(njPath)) { fs.writeFileSync(njPath, '', 'utf8'); say('· 已生成 .nojekyll'); }
 
   git(['add', '-A']);
   const status = git(['status', '--porcelain']);
+  const msg = process.env.COMMIT_MSG ||
+    '你的本命 MC 角色测试：3 个小游戏 + 7 道性格题 · 72 位角色（5 维判定）';
   if (status.trim()) {
-    git(['commit', '-m', '你的本命 MC 角色测试：3 个小游戏 + 5 道性格题（浅色像素风）']);
-    say('✓ 已提交');
+    git(['commit', '-m', msg]);
+    say('✓ 已提交：' + msg);
   } else {
     say('· 无新变更，跳过提交');
   }

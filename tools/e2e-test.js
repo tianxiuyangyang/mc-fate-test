@@ -317,6 +317,28 @@ const check = (ok, label) => { console.log((ok ? '  ✓ ' : '  ✗ ') + label); 
       '72 个角色精灵全部可绘制' + (spriteAudit.empty.length ? '（异常: ' + spriteAudit.empty.slice(0, 5).join(',') + '）' : ''));
     check(spriteAudit.copy === 72 && spriteAudit.copyBad.length === 0,
       '72 份专属文案全部就位' + (spriteAudit.copyBad.length ? '（缺: ' + spriteAudit.copyBad.slice(0, 5).join(',') + '）' : ''));
+
+    /* 文案深度审计：称号格式/唯一、台词引号、解读 3 段、危险说明 */
+    const copyAudit = await evalJs(`(function(){
+      var A=window.__MYCRAFT__, cp=A.copy, order=A.order;
+      var titles={}, bad={title:[],quote:[],desc:[],note:[],dup:[]};
+      order.forEach(function(id){
+        var c=cp[id]; if(!c){ bad.title.push(id+':missing'); return; }
+        if(!/^.{4}・.{4}$/.test(c.title||'')) bad.title.push(id+':'+c.title);
+        if(!/^“.+”$/.test((c.quote||'').replace(/\\s/g,''))) bad.quote.push(id);
+        if(!Array.isArray(c.desc)||c.desc.length!==3) bad.desc.push(id+':not3');
+        else c.desc.forEach(function(p,i){ if(typeof p!=='string'||p.length<40) bad.desc.push(id+':s'+(i+1)+'='+(p||'').length); });
+        if(!/^危险等级/.test(c.dangerNote||'')) bad.note.push(id);
+        titles[c.title]=(titles[c.title]||0)+1;
+      });
+      Object.keys(titles).forEach(function(t){ if(titles[t]>1) bad.dup.push(t); });
+      return {count:Object.keys(cp).length, bad:bad,
+        uniqTitles:Object.keys(titles).length,
+        badge:Object.keys(bad).reduce(function(s,k){return s+bad[k].length;},0)};
+    })()`);
+    check(copyAudit.badge === 0,
+      '文案审计通过：72 个称号唯一、台词带引号、解读各 3 段、危险说明齐全' +
+      (copyAudit.badge ? '（异常: ' + JSON.stringify(copyAudit.bad).slice(0, 200) + '）' : ''));
     check(spriteAudit.qLen === 7 && spriteAudit.qOpts.every(n => n === 4),
       '共 7 道题、每题 4 个选项（' + spriteAudit.qOpts.join('/') + '）');
     check(spriteAudit.dims.length === 5, '判定维度为 5 项：' + spriteAudit.dims.join('/'));
