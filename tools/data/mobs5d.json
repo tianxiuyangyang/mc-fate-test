@@ -1,0 +1,1154 @@
+[
+ {
+  "id": "steve",
+  "zh": "史蒂夫",
+  "en": "Steve",
+  "t": "humanoid",
+  "d": 30,
+  "tag": "全能 稳重 耐心 建造",
+  "v": {
+   "action": 58,
+   "extra": 46,
+   "aggro": 38,
+   "care": 82,
+   "build": 92
+  },
+  "profile": "中等行动力、社交中性、中等侵略、高耐心、强创造守护"
+ },
+ {
+  "id": "alex",
+  "zh": "爱丽克丝",
+  "en": "Alex",
+  "t": "humanoid",
+  "d": 38,
+  "tag": "灵活 果敢 会规划 上进",
+  "v": {
+   "action": 74,
+   "extra": 52,
+   "aggro": 46,
+   "care": 64,
+   "build": 78
+  },
+  "profile": "高行动力、社交中性、中等侵略、中等耐心、强创造守护"
+ },
+ {
+  "id": "villager",
+  "zh": "村民",
+  "en": "Villager",
+  "t": "humanoid",
+  "d": 10,
+  "tag": "温和 交易 守序 居家",
+  "v": {
+   "action": 30,
+   "extra": 62,
+   "aggro": 10,
+   "care": 88,
+   "build": 95
+  },
+  "profile": "中等行动力、社交中性、无侵略、高耐心、强创造守护"
+ },
+ {
+  "id": "witch",
+  "zh": "女巫",
+  "en": "Witch",
+  "t": "humanoid",
+  "d": 66,
+  "tag": "聪慧 神秘 药水 算计",
+  "v": {
+   "action": 48,
+   "extra": 26,
+   "aggro": 62,
+   "care": 84,
+   "build": 56
+  },
+  "profile": "中等行动力、内向、中等侵略、高耐心、中等创造"
+ },
+ {
+  "id": "illusioner",
+  "zh": "幻术师",
+  "en": "Illusioner",
+  "t": "humanoid",
+  "d": 74,
+  "tag": "神秘 诡计 隐身 远程",
+  "v": {
+   "action": 42,
+   "extra": 18,
+   "aggro": 74,
+   "care": 72,
+   "build": 30
+  },
+  "profile": "中等行动力、内向、高侵略、高耐心、中等创造"
+ },
+ {
+  "id": "pillager",
+  "zh": "掠夺者",
+  "en": "Pillager",
+  "t": "humanoid",
+  "d": 70,
+  "tag": "效率 行动 掠夺 弩箭",
+  "v": {
+   "action": 72,
+   "extra": 34,
+   "aggro": 78,
+   "care": 44,
+   "build": 26
+  },
+  "profile": "高行动力、社交中性、高侵略、中等耐心、弱创造"
+ },
+ {
+  "id": "vindicator",
+  "zh": "卫道士",
+  "en": "Vindicator",
+  "t": "humanoid",
+  "d": 76,
+  "tag": "近战 凶悍 突进 斧头",
+  "v": {
+   "action": 76,
+   "extra": 30,
+   "aggro": 88,
+   "care": 32,
+   "build": 18
+  },
+  "profile": "高行动力、社交中性、高侵略、中等耐心、弱创造"
+ },
+ {
+  "id": "evoker",
+  "zh": "唤魔者",
+  "en": "Evoker",
+  "t": "humanoid",
+  "d": 88,
+  "tag": "召唤 诡计 掌控 远程",
+  "v": {
+   "action": 38,
+   "extra": 22,
+   "aggro": 86,
+   "care": 78,
+   "build": 34
+  },
+  "profile": "中等行动力、内向、高侵略、高耐心、中等创造"
+ },
+ {
+  "id": "piglin",
+  "zh": "猪灵",
+  "en": "Piglin",
+  "t": "humanoid",
+  "d": 64,
+  "tag": "交易 族群 规则 好斗",
+  "v": {
+   "action": 66,
+   "extra": 44,
+   "aggro": 72,
+   "care": 48,
+   "build": 40
+  },
+  "profile": "中等行动力、社交中性、高侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "piglin_brute",
+  "zh": "猪灵蛮兵",
+  "en": "Piglin Brute",
+  "t": "humanoid",
+  "d": 82,
+  "tag": "蛮力 狂暴 正面 硬刚",
+  "v": {
+   "action": 82,
+   "extra": 28,
+   "aggro": 96,
+   "care": 22,
+   "build": 14
+  },
+  "profile": "高行动力、内向、高侵略、急躁、弱创造"
+ },
+ {
+  "id": "snow_golem",
+  "zh": "雪傀儡",
+  "en": "Snow Golem",
+  "t": "humanoid",
+  "d": 16,
+  "tag": "守护 温顺 巡逻 雪球",
+  "v": {
+   "action": 44,
+   "extra": 40,
+   "aggro": 24,
+   "care": 70,
+   "build": 84
+  },
+  "profile": "中等行动力、社交中性、无侵略、中等耐心、强创造守护"
+ },
+ {
+  "id": "iron_golem",
+  "zh": "铁傀儡",
+  "en": "Iron Golem",
+  "t": "humanoid",
+  "d": 58,
+  "tag": "守护 厚实 可靠 硬扛",
+  "v": {
+   "action": 40,
+   "extra": 38,
+   "aggro": 58,
+   "care": 76,
+   "build": 96
+  },
+  "profile": "中等行动力、社交中性、中等侵略、高耐心、强创造守护"
+ },
+ {
+  "id": "wandering_trader",
+  "zh": "流浪商人",
+  "en": "Wandering Trader",
+  "t": "humanoid",
+  "d": 10,
+  "tag": "漂泊 见闻 交易 独行",
+  "v": {
+   "action": 46,
+   "extra": 56,
+   "aggro": 12,
+   "care": 68,
+   "build": 62
+  },
+  "profile": "中等行动力、社交中性、无侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "zombie",
+  "zh": "僵尸",
+  "en": "Zombie",
+  "t": "zombie",
+  "d": 52,
+  "tag": "执着 憨厚 不放弃 夜行",
+  "v": {
+   "action": 38,
+   "extra": 30,
+   "aggro": 56,
+   "care": 54,
+   "build": 24
+  },
+  "profile": "中等行动力、社交中性、中等侵略、中等耐心、弱创造"
+ },
+ {
+  "id": "husk",
+  "zh": "尸壳",
+  "en": "Husk",
+  "t": "zombie",
+  "d": 56,
+  "tag": "坚韧 干旱 耐受 缓慢",
+  "v": {
+   "action": 24,
+   "extra": 22,
+   "aggro": 55,
+   "care": 72,
+   "build": 20
+  },
+  "profile": "慢节奏、内向、中等侵略、高耐心、弱创造"
+ },
+ {
+  "id": "drowned",
+  "zh": "溺尸",
+  "en": "Drowned",
+  "t": "zombie",
+  "d": 60,
+  "tag": "水生 突袭 夜行 三叉戟",
+  "v": {
+   "action": 52,
+   "extra": 20,
+   "aggro": 68,
+   "care": 58,
+   "build": 18
+  },
+  "profile": "中等行动力、内向、中等侵略、中等耐心、弱创造"
+ },
+ {
+  "id": "skeleton",
+  "zh": "骷髅",
+  "en": "Skeleton",
+  "t": "zombie",
+  "d": 60,
+  "tag": "精准 冷静 疏离 弓手",
+  "v": {
+   "action": 50,
+   "extra": 16,
+   "aggro": 62,
+   "care": 76,
+   "build": 22
+  },
+  "profile": "中等行动力、内向、中等侵略、高耐心、弱创造"
+ },
+ {
+  "id": "stray",
+  "zh": "流浪者",
+  "en": "Stray",
+  "t": "zombie",
+  "d": 64,
+  "tag": "寒冷 迟缓 远程 独行",
+  "v": {
+   "action": 30,
+   "extra": 12,
+   "aggro": 60,
+   "care": 80,
+   "build": 20
+  },
+  "profile": "中等行动力、内向、中等侵略、高耐心、弱创造"
+ },
+ {
+  "id": "bogged",
+  "zh": "沼骸",
+  "en": "Bogged",
+  "t": "zombie",
+  "d": 62,
+  "tag": "沼泽 毒箭 迟缓 隐忍",
+  "v": {
+   "action": 26,
+   "extra": 14,
+   "aggro": 56,
+   "care": 84,
+   "build": 22
+  },
+  "profile": "慢节奏、内向、中等侵略、高耐心、弱创造"
+ },
+ {
+  "id": "wither_skeleton",
+  "zh": "凋灵骷髅",
+  "en": "Wither Skeleton",
+  "t": "zombie",
+  "d": 86,
+  "tag": "高攻 压迫 下界 石剑",
+  "v": {
+   "action": 68,
+   "extra": 18,
+   "aggro": 94,
+   "care": 34,
+   "build": 12
+  },
+  "profile": "中等行动力、内向、高侵略、中等耐心、弱创造"
+ },
+ {
+  "id": "zombified_piglin",
+  "zh": "僵尸猪灵",
+  "en": "Zombified Piglin",
+  "t": "zombie",
+  "d": 54,
+  "tag": "群体 中立 报复 皮厚",
+  "v": {
+   "action": 46,
+   "extra": 48,
+   "aggro": 70,
+   "care": 38,
+   "build": 26
+  },
+  "profile": "中等行动力、社交中性、中等侵略、中等耐心、弱创造"
+ },
+ {
+  "id": "pig",
+  "zh": "猪",
+  "en": "Pig",
+  "t": "quadruped",
+  "d": 6,
+  "tag": "憨厚 贪吃 随遇而安 温和",
+  "v": {
+   "action": 40,
+   "extra": 66,
+   "aggro": 10,
+   "care": 48,
+   "build": 36
+  },
+  "profile": "中等行动力、社交中性、无侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "cow",
+  "zh": "牛",
+  "en": "Cow",
+  "t": "quadruped",
+  "d": 6,
+  "tag": "温和 供给 踏实 慢节奏",
+  "v": {
+   "action": 26,
+   "extra": 72,
+   "aggro": 8,
+   "care": 66,
+   "build": 54
+  },
+  "profile": "慢节奏、外向、无侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "sheep",
+  "zh": "羊",
+  "en": "Sheep",
+  "t": "quadruped",
+  "d": 4,
+  "tag": "温顺 群体 无忧 跟随",
+  "v": {
+   "action": 30,
+   "extra": 88,
+   "aggro": 6,
+   "care": 56,
+   "build": 42
+  },
+  "profile": "中等行动力、外向、无侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "wolf",
+  "zh": "狼",
+  "en": "Wolf",
+  "t": "quadruped",
+  "d": 44,
+  "tag": "忠诚 守护 群居 出击",
+  "v": {
+   "action": 78,
+   "extra": 70,
+   "aggro": 66,
+   "care": 54,
+   "build": 58
+  },
+  "profile": "高行动力、社交中性、中等侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "ocelot",
+  "zh": "豹猫",
+  "en": "Ocelot",
+  "t": "quadruped",
+  "d": 14,
+  "tag": "警觉 独行 谨慎 敏捷",
+  "v": {
+   "action": 70,
+   "extra": 22,
+   "aggro": 34,
+   "care": 78,
+   "build": 28
+  },
+  "profile": "中等行动力、内向、中等侵略、高耐心、中等创造"
+ },
+ {
+  "id": "cat",
+  "zh": "猫",
+  "en": "Cat",
+  "t": "quadruped",
+  "d": 8,
+  "tag": "傲娇 独立 慵懒 好奇",
+  "v": {
+   "action": 42,
+   "extra": 28,
+   "aggro": 30,
+   "care": 62,
+   "build": 32
+  },
+  "profile": "中等行动力、内向、中等侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "fox",
+  "zh": "狐狸",
+  "en": "Fox",
+  "t": "quadruped",
+  "d": 26,
+  "tag": "机灵 随性 夜行 偷蛋",
+  "v": {
+   "action": 84,
+   "extra": 34,
+   "aggro": 44,
+   "care": 52,
+   "build": 30
+  },
+  "profile": "高行动力、社交中性、中等侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "llama",
+  "zh": "羊驼",
+  "en": "Llama",
+  "t": "quadruped",
+  "d": 34,
+  "tag": "高冷 护卫 吐口水 倔强",
+  "v": {
+   "action": 36,
+   "extra": 40,
+   "aggro": 52,
+   "care": 68,
+   "build": 60
+  },
+  "profile": "中等行动力、社交中性、中等侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "horse",
+  "zh": "马",
+  "en": "Horse",
+  "t": "quadruped",
+  "d": 14,
+  "tag": "自由 奔放 探索 快速",
+  "v": {
+   "action": 88,
+   "extra": 54,
+   "aggro": 26,
+   "care": 46,
+   "build": 34
+  },
+  "profile": "高行动力、社交中性、无侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "creeper",
+  "zh": "苦力怕",
+  "en": "Creeper",
+  "t": "blob",
+  "d": 78,
+  "tag": "活泼 冲动 爆发 不经意搞大事",
+  "v": {
+   "action": 72,
+   "extra": 40,
+   "aggro": 92,
+   "care": 10,
+   "build": 16
+  },
+  "profile": "高行动力、社交中性、高侵略、急躁、弱创造"
+ },
+ {
+  "id": "slime",
+  "zh": "史莱姆",
+  "en": "Slime",
+  "t": "blob",
+  "d": 40,
+  "tag": "随性 弹跳 分裂 乐天",
+  "v": {
+   "action": 66,
+   "extra": 72,
+   "aggro": 34,
+   "care": 24,
+   "build": 22
+  },
+  "profile": "中等行动力、外向、中等侵略、急躁、弱创造"
+ },
+ {
+  "id": "magma_cube",
+  "zh": "岩浆怪",
+  "en": "Magma Cube",
+  "t": "blob",
+  "d": 72,
+  "tag": "暴躁 分裂 灼热 冲撞",
+  "v": {
+   "action": 79,
+   "extra": 26,
+   "aggro": 96,
+   "care": 14,
+   "build": 19
+  },
+  "profile": "中等行动力、社交中性、高侵略、急躁、弱创造"
+ },
+ {
+  "id": "silverfish",
+  "zh": "蠹虫",
+  "en": "Silverfish",
+  "t": "blob",
+  "d": 48,
+  "tag": "隐匿 突袭 成群 躁动",
+  "v": {
+   "action": 74,
+   "extra": 46,
+   "aggro": 62,
+   "care": 36,
+   "build": 14
+  },
+  "profile": "高行动力、社交中性、中等侵略、中等耐心、弱创造"
+ },
+ {
+  "id": "endermite",
+  "zh": "末影螨",
+  "en": "Endermite",
+  "t": "blob",
+  "d": 50,
+  "tag": "微小 钻洞 短命 执念",
+  "v": {
+   "action": 68,
+   "extra": 30,
+   "aggro": 58,
+   "care": 32,
+   "build": 16
+  },
+  "profile": "中等行动力、社交中性、中等侵略、中等耐心、弱创造"
+ },
+ {
+  "id": "snowman",
+  "zh": "雪人",
+  "en": "Snowman",
+  "t": "blob",
+  "d": 10,
+  "tag": "天真 短暂 守护 融化",
+  "v": {
+   "action": 40,
+   "extra": 60,
+   "aggro": 12,
+   "care": 54,
+   "build": 74
+  },
+  "profile": "中等行动力、社交中性、无侵略、中等耐心、强创造守护"
+ },
+ {
+  "id": "armadillo",
+  "zh": "犰狳",
+  "en": "Armadillo",
+  "t": "blob",
+  "d": 12,
+  "tag": "卷缩 防御 谨慎 独处",
+  "v": {
+   "action": 20,
+   "extra": 18,
+   "aggro": 14,
+   "care": 88,
+   "build": 46
+  },
+  "profile": "慢节奏、内向、无侵略、高耐心、中等创造"
+ },
+ {
+  "id": "chicken",
+  "zh": "鸡",
+  "en": "Chicken",
+  "t": "bird",
+  "d": 4,
+  "tag": "怯懦 轻盈 下蛋 慌乱",
+  "v": {
+   "action": 49,
+   "extra": 56,
+   "aggro": 10,
+   "care": 42,
+   "build": 35
+  },
+  "profile": "中等行动力、社交中性、无侵略、急躁、中等创造"
+ },
+ {
+  "id": "parrot",
+  "zh": "鹦鹉",
+  "en": "Parrot",
+  "t": "bird",
+  "d": 12,
+  "tag": "活泼 好动 爱热闹 模仿",
+  "v": {
+   "action": 82,
+   "extra": 92,
+   "aggro": 22,
+   "care": 32,
+   "build": 38
+  },
+  "profile": "高行动力、外向、无侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "bat",
+  "zh": "蝙蝠",
+  "en": "Bat",
+  "t": "bird",
+  "d": 18,
+  "tag": "夜行 倒挂 不安 洞穴",
+  "v": {
+   "action": 72,
+   "extra": 26,
+   "aggro": 30,
+   "care": 40,
+   "build": 20
+  },
+  "profile": "高行动力、内向、中等侵略、中等耐心、弱创造"
+ },
+ {
+  "id": "axolotl",
+  "zh": "美西螈",
+  "en": "Axolotl",
+  "t": "bird",
+  "d": 6,
+  "tag": "治愈 好奇 水中 温柔",
+  "v": {
+   "action": 58,
+   "extra": 62,
+   "aggro": 8,
+   "care": 64,
+   "build": 58
+  },
+  "profile": "中等行动力、社交中性、无侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "tropical_fish",
+  "zh": "热带鱼",
+  "en": "Tropical Fish",
+  "t": "bird",
+  "d": 2,
+  "tag": "绚丽 悠闲 群游 观赏",
+  "v": {
+   "action": 44,
+   "extra": 78,
+   "aggro": 6,
+   "care": 52,
+   "build": 40
+  },
+  "profile": "中等行动力、外向、无侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "frog",
+  "zh": "青蛙",
+  "en": "Frog",
+  "t": "bird",
+  "d": 20,
+  "tag": "跳跃 捕食 水陆 机敏",
+  "v": {
+   "action": 64,
+   "extra": 44,
+   "aggro": 38,
+   "care": 54,
+   "build": 30
+  },
+  "profile": "中等行动力、社交中性、中等侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "tadpole",
+  "zh": "蝌蚪",
+  "en": "Tadpole",
+  "t": "bird",
+  "d": 2,
+  "tag": "幼小 成长 群聚 柔弱",
+  "v": {
+   "action": 36,
+   "extra": 84,
+   "aggro": 13,
+   "care": 45,
+   "build": 26
+  },
+  "profile": "中等行动力、外向、无侵略、中等耐心、弱创造"
+ },
+ {
+  "id": "dolphin",
+  "zh": "海豚",
+  "en": "Dolphin",
+  "t": "fish",
+  "d": 8,
+  "tag": "阳光 好动 治愈 爱带路",
+  "v": {
+   "action": 92,
+   "extra": 86,
+   "aggro": 18,
+   "care": 44,
+   "build": 42
+  },
+  "profile": "高行动力、外向、无侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "squid",
+  "zh": "鱿鱼",
+  "en": "Squid",
+  "t": "fish",
+  "d": 8,
+  "tag": "安静 深水 被动 漂流",
+  "v": {
+   "action": 34,
+   "extra": 38,
+   "aggro": 22,
+   "care": 62,
+   "build": 28
+  },
+  "profile": "中等行动力、社交中性、无侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "glow_squid",
+  "zh": "发光鱿鱼",
+  "en": "Glow Squid",
+  "t": "fish",
+  "d": 8,
+  "tag": "幽光 深海 沉静 梦幻",
+  "v": {
+   "action": 28,
+   "extra": 32,
+   "aggro": 16,
+   "care": 74,
+   "build": 44
+  },
+  "profile": "慢节奏、社交中性、无侵略、高耐心、中等创造"
+ },
+ {
+  "id": "cod",
+  "zh": "鳕鱼",
+  "en": "Cod",
+  "t": "fish",
+  "d": 2,
+  "tag": "随波 温和 群体 游荡",
+  "v": {
+   "action": 38,
+   "extra": 76,
+   "aggro": 8,
+   "care": 50,
+   "build": 30
+  },
+  "profile": "中等行动力、外向、无侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "salmon",
+  "zh": "鲑鱼",
+  "en": "Salmon",
+  "t": "fish",
+  "d": 2,
+  "tag": "洄游 逆流 坚持 群体",
+  "v": {
+   "action": 60,
+   "extra": 72,
+   "aggro": 22,
+   "care": 66,
+   "build": 32
+  },
+  "profile": "中等行动力、外向、无侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "pufferfish",
+  "zh": "河豚",
+  "en": "Pufferfish",
+  "t": "fish",
+  "d": 26,
+  "tag": "警戒 膨胀 有毒 防御",
+  "v": {
+   "action": 32,
+   "extra": 34,
+   "aggro": 48,
+   "care": 70,
+   "build": 36
+  },
+  "profile": "中等行动力、社交中性、中等侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "turtle",
+  "zh": "海龟",
+  "en": "Turtle",
+  "t": "fish",
+  "d": 10,
+  "tag": "耐心 长寿 守巢 稳健",
+  "v": {
+   "action": 22,
+   "extra": 48,
+   "aggro": 14,
+   "care": 94,
+   "build": 66
+  },
+  "profile": "慢节奏、社交中性、无侵略、高耐心、中等创造"
+ },
+ {
+  "id": "bee",
+  "zh": "蜜蜂",
+  "en": "Bee",
+  "t": "flyer",
+  "d": 30,
+  "tag": "勤劳 群体 护巢 采蜜",
+  "v": {
+   "action": 80,
+   "extra": 84,
+   "aggro": 48,
+   "care": 62,
+   "build": 72
+  },
+  "profile": "高行动力、外向、中等侵略、中等耐心、强创造守护"
+ },
+ {
+  "id": "allay",
+  "zh": "悦灵",
+  "en": "Allay",
+  "t": "flyer",
+  "d": 8,
+  "tag": "创造 收集 友善 轻盈",
+  "v": {
+   "action": 62,
+   "extra": 70,
+   "aggro": 6,
+   "care": 58,
+   "build": 90
+  },
+  "profile": "中等行动力、社交中性、无侵略、中等耐心、强创造守护"
+ },
+ {
+  "id": "vex",
+  "zh": "恼鬼",
+  "en": "Vex",
+  "t": "flyer",
+  "d": 66,
+  "tag": "飘忽 顽劣 穿墙 突袭",
+  "v": {
+   "action": 86,
+   "extra": 36,
+   "aggro": 74,
+   "care": 26,
+   "build": 12
+  },
+  "profile": "高行动力、社交中性、高侵略、急躁、弱创造"
+ },
+ {
+  "id": "breeze",
+  "zh": "旋风人",
+  "en": "Breeze",
+  "t": "flyer",
+  "d": 62,
+  "tag": "轻盈 弹跳 风刃 灵动",
+  "v": {
+   "action": 88,
+   "extra": 30,
+   "aggro": 64,
+   "care": 42,
+   "build": 24
+  },
+  "profile": "高行动力、社交中性、中等侵略、中等耐心、弱创造"
+ },
+ {
+  "id": "blaze",
+  "zh": "烈焰人",
+  "en": "Blaze",
+  "t": "flyer",
+  "d": 80,
+  "tag": "灼热 悬浮 连射 冲动",
+  "v": {
+   "action": 78,
+   "extra": 24,
+   "aggro": 88,
+   "care": 20,
+   "build": 14
+  },
+  "profile": "高行动力、内向、高侵略、急躁、弱创造"
+ },
+ {
+  "id": "ghast",
+  "zh": "恶魂",
+  "en": "Ghast",
+  "t": "flyer",
+  "d": 70,
+  "tag": "孤高 哀鸣 远程 敏感",
+  "v": {
+   "action": 32,
+   "extra": 12,
+   "aggro": 68,
+   "care": 56,
+   "build": 18
+  },
+  "profile": "中等行动力、内向、中等侵略、中等耐心、弱创造"
+ },
+ {
+  "id": "phantom",
+  "zh": "幻翼",
+  "en": "Phantom",
+  "t": "flyer",
+  "d": 72,
+  "tag": "夜行 自由 随性 扰人清梦",
+  "v": {
+   "action": 90,
+   "extra": 24,
+   "aggro": 72,
+   "care": 28,
+   "build": 16
+  },
+  "profile": "高行动力、内向、高侵略、急躁、弱创造"
+ },
+ {
+  "id": "spider",
+  "zh": "蜘蛛",
+  "en": "Spider",
+  "t": "bug",
+  "d": 56,
+  "tag": "潜伏 织网 夜行 耐心",
+  "v": {
+   "action": 64,
+   "extra": 20,
+   "aggro": 70,
+   "care": 82,
+   "build": 30
+  },
+  "profile": "中等行动力、内向、中等侵略、高耐心、中等创造"
+ },
+ {
+  "id": "cave_spider",
+  "zh": "洞穴蜘蛛",
+  "en": "Cave Spider",
+  "t": "bug",
+  "d": 58,
+  "tag": "剧毒 狭窄 突袭 阴冷",
+  "v": {
+   "action": 70,
+   "extra": 16,
+   "aggro": 80,
+   "care": 68,
+   "build": 22
+  },
+  "profile": "中等行动力、内向、高侵略、中等耐心、弱创造"
+ },
+ {
+  "id": "enderman",
+  "zh": "末影人",
+  "en": "Enderman",
+  "t": "bug",
+  "d": 70,
+  "tag": "高冷 独处 瞬移 黑夜",
+  "v": {
+   "action": 76,
+   "extra": 8,
+   "aggro": 60,
+   "care": 74,
+   "build": 26
+  },
+  "profile": "高行动力、内向、中等侵略、高耐心、弱创造"
+ },
+ {
+  "id": "shulker",
+  "zh": "潜影贝",
+  "en": "Shulker",
+  "t": "bug",
+  "d": 68,
+  "tag": "封闭 固守 远程 藏身",
+  "v": {
+   "action": 14,
+   "extra": 10,
+   "aggro": 66,
+   "care": 88,
+   "build": 48
+  },
+  "profile": "慢节奏、内向、中等侵略、高耐心、中等创造"
+ },
+ {
+  "id": "guardian",
+  "zh": "守卫者",
+  "en": "Guardian",
+  "t": "bug",
+  "d": 64,
+  "tag": "领地 激光 警觉 巡逻",
+  "v": {
+   "action": 54,
+   "extra": 24,
+   "aggro": 68,
+   "care": 76,
+   "build": 38
+  },
+  "profile": "中等行动力、内向、中等侵略、高耐心、中等创造"
+ },
+ {
+  "id": "camel",
+  "zh": "骆驼",
+  "en": "Camel",
+  "t": "bug",
+  "d": 12,
+  "tag": "沉稳 长途 高傲 耐性",
+  "v": {
+   "action": 26,
+   "extra": 44,
+   "aggro": 20,
+   "care": 90,
+   "build": 72
+  },
+  "profile": "慢节奏、社交中性、无侵略、高耐心、强创造守护"
+ },
+ {
+  "id": "mooshroom",
+  "zh": "哞菇",
+  "en": "Mooshroom",
+  "t": "bug",
+  "d": 6,
+  "tag": "奇特 蘑菇 孤岛 温和",
+  "v": {
+   "action": 28,
+   "extra": 58,
+   "aggro": 12,
+   "care": 74,
+   "build": 64
+  },
+  "profile": "慢节奏、社交中性、无侵略、高耐心、中等创造"
+ },
+ {
+  "id": "ender_dragon",
+  "zh": "末影龙",
+  "en": "Ender Dragon",
+  "t": "huge",
+  "d": 100,
+  "tag": "霸气 强势 挑战 少言",
+  "v": {
+   "action": 90,
+   "extra": 14,
+   "aggro": 98,
+   "care": 40,
+   "build": 30
+  },
+  "profile": "高行动力、内向、高侵略、中等耐心、中等创造"
+ },
+ {
+  "id": "wither",
+  "zh": "凋灵",
+  "en": "Wither",
+  "t": "huge",
+  "d": 96,
+  "tag": "强大 压迫 独裁 破坏",
+  "v": {
+   "action": 68,
+   "extra": 10,
+   "aggro": 99,
+   "care": 26,
+   "build": 12
+  },
+  "profile": "中等行动力、内向、高侵略、急躁、弱创造"
+ },
+ {
+  "id": "warden",
+  "zh": "监守者",
+  "en": "Warden",
+  "t": "huge",
+  "d": 100,
+  "tag": "深渊 感知 无声 绝对",
+  "v": {
+   "action": 58,
+   "extra": 6,
+   "aggro": 96,
+   "care": 76,
+   "build": 10
+  },
+  "profile": "中等行动力、内向、高侵略、高耐心、弱创造"
+ },
+ {
+  "id": "ravager",
+  "zh": "劫掠兽",
+  "en": "Ravager",
+  "t": "huge",
+  "d": 88,
+  "tag": "冲撞 蛮力 破坏 正面",
+  "v": {
+   "action": 86,
+   "extra": 18,
+   "aggro": 94,
+   "care": 18,
+   "build": 14
+  },
+  "profile": "高行动力、内向、高侵略、急躁、弱创造"
+ },
+ {
+  "id": "elder_guardian",
+  "zh": "远古守卫者",
+  "en": "Elder Guardian",
+  "t": "huge",
+  "d": 84,
+  "tag": "领域 威严 缓慢 诅咒",
+  "v": {
+   "action": 30,
+   "extra": 26,
+   "aggro": 82,
+   "care": 86,
+   "build": 52
+  },
+  "profile": "中等行动力、内向、高侵略、高耐心、中等创造"
+ },
+ {
+  "id": "hoglin",
+  "zh": "疣猪兽",
+  "en": "Hoglin",
+  "t": "huge",
+  "d": 74,
+  "tag": "冲锋 下界 凶猛 领地",
+  "v": {
+   "action": 88,
+   "extra": 34,
+   "aggro": 92,
+   "care": 16,
+   "build": 18
+  },
+  "profile": "高行动力、社交中性、高侵略、急躁、弱创造"
+ },
+ {
+  "id": "sniffer",
+  "zh": "嗅探兽",
+  "en": "Sniffer",
+  "t": "huge",
+  "d": 6,
+  "tag": "古老 悠哉 寻觅 温和",
+  "v": {
+   "action": 18,
+   "extra": 42,
+   "aggro": 10,
+   "care": 82,
+   "build": 78
+  },
+  "profile": "慢节奏、社交中性、无侵略、高耐心、强创造守护"
+ }
+]

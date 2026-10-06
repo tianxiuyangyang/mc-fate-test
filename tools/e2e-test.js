@@ -90,6 +90,12 @@ const check = (ok, label) => { console.log((ok ? '  ✓ ' : '  ✗ ') + label); 
     if (!b) throw new Error('找不到元素: ' + sel);
     await clickAt(b.x, b.y);
   };
+  /* 点击舞台内的相对位置（用于挖矿/搭建等需要点场地的游戏） */
+  const stageClick = async (fx, fy) => {
+    const b = await evalJs(`(function(){var n=document.querySelector('.stage');if(!n)return null;var r=n.getBoundingClientRect();return {l:r.left,t:r.top,w:r.width,h:r.height};})()`);
+    if (!b) return;
+    await clickAt(b.l + b.w * fx, b.t + b.h * fy);
+  };
   const key = async (k, code, vk, hold) => {
     await send('Input.dispatchKeyEvent', { type: 'rawKeyDown', key: k, code, windowsVirtualKeyCode: vk, nativeVirtualKeyCode: vk }, sid);
     await sleep(hold || 160);
@@ -195,10 +201,13 @@ const check = (ok, label) => { console.log((ok ? '  ✓ ' : '  ✗ ') + label); 
     check(bScore > 0, '搭建游戏放置了方块（' + bScore + ' 个）');
     await clickSel('#gNext'); await sleep(350);
 
-    /* 第 5 题 → 结果 */
-    check(await evalJs(`!!document.querySelector('.opt')`), '第 5 题出现');
-    await clickSel('.opt');
-    await sleep(2800);
+    /* 第 5~7 题 → 结果 */
+    for (const n of [5, 6, 7]) {
+      check(await evalJs(`!!document.querySelector('.opt')`), '第 ' + n + ' 题出现');
+      await clickSel('.opt');
+      await sleep(600);
+    }
+    await sleep(2600);
 
     const res = await evalJs(`(function(){
       var n=document.querySelector('.rname'); if(!n) return null;
@@ -214,12 +223,12 @@ const check = (ok, label) => { console.log((ok ? '  ✓ ' : '  ✗ ') + label); 
         desc:(document.querySelector('.rdesc')||{}).textContent||'',
         scores:(document.querySelector('#view-result .small.center')||{}).textContent||''};
     })()`);
-    if (!res) throw new Error('未生成结果页');
+    if (!res) { console.log('    调试: ' + JSON.stringify(await evalJs('window.__dbgRes||null'))); throw new Error('未生成结果页'); }
     check(!!res.name, '结果页生成：' + res.name + ' ' + res.title);
     check(res.heroOk, '超大像素立绘已渲染');
     check(res.desc.length > 40, '专属人物解读非空');
-    check(res.tvals.length === 6 && res.tvals.every(v => v >= 0 && v <= 100), '人格六维数值合法：' + res.tvals.join('/'));
-    check(res.bars.length === 6 && res.bars.every(b => /%$/.test(b)), '六维进度条已渲染');
+    check(res.tvals.length === 5 && res.tvals.every(v => v >= 0 && v <= 100), '性格五维数值合法：' + res.tvals.join('/'));
+    check(res.bars.length === 5 && res.bars.every(b => /%$/.test(b)), '五维进度条已渲染');
     check(res.danger > 0 && res.danger <= 100, '危险等级：' + res.danger);
     check(!!res.partner, 'MCCP 搭档：' + res.partner);
     check(/挖矿 \d+/.test(res.scores), '小游戏成绩回显：' + res.scores);
@@ -250,6 +259,68 @@ const check = (ok, label) => { console.log((ok ? '  ✓ ' : '  ✗ ') + label); 
     await sleep(600);
     check(await evalJs(`!document.getElementById('view-intro').hidden`), '「重新测试」回到开场页');
 
+    /* ---------- 3. 粒子特效 & 精灵覆盖 ---------- */
+    const fx = await evalJs(`(function(){
+      var cv=document.getElementById('fx');
+      if(!cv) return {ok:false};
+      // 采样画布是否有非透明像素（粒子正在飞）
+      var c=cv.getContext('2d');
+      var d=c.getImageData(0,0,Math.min(cv.width,400),Math.min(cv.height,400)).data;
+      var n=0; for(var i=3;i<d.length;i+=4) if(d[i]>0) n++;
+      return {ok:true, pix:n, w:cv.width, h:cv.height};
+    })()`);
+    check(fx.ok, '答题粒子特效画布 #fx 已创建');
+    /* 重开一轮，快速跑到第一题，答完立刻采样粒子 */
+    await clickSel('#rAgain'); await sleep(700);
+    await clickSel('#startBtn'); await sleep(500);
+    const onGame1 = await evalJs(`!!document.querySelector('#gStart')`);
+    if (onGame1) {                       /* 第一个环节是挖矿，直接开始并跳过 */
+      await clickSel('#gStart'); await sleep(300);
+      const t9 = Date.now();
+      while (Date.now() - t9 < 11200) { if (await evalJs(`!!document.querySelector('#gNext')`)) break; await sleep(400); }
+      await clickSel('#gNext'); await sleep(450);
+    }
+    check(await evalJs(`!!document.querySelector('.opt')`), '重开后进入第 1 题');
+    await clickSel('.opt'); await sleep(120);
+    const fxLive = await evalJs(`(function(){
+      var cv=document.getElementById('fx'); if(!cv) return -1;
+      var c=cv.getContext('2d');
+      var d=c.getImageData(0,0,Math.min(cv.width,600),Math.min(cv.height,600)).data;
+      var n=0; for(var i=3;i<d.length;i+=4) if(d[i]>0) n++;
+      return n;
+    })()`);
+    check(fxLive > 0, '答完一题后右下角有粒子在飞（采样到 ' + fxLive + ' 个像素）');
+
+    /* 精灵覆盖：72 个角色都要能画出立绘（通过站内自检接口） */
+    const spriteAudit = await evalJs(`(function(){
+      var A=window.__MYCRAFT__;
+      if(!A) return {noApi:true};
+      var bad=[],empty=[],order=A.order;
+      for(var i=0;i<order.length;i++){
+        var id=order[i];
+        try{
+          var url=A.spriteImg(id,6);
+          if(!url||url.length<400) empty.push(id);
+        }catch(e){ bad.push(id+':'+e.message); }
+      }
+      var cp=A.copy;
+      return {total:order.length, empty:empty, err:bad,
+        copy:Object.keys(cp).length,
+        copyBad:order.filter(function(id){return !cp[id]||!cp[id].title||!cp[id].desc||cp[id].desc.length!==3;}),
+        qLen:A.questions.length,
+        qOpts:A.questions.map(function(q){return q.opts.length;}),
+        dims:A.dims};
+    })()`);
+    check(!spriteAudit.noApi, '站内自检接口可用');
+    check(spriteAudit.total === 72, '角色库共 72 个（' + spriteAudit.total + '）');
+    check(spriteAudit.empty.length === 0 && spriteAudit.err.length === 0,
+      '72 个角色精灵全部可绘制' + (spriteAudit.empty.length ? '（异常: ' + spriteAudit.empty.slice(0, 5).join(',') + '）' : ''));
+    check(spriteAudit.copy === 72 && spriteAudit.copyBad.length === 0,
+      '72 份专属文案全部就位' + (spriteAudit.copyBad.length ? '（缺: ' + spriteAudit.copyBad.slice(0, 5).join(',') + '）' : ''));
+    check(spriteAudit.qLen === 7 && spriteAudit.qOpts.every(n => n === 4),
+      '共 7 道题、每题 4 个选项（' + spriteAudit.qOpts.join('/') + '）');
+    check(spriteAudit.dims.length === 5, '判定维度为 5 项：' + spriteAudit.dims.join('/'));
+
     /* ---------- 4. 手机视口 ---------- */
     await send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true }, sid);
     await sleep(500);
@@ -278,12 +349,13 @@ const check = (ok, label) => { console.log((ok ? '  ✓ ' : '  ✗ ') + label); 
 
   } catch (e) {
     console.log('\n❌ 中断: ' + e.message);
+    try { console.log('  computeResult 探针: ' + JSON.stringify(await evalJs('window.__dbgC||null'))); } catch (e3) {}
     errors.push('FLOW: ' + e.message);
   }
 
   console.log('\n== 运行时错误 ==');
   if (!errors.length) console.log('  （无）');
-  else errors.slice(0, 15).forEach(e => { console.log('  ✗ ' + String(e).split('\n')[0]); failures++; });
+  else errors.slice(0, 15).forEach(e => { console.log('  ✗ ' + String(e).split('\n').slice(0, 6).join('\n     ')); failures++; });
 
   console.log('\n' + (failures === 0 ? '✅ 全部通过' : '❌ ' + failures + ' 项未通过'));
   try { proc.kill(); } catch (e) {}
